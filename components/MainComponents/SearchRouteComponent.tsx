@@ -72,8 +72,7 @@ export default function SearchRouteComponent() {
                     Откуда
                 </label>
                 <input
-                    className="focus:outline-none rounded-none focus:ring-1 text-[#373F47]
-                     focus:ring-[#F9AC1A] focus:border-[#F9AC1A]
+                    className="focus:outline-none rounded-none text-[#373F47]
                       h-full w-full px-4 pt-5 pb-1 rounded-tl-[10px]
                        rounded-bl-[10px]"
                     type="text"
@@ -121,8 +120,7 @@ export default function SearchRouteComponent() {
                     Куда
                 </label>
                 <input
-                    className="focus:outline-none rounded-none focus:ring-1
-                     focus:ring-[#F9AC1A] focus:border-[#F9AC1A]
+                    className="focus:outline-none rounded-none
                       h-full w-full px-4 pt-5 pb-1 border-l-0 focus:border-l-0 text-[#373F47]"
                     type="text"
                     id="inWhereInput"

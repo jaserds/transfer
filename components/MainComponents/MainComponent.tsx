@@ -1,8 +1,5 @@
 'use client';
 
-import { Rubik } from 'next/font/google';
-
-const rubik = Rubik({ subsets: ['latin'], weight: ['400', '700'] });
 export default function MainComponent({ children }: Readonly<{ children: React.ReactNode }>) {
 
     return (
@@ -16,7 +13,7 @@ export default function MainComponent({ children }: Readonly<{ children: React.R
                     text-center 
                     mt-[60px] 
                     max-w-[800px] 
-                    ${rubik.className} 
+                    font-[rubik]
                     font-[600]
                     mb-[50px]
                     `}>
