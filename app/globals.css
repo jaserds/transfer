@@ -19,3 +19,8 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.border-dash-16::after {
+  content: '';
+  @apply absolute top-0 bottom-0 left-0 right-0 bg-[url('/icons/dash.svg')] bg-no-repeat bg-contain;
+}
