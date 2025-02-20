@@ -1,7 +1,5 @@
 'use client';
 
-import ContactAndFAQContainer from "@/components/ContactAndFAQSection/ContactAndFAQContainer";
-import ContactsFomContainer from "@/components/ContactsFomSection/ContactsFomContainer";
 import Advantages from "@/components/MainComponents/AdvantagesComponent";
 import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
@@ -23,8 +21,6 @@ export default function Home() {
       <TransfersContainerComponent />
       <WhyChooseUsContainer />
       <HowWorkContainer />
-      <ContactAndFAQContainer />
-      <ContactsFomContainer />
     </>
   );
 }
