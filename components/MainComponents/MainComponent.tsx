@@ -1,4 +1,4 @@
-'use client';
+
 
 export default function MainComponent({ children }: Readonly<{ children: React.ReactNode }>) {
 
