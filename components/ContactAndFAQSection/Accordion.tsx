@@ -25,10 +25,11 @@ const Accordion = ({ title, content }: AccordionProps) => {
                     accordion-content
                     bg-gray-100
                      rounded-b-md 
+                     opacity-0
                      transition-all 
                      duration-300 
                      ease-in-out 
-                     ${isOpen ? "max-h-screen p-4" : "max-h-0 overflow-hidden"
+                     ${isOpen ? "max-h-screen p-4 opacity-100" : "max-h-0 overflow-hidden"
                     }`}
             >
                 <p>{content}</p>
