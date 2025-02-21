@@ -8,8 +8,8 @@ export default function HeaderComponent() {
             <div className="w-[1070px] flex items-center justify-between">
                 <nav>
                     <ul className="flex items-center">
-                        <li className="mr-12"><Link href="#">Главная</Link></li>
-                        <li className="mr-12"><Link href="#">Города</Link></li>
+                        <li className="mr-12"><Link href="/">Главная</Link></li>
+                        <li className="mr-12"><Link href="/booking">Города</Link></li>
                         <li className="mr-12"><Link href="#">Популярные маршруты</Link></li>
                         <li className=""><Link className="flex items-center " href="#"><Image className="mr-2" src="/icons/header-icons/excursionsLogo.svg"
                             width={35}

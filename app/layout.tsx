@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import HeaderComponent from "@/components/MainComponents/HeaderComponent";
 import { Rubik, Open_Sans } from 'next/font/google';
-import Footer from "@/components/Footer/Footer";
-import ContactAndFAQContainer from "@/components/ContactAndFAQSection/ContactAndFAQContainer";
-import ContactsFomContainer from "@/components/ContactsFomSection/ContactsFomContainer";
 
 export const metadata: Metadata = {
   title: "Трансфер",
@@ -23,11 +19,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${rubik.className} ${openSans.className}`}>
-        <HeaderComponent />
         {children}
-        <ContactAndFAQContainer />
-        <ContactsFomContainer />
-        <Footer />
       </body>
     </html>
   );
