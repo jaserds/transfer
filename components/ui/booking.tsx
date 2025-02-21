@@ -216,5 +216,45 @@ const CustomToggle: React.FC<CustomToggleProps> = ({ isOn, setIsOn }) => {
     );
 };
 
+interface CounterOrderProps {
+    count: number;
+    setCount: (count: number) => void;
+}
 
-export { CustomDatePicker, CustomTimePicker, CustomToggle };
+function CounterOrder({ count, setCount }: CounterOrderProps) {
+
+
+    return (
+        <div className="flex items-center bg-[#FFE6B8] rounded-full px-1 py-1">
+            <button
+                type="button"
+                onClick={() => setCount(count - 1)}
+                className="w-[26px] h-[26px] flex items-center justify-center rounded-full bg-[#F9AC1A] text-white text-xl font-bold"
+            >
+                −
+            </button>
+            <span className="mx-4 text-gray-700 text-lg font-semibold">{count}</span>
+            <button
+                type="button"
+                onClick={() => setCount(count + 1)}
+                className="w-[26px] h-[26px] flex items-center justify-center rounded-full bg-[#F9AC1A] text-white text-xl font-bold"
+            >
+                +
+            </button>
+        </div>
+    );
+}
+
+export default function CustomCheckbox() {
+    return (
+        <label className="flex items-center cursor-pointer">
+            <input type="checkbox" className="hidden peer" />
+            <div className="w-[15px] h-[15px] mr-[10px] rounded-[5px] border-[1px] border-[#F9AC1A] peer-checked:bg-[#F9AC1A] peer-checked:border-[#F9AC1A] flex items-center justify-center transition">
+            </div>
+            <span className="text-[#6C7C8C] text-[14px]">Хочу, что бы со мной связались</span>
+        </label>
+    );
+}
+
+
+export { CustomDatePicker, CustomTimePicker, CustomToggle, CounterOrder, CustomCheckbox };
