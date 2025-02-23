@@ -2,13 +2,17 @@ import ContactAndFAQContainer from "@/components/ContactAndFAQSection/ContactAnd
 import ContactsFomContainer from "@/components/ContactsFomSection/ContactsFomContainer";
 import Footer from "@/components/Footer/Footer";
 import HeaderComponent from "@/components/MainComponents/HeaderComponent";
+import HowWorkContainer from "@/components/SectionHowWork/HowWorkContainer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <><HeaderComponent />
+        <>
+            <HeaderComponent />
             {children}
+            <HowWorkContainer />
             <ContactAndFAQContainer />
             <ContactsFomContainer />
-            <Footer /></>
+            <Footer />
+        </>
     )
 }
