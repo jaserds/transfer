@@ -27,7 +27,7 @@ export function ProviderButton({ provider }: { provider: ClientSafeProvider }) {
             items-center justify-center 
             gap-2 rounded-[5px] border
              border-zinc-300 bg-white px-4 
-             py-2 text-sm font-semibold text-zinc-700 
+             py-2 text-sm font-semibold
              shadow-sm hover:bg-zinc-50 sm:w-auto" onClick={() => oauthSignIn.signIn()}>
             {getIcon(provider)}
             <span>{provider.name}</span>

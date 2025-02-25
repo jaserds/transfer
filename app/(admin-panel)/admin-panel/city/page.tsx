@@ -1,6 +1,4 @@
-
-
-export default async function AdminPanel() {
+export default async function City() {
 
     return (
         <div className=""></div>

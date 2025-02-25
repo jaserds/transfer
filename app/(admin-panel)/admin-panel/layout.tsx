@@ -1,3 +1,5 @@
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/ui/sidebar/app-sidebar";
 import AuthorizedGuard from "@/lib/auth/authorized-guard";
 
 export default function RootLayout({
@@ -8,7 +10,13 @@ export default function RootLayout({
     return (
         <>
             <AuthorizedGuard>
-                {children}
+                <SidebarProvider>
+                    <AppSidebar />
+                    <main>
+                        <SidebarTrigger />
+                        {children}
+                    </main>
+                </SidebarProvider>
             </AuthorizedGuard>
         </>
     );

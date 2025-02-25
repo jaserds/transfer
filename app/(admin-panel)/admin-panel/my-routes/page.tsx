@@ -1,6 +1,4 @@
-
-
-export default async function AdminPanel() {
+export default async function MyRoutes() {
 
     return (
         <div className=""></div>
