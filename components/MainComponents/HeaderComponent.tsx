@@ -10,9 +10,6 @@ export default function HeaderComponent() {
     const session = useAppSession();
     const signOut = useSignOut();
 
-    console.log(session);
-
-
     return (
         <div className="w-full h-[70px] bg-[#fff] flex justify-center px-[15px] relative">
             <Image className="absolute left-0 ml-4" src="/icons/header-icons/logo.svg" width={137} height={70} alt=""></Image>
@@ -35,7 +32,6 @@ export default function HeaderComponent() {
                         <Image src='/icons/social-icons/ig.svg' width={40} height={40} alt="" />
                     </div>
                     {session.data?.user?.name}
-                    <Image src={session.data?.user?.image ?? "/icons/social-icons/wa.svg"} width={30} height={30} alt="" />
                     {session.status === 'loading' && <div className="bg-gray-200 animate-pulse px-9 py-3 rounded-[5px] w-[100px] h-[40px]"></div>}
                     {session.status === "unauthenticated" ?
                         <div className="bg-[#fff] border-[1px] border-[DFE2E6] shadow-[0px_0px_2px_1px_rgba(55,63,71,0.05)] px-9 py-3 rounded-[5px] cursor-pointer"

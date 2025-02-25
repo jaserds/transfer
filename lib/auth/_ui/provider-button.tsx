@@ -14,7 +14,7 @@ export function ProviderButton({ provider }: { provider: ClientSafeProvider }) {
             case "github":
                 return <Github />;
             case 'google':
-                return <Image src="/icons/booking/mail-order-icon.svg" width={20} height={20} alt="" />;
+                return <Image src="/icons/icon-google.svg" width={20} height={20} alt="" />;
             default:
                 return null;
         }
@@ -23,9 +23,9 @@ export function ProviderButton({ provider }: { provider: ClientSafeProvider }) {
     return (
         <button
             type="button"
-            className="flex w-full 
+            className="flex w-full text-[#383F47] 
             items-center justify-center 
-            gap-2 rounded-md border
+            gap-2 rounded-[5px] border
              border-zinc-300 bg-white px-4 
              py-2 text-sm font-semibold text-zinc-700 
              shadow-sm hover:bg-zinc-50 sm:w-auto" onClick={() => oauthSignIn.signIn()}>
