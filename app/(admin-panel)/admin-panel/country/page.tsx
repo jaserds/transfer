@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Image from "next/image";
+import { Trash2 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Country {
     id: string;
@@ -12,15 +14,19 @@ interface Country {
     imageUrl?: string;
 }
 
-export default function CountriesTable() {
+export default function Countries() {
     const [countries, setCountries] = useState<Country[]>([]);
     const [newCountry, setNewCountry] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch("/api/country")
             .then((res) => res.json())
-            .then(setCountries)
+            .then((countries) => {
+                setCountries(countries)
+                setIsLoading(false)
+            })
             .catch(() => console.error("Failed to fetch countries"));
     }, []);
 
@@ -59,7 +65,6 @@ export default function CountriesTable() {
                 body: JSON.stringify({ name: newCountry, imageUrl }),
                 headers: { "Content-Type": "application/json" },
             });
-            console.log(res);
 
             if (!res.ok) throw new Error("Failed to add country");
 
@@ -72,11 +77,25 @@ export default function CountriesTable() {
         }
     };
 
-    console.log(countries);
 
+    const deleteCountry = async (id: string) => {
+        try {
+            const res = await fetch(`/api/country/${id}`, { method: "DELETE" });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "Failed to delete country");
+            }
+
+            setCountries(countries.filter((country) => country.id !== id));
+        } catch (error) {
+            console.error("Error deleting country:", error);
+        }
+    };
 
     return (
         <div className="p-4">
+            <div className="mb-3 text-[#373F47] font-bold">Добьавить страну</div>
             <div className="flex gap-2 mb-4">
                 <Input value={newCountry} onChange={(e) => setNewCountry(e.target.value)} placeholder="Название страны" />
                 <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
@@ -86,21 +105,62 @@ export default function CountriesTable() {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>ID</TableHead>
                         <TableHead>Название</TableHead>
                         <TableHead>Картинка</TableHead>
+                        <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {countries.map((country) => (
-                        <TableRow key={country.id}>
-                            <TableCell>{country.id}</TableCell>
-                            <TableCell>{country.name}</TableCell>
-                            <TableCell>
-                                {country.imageUrl && <Image src={country.imageUrl} width={50} height={50} alt={country.name} className="h-12 w-12 object-cover rounded-md" />}
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {isLoading ? (
+                        <>
+                            <TableRow >
+                                <TableCell>
+                                    <Skeleton className="h-[20px] w-[200px]" />
+                                </TableCell>
+                                <TableCell>
+                                    <Skeleton className="h-[50px] w-[50px]" />
+                                </TableCell>
+                                <TableCell>
+                                    <Skeleton className="h-[20px] w-[150px]" />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow >
+                                <TableCell>
+                                    <Skeleton className="h-[20px] w-[200px]" />
+                                </TableCell>
+                                <TableCell>
+                                    <Skeleton className="h-[50px] w-[50px]" />
+                                </TableCell>
+                                <TableCell>
+                                    <Skeleton className="h-[20px] w-[150px]" />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow >
+                                <TableCell>
+                                    <Skeleton className="h-[20px] w-[200px]" />
+                                </TableCell>
+                                <TableCell>
+                                    <Skeleton className="h-[50px] w-[50px]" />
+                                </TableCell>
+                                <TableCell>
+                                    <Skeleton className="h-[20px] w-[150px]" />
+                                </TableCell>
+                            </TableRow>
+                        </>
+                    ) : (
+
+                        countries.map((country) => (
+                            <TableRow key={country.id}>
+                                <TableCell>{country.name}</TableCell>
+                                <TableCell>
+                                    {country.imageUrl && <Image src={country.imageUrl} width={100} height={100} alt={country.name} className="max-h-[100px] max-w-[100px] object-contain rounded-md" />}
+                                </TableCell>
+                                <TableCell>
+                                    <Trash2 onClick={() => deleteCountry(country.id)} className="cursor-pointer text-[#6C7C8C] hover:text-rose-500" />
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    )}
                 </TableBody>
             </Table>
         </div>

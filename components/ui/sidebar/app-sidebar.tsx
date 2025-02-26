@@ -15,12 +15,13 @@ import {
 } from "@/components/ui/sidebar"
 import { useAppSession } from "@/lib/use-app-session"
 import Image from "next/image"
+import Link from "next/link";
 
 // Menu items.
 const items = [
     {
         title: "Маршруты",
-        url: "/admin-panel/my-routes",
+        url: "/admin-panel/my-routs",
         icon: Route,
     },
     {
@@ -46,18 +47,18 @@ export function AppSidebar() {
 
     return (
         <Sidebar>
-            <SidebarContent>
-                <SidebarGroup>
+            <SidebarContent >
+                <SidebarGroup className="relative">
                     <SidebarGroupLabel>Админ панель</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link href={item.url}>
                                             <item.icon className="text-[#F9AC1A]" />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
@@ -66,8 +67,8 @@ export function AppSidebar() {
                 </SidebarGroup>
             </SidebarContent>
             <div className="flex justify-start items-center ml-3 mb-5">
-                {session.data?.user.image && <Image className="rounded-full " width={50} height={50} src={session.data.user.image} alt={`${session.data.user.name}`} title={`${session.data.user.name} - ${session.data.user.email}`} />}
-                <div className="ml-2">{session.data?.user.name}</div>
+                {session.data?.user.image && <Image className="rounded-full mr-4" width={40} height={40} src={session.data.user.image} alt={`${session.data.user.name}`} title={`${session.data.user.name} - ${session.data.user.email}`} />}
+                <div className="">{session.data?.user.name}</div>
             </div>
 
         </Sidebar>
