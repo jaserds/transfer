@@ -5,6 +5,50 @@ import path from "path";
 import { getAppSessionStrictServer } from "@/lib/session.server";
 
 
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+    try {
+        const { id } = await params;
+        console.log(id);
+
+
+        if (!id) {
+            return NextResponse.json({ error: "countryId is required" }, { status: 400 });
+        }
+
+        const cities = await prisma.city.findMany({
+            where: { countryId: id },
+            include: {
+                country: { select: { name: true } },
+                routes: { select: { id: true, inRoute: true, toRoute: true } },
+                _count: {
+                    select: { routes: true },
+                },
+            },
+        });
+
+        const formattedCities = cities.map(city => ({
+            countryName: city.country.name,
+            data: {
+                id: city.id,
+                name: city.name,
+                imageUrl: city.imageUrl,
+                countryId: city.countryId,
+                routeCount: city._count.routes,
+                routes: city.routes.map(route => ({
+                    id: route.id,
+                    inRoute: route.inRoute,
+                    toRoute: route.toRoute,
+                })),
+            }
+        }));
+
+        return NextResponse.json(formattedCities);
+    } catch (error) {
+        return NextResponse.json({ error: error instanceof Error ? error.message : "Unknown error" }, { status: 500 });
+    }
+}
+
+
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
 
     const session = await getAppSessionStrictServer();
