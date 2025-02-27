@@ -2,15 +2,23 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { getAppSessionStrictServer } from "@/lib/session.server";
 
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+
+    const session = await getAppSessionStrictServer();
+
+    if (!session || session.user.role !== "ADMIN") {
+        return NextResponse.json({ error: "Access denied" }, { status: 403 });
+    }
+
     try {
 
         const { id } = await params;
 
         if (!id) {
-            return NextResponse.json({ error: "Country ID is required" }, { status: 400 });
+            return NextResponse.json({ error: "Route ID is required" }, { status: 400 });
         }
 
         // Получаем страну перед удалением
@@ -20,7 +28,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
 
         if (!myroute) {
-            return NextResponse.json({ error: "Country not found" }, { status: 404 });
+            return NextResponse.json({ error: "Route not found" }, { status: 404 });
         }
 
         // Удаляем файл изображения, если он есть

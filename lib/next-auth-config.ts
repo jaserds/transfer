@@ -8,7 +8,6 @@ import { prisma } from "./prisma"
 import { UserEntity } from "./_domain/types"
 
 
-
 const prismaAdapter = PrismaAdapter(prisma);
 
 export const nextAuthConfig: AuthOptions = {

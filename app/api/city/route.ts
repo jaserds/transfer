@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getAppSessionStrictServer } from "@/lib/session.server";
 import { NextResponse } from "next/server";
 
 
@@ -12,6 +13,13 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+
+    const session = await getAppSessionStrictServer();
+
+    if (!session || session.user.role !== "ADMIN") {
+        return NextResponse.json({ error: "Access denied" }, { status: 403 });
+    }
+
     try {
         const { name, imageUrl, countryId }: { name: string; imageUrl: string, countryId: string } = await req.json();
         if (!name || !imageUrl) {

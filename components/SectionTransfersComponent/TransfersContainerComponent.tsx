@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import TransferComponent from './TransferComponent';
 import { Skeleton } from '../ui/skeleton';
 
-interface Country {
+export interface Country {
     id: string;
     name: string;
     imageUrl: string;
+    routeCount: number;
 }
 
 const TransfersContainerComponent = () => {
@@ -36,7 +37,7 @@ const TransfersContainerComponent = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-[50px] justify-center">
 
                     {isLoading
-                        ? // Показываем 6 скелетонов, пока данные загружаются
+                        ?
                         Array.from({ length: 6 }).map((_, index) => (
                             <div key={index} className="relative min-w-[290px] max-w-[330px] min-h-[311px] max-h-[351px] p-[10px] shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] bg-white rounded-[10px]">
                                 <Skeleton className="absolute top-[40px] right-[40px] w-[100px] h-[20px] rounded-full" />

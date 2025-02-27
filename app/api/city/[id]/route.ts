@@ -2,9 +2,17 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { getAppSessionStrictServer } from "@/lib/session.server";
 
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+
+    const session = await getAppSessionStrictServer();
+
+    if (!session || session.user.role !== "ADMIN") {
+        return NextResponse.json({ error: "Access denied" }, { status: 403 });
+    }
+
     try {
 
         const { id } = await params;

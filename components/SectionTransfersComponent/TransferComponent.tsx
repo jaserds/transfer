@@ -1,8 +1,18 @@
-import { Country } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { Country } from "./TransfersContainerComponent";
 
 const TransferComponent = ({ dataSet }: { dataSet: Country }) => {
+
+    function getTransferString(count: number): string {
+        if (count === 1) {
+            return `${count} трансфер`;
+        } else if (count >= 2 && count <= 4) {
+            return `${count} трансфера`;
+        } else {
+            return `${count} трансферов`;
+        }
+    }
 
     return (
         <Link className="" href={`/admin-panel`}>
@@ -14,7 +24,7 @@ const TransferComponent = ({ dataSet }: { dataSet: Country }) => {
                 <Image className="brightness-90 mb-[20px]" src={`${dataSet.imageUrl}`} width={330} height={351} alt="" />
                 <div className="flex pl-[10px] pb-[13px]">
                     <Image src="/icons/transfer-icons/transfer-route-icon.svg" width={20} height={20} alt="" />
-                    <p className="text-base font-semibold text-[#373F47] ml-[5px]">91 трансфер</p>
+                    <p className="text-base font-semibold text-[#373F47] ml-[5px]">{getTransferString(dataSet.routeCount)}</p>
                 </div>
             </div>
         </Link>
