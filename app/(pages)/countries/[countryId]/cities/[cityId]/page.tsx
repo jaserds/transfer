@@ -40,7 +40,7 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
                     <Advantages />
                 </MainComponent>
                 <div className="mt-[120px]"></div>
-                <PopularRoutesSection popularRoute={responseData} itemName={responseData[0].cityName} />
+                <PopularRoutesSection popularRoute={responseData} itemName={responseData[0]?.cityName} />
             </>
         )
     } catch (error) {

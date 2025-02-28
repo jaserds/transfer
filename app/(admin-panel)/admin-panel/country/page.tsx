@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -19,6 +19,7 @@ export default function Countries() {
     const [newCountry, setNewCountry] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         fetch("/api/country")
@@ -72,6 +73,9 @@ export default function Countries() {
             setCountries([...countries, country]);
             setNewCountry("");
             setFile(null);
+            if (fileInputRef.current) {
+                fileInputRef.current.value = ""; // Очистка инпута
+            }
         } catch (error) {
             console.error(error);
         }
@@ -98,7 +102,7 @@ export default function Countries() {
             <div className="mb-3 text-[#373F47] font-bold">Добьавить страну</div>
             <div className="flex gap-2 mb-4">
                 <Input value={newCountry} onChange={(e) => setNewCountry(e.target.value)} placeholder="Название страны" />
-                <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+                <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} ref={fileInputRef} />
                 <Button onClick={addCountry}>Добавить</Button>
             </div>
 

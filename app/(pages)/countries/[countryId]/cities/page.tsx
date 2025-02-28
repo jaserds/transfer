@@ -59,8 +59,9 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
                 <SearchRouteComponent />
                 <Advantages />
             </MainComponent>
-            <TransfersContainerComponentCity dataSet={formattedCities} isLoading={false} />
-            <PopularRoutesSection popularRoute={responseData} itemName={formattedCities[0].countryName} />
+            {cities.length > 0 && <TransfersContainerComponentCity dataSet={formattedCities} isLoading={false} />}
+            {popularRoutes.length > 0 && <PopularRoutesSection popularRoute={responseData} itemName={formattedCities[0]?.countryName} />}
+
         </>
     );
 }
