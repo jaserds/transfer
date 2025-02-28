@@ -169,8 +169,6 @@ export default function MyRouts() {
     };
 
     const updatePopularRoute = async (id: string, popularRoute: boolean) => {
-        console.log(id);
-
         try {
             const res = await fetch(`/api/my-routs/${id}/set-popular-route`, {
                 method: "PUT",

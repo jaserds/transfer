@@ -1,41 +1,57 @@
-"use client";
-
 import Advantages from "@/components/MainComponents/AdvantagesComponent";
 import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import PopularRoutesSection from "@/components/PopularRoutesComponents/PopularRoutesSection";
 import TransfersContainerComponentCity from "@/components/SectionTransfersComponent/TransfersContainerComponentCity";
-import { ICityByCountryResponse, IPopularRouteResponse } from "@/lib/types";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { prisma } from "@/lib/prisma";
 
 
+export default async function Cities({ params }: { params: Promise<{ countryId: string }> }) {
 
-export default function Cities() {
+    const { countryId } = await params;
 
-    const params = useParams();
-    const [cities, setCities] = useState<ICityByCountryResponse[]>([]);
-    const [popularRoute, setPopularRoute] = useState<IPopularRouteResponse[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const cities = await prisma.city.findMany({
+        where: { countryId },
+        include: {
+            country: { select: { name: true } },
+            routes: { select: { id: true, inRoute: true, toRoute: true } },
+            _count: {
+                select: { routes: true },
+            },
+        },
+    });
 
-    useEffect(() => {
-        fetch(`/api/city/${params.countryId}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setCities(data)
-                setIsLoading(false)
-            }
-            )
-            .catch(() => {
-                console.error("Failed to fetch countries")
-                setIsLoading(true)
-            });
-        fetch(`/api/country/${params.countryId}/popular-routes`)
-            .then((res) => res.json())
-            .then((data) => {
-                setPopularRoute(data)
-            })
-    }, [params.countryId]);
+    const formattedCities = cities.map(city => ({
+        countryName: city.country.name,
+        data: {
+            id: city.id,
+            name: city.name,
+            imageUrl: city.imageUrl,
+            countryId: city.countryId,
+            routeCount: city._count.routes,
+            routes: city.routes.map(route => ({
+                id: route.id,
+                inRoute: route.inRoute,
+                toRoute: route.toRoute,
+            })),
+        }
+    }));
+
+    const popularRoutes = await prisma.route.findMany({
+        where: {
+            city: {
+                countryId: countryId,
+            },
+            popularRoute: true,
+        },
+        take: 12,
+    });
+
+    const responseData = popularRoutes.map((route) => ({
+        id: route.id,
+        inRoute: route.inRoute,
+        toRoute: route.toRoute
+    }))
 
     return (
         <>
@@ -43,8 +59,8 @@ export default function Cities() {
                 <SearchRouteComponent />
                 <Advantages />
             </MainComponent>
-            <TransfersContainerComponentCity dataSet={cities} isLoading={isLoading} />
-            <PopularRoutesSection popularRoute={popularRoute} />
+            <TransfersContainerComponentCity dataSet={formattedCities} isLoading={false} />
+            <PopularRoutesSection popularRoute={responseData} itemName={formattedCities[0].countryName} />
         </>
     );
 }

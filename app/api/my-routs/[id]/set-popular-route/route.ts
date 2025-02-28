@@ -3,7 +3,7 @@ import { getAppSessionStrictServer } from "@/lib/session.server";
 import { NextResponse } from "next/server";
 
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
     const session = await getAppSessionStrictServer();
 
     if (!session || session.user.role !== "ADMIN") {

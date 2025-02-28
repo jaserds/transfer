@@ -9,7 +9,11 @@ export const metadata: Metadata = {
 };
 
 
-const rubik = Rubik({ subsets: ['latin'], weight: ['400', '700'] });
+const rubik = Rubik({
+  subsets: ['latin'],
+  weight: ["300", "400", "500", "700", "900"],
+  variable: "--font-rubik",
+});
 const openSans = Open_Sans({ subsets: ['latin'], weight: ["300", "400", "600", "700"] });
 
 export default function RootLayout({

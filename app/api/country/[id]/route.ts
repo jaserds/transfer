@@ -5,7 +5,7 @@ import path from "path";
 import { getAppSessionStrictServer } from "@/lib/session.server";
 
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getAppSessionStrictServer();
 

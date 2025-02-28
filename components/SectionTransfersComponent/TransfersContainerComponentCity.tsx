@@ -8,7 +8,6 @@ interface ITransferContainerComponentCityProps {
 }
 
 const TransfersContainerComponentCity = ({ dataSet, isLoading }: ITransferContainerComponentCityProps) => {
-    console.log(dataSet);
     return (
         <section className="flex flex-col items-center mt-[120px] mb-[120px]">
             <div className="px-[10px]">
@@ -33,7 +32,7 @@ const TransfersContainerComponentCity = ({ dataSet, isLoading }: ITransferContai
                         ))
                         :
                         dataSet.map((city, index) => (
-                            <TransferComponentCity key={index} dataSet={city} link="" />
+                            <TransferComponentCity key={index} dataSet={city} link={"/countries/" + city.data.countryId + "/cities/" + city.data.id} />
                         ))
                     }
                 </div>

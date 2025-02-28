@@ -22,7 +22,7 @@ export interface ICityRoute {
 export interface ICityData {
     id: string;
     name: string;
-    imageUrl: string;
+    imageUrl: string | null;
     countryId: string;
     routeCount: number;
     routes: ICityRoute[];

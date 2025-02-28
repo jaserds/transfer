@@ -5,11 +5,9 @@ import path from "path";
 import { getAppSessionStrictServer } from "@/lib/session.server";
 
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
         const { id } = await params;
-        console.log(id);
-
 
         if (!id) {
             return NextResponse.json({ error: "countryId is required" }, { status: 400 });
@@ -49,7 +47,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 }
 
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getAppSessionStrictServer();
 
