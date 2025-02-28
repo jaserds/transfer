@@ -32,3 +32,9 @@ export interface ICityByCountryResponse {
     countryName: string;
     data: ICityData;
 }
+
+export interface IPopularRouteResponse {
+    id: string;
+    inRoute: string;
+    toRoute: string;
+}
