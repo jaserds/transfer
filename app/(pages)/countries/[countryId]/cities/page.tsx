@@ -50,7 +50,8 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
     const responseData = popularRoutes.map((route) => ({
         id: route.id,
         inRoute: route.inRoute,
-        toRoute: route.toRoute
+        toRoute: route.toRoute,
+        price: route.price
     }))
 
     return (

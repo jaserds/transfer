@@ -39,6 +39,17 @@ model Route {
   city            City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
   pointsGoogleMap Json
   description     String
+  price           Float
+}
+
+model TransferCars {
+  id        String @id @default(uuid())
+  name      String
+  imageUrl  String
+  cars      String
+  qtyPerson Int
+  qtyBags   Int
+  price     Float
 }
 
 model Account {

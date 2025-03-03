@@ -25,7 +25,7 @@ const PopularRoutesSection = ({ popularRoute, itemName }: PopularRouteProps & { 
                                 <Image src="/icons/popular-route/popular-route-icon.svg" width={50} height={50} alt="" />
                                 <p className="w-1/2">{route.toRoute}</p>
                             </div>
-                            <p className="flex justify-end text-[#26A65B] text-base font-bold">От 13 500 р.</p>
+                            <p className="flex justify-end text-[#26A65B] text-base font-bold">От {route.price} р.</p>
                         </Link>
                     </div>
                 ))}

@@ -11,6 +11,7 @@ interface IRequestMyRoute {
     popularRoute: boolean;
     pointsGoogleMap: Prisma.JsonValue;
     description: string;
+    price: number
 }
 
 export async function GET() {
@@ -31,9 +32,9 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description }: IRequestMyRoute = await req.json();
+        const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description, price }: IRequestMyRoute = await req.json();
 
-        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description) {
+        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !price) {
             return NextResponse.json(
                 { error: "Not all fields were filled (imageUrl, inRoute, toRoute, cityId, pointsGoogleMap, description)" },
                 { status: 400 }
@@ -49,6 +50,7 @@ export async function POST(req: Request) {
                 popularRoute,
                 pointsGoogleMap,
                 description,
+                price,
             },
         });
 

@@ -30,7 +30,8 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
             id: route.id,
             inRoute: route.inRoute,
             toRoute: route.toRoute,
-            cityName: route.city.name
+            cityName: route.city.name,
+            price: route.price
         }))
 
         return (

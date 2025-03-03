@@ -1,7 +1,7 @@
 "use client";
 
 
-import { EarthIcon, HouseIcon, MapPinHouseIcon, Route } from "lucide-react"
+import { Car, EarthIcon, HouseIcon, MapPinHouseIcon, Route } from "lucide-react"
 
 import {
     Sidebar,
@@ -33,6 +33,11 @@ const items = [
         title: "Города",
         url: "/admin-panel/city",
         icon: MapPinHouseIcon,
+    },
+    {
+        title: "Гараж",
+        url: "/admin-panel/transfer-cars",
+        icon: Car,
     },
     {
         title: "Выход на главную",

@@ -1,4 +1,3 @@
-
 export interface ICountryResponse {
     id: string;
     name: string;
@@ -37,4 +36,16 @@ export interface IPopularRouteResponse {
     id: string;
     inRoute: string;
     toRoute: string;
+    price: number;
 }
+
+export interface ITransferCars {
+    id: string;
+    name: string;
+    imageUrl: string;
+    cars: string;
+    qtyPerson: number;
+    qtyBags: number;
+    price: number;
+}
+

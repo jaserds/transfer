@@ -15,6 +15,7 @@ interface IMyRoute {
     toRoute: string;
     cityId: string;
     popularRoute: boolean;
+    price: number
     pointsGoogleMap: {
         points: Array<{ lat: number, lng: number }>
     };
@@ -25,6 +26,7 @@ interface INewMyRoute {
     inRoute: string
     toRoute: string;
     cityId: string;
+    price: number
     popularRoute: boolean;
     pointsGoogleMap: {
         points: Array<{ lat: number, lng: number }>
@@ -50,6 +52,7 @@ export default function MyRouts() {
         toRoute: "",
         cityId: "",
         popularRoute: false,
+        price: 0,
         pointsGoogleMap: {
             points: [
                 {
@@ -104,6 +107,7 @@ export default function MyRouts() {
             inRoute: "",
             toRoute: "",
             cityId: "",
+            price: 0,
             popularRoute: false,
             pointsGoogleMap: {
                 points: [
@@ -276,6 +280,7 @@ export default function MyRouts() {
                         <Textarea onChange={(e) => setDataNewRoute(prev => ({ ...prev, description: e.target.value }))} placeholder="Введите описание маршрута" />
                         <p className="text-[#373F47] font-bold text-center mt-3">Фото для стрицы</p>
                         <Input className="cursor-pointer" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" />
                         <Button className="mt-3" onClick={() => { addRoute() }}>Сохранить маршрут</Button>
                     </div>
 
