@@ -30,26 +30,37 @@ model City {
 }
 
 model Route {
-  id              String   @id @default(uuid())
+  id              String                 @id @default(uuid())
   inRoute         String
   toRoute         String
   cityId          String
   popularRoute    Boolean?
   imageUrl        String
-  city            City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  city            City                   @relation(fields: [cityId], references: [id], onDelete: Cascade)
   pointsGoogleMap Json
   description     String
   price           Float
+  transferCars    TransferCarsOnRoutes[]
 }
 
 model TransferCars {
-  id        String @id @default(uuid())
+  id        String                 @id @default(uuid())
   name      String
   imageUrl  String
   cars      String
   qtyPerson Int
   qtyBags   Int
   price     Float
+  routes    TransferCarsOnRoutes[]
+}
+
+model TransferCarsOnRoutes {
+  routeId       String
+  transferCarId String
+  route         Route        @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  transferCar   TransferCars @relation(fields: [transferCarId], references: [id], onDelete: Cascade)
+
+  @@id([routeId, transferCarId]) // Композитный ключ для связи
 }
 
 model Account {

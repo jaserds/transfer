@@ -2,11 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import MultiSelect from "@/components/ui/other/MultiSelect";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
+import { ITransferCars } from "@/lib/types";
 import { CircleX, Minus, Trash2 } from "lucide-react";
 import { useEffect, useState, } from "react";
+
+interface ITransferCarsResponse {
+    routeId: string;
+    transferCarId: string;
+    transferCar: ITransferCars[];
+}
 
 interface IMyRoute {
     id: string;
@@ -15,30 +23,32 @@ interface IMyRoute {
     toRoute: string;
     cityId: string;
     popularRoute: boolean;
-    price: number
+    price: number;
     pointsGoogleMap: {
         points: Array<{ lat: number, lng: number }>
     };
-    description: string
+    description: string;
+    transferCars: ITransferCarsResponse[];
 }
 
 interface INewMyRoute {
     inRoute: string
     toRoute: string;
     cityId: string;
-    price: number
+    price: number;
     popularRoute: boolean;
     pointsGoogleMap: {
         points: Array<{ lat: number, lng: number }>
     };
-    description: string
+    description: string;
+    transferCarIds: string[];
 }
 
 interface City {
     id: string;
     name: string;
     imageUrl?: string;
-    countryId: string;
+    countryId: string[];
 }
 
 
@@ -46,7 +56,10 @@ export default function MyRouts() {
     const [myRouts, setMyRouts] = useState<IMyRoute[]>([]);
     const [city, setCity] = useState<City[]>([]);
     const [showFormAddRoute, setShowFormAddRoute] = useState(false);
+    const [dataTransferCars, setDataTransferCars] = useState<ITransferCars[]>([]);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [file, setFile] = useState<File | null>(null);
+    const [multiSelectserverData, setMultiSelectserverData] = useState<ITransferCars[]>([]);
     const [dataNewRoute, setDataNewRoute] = useState<INewMyRoute>({
         inRoute: "",
         toRoute: "",
@@ -65,8 +78,14 @@ export default function MyRouts() {
                 }
             ]
         },
-        description: ""
+        description: "",
+        transferCarIds: [],
     })
+
+    const options = dataTransferCars.map((transferCar) => ({
+        id: transferCar.id,
+        name: transferCar.name,
+    }));
 
     useEffect(() => {
         fetch("/api/city")
@@ -78,7 +97,20 @@ export default function MyRouts() {
             .then((res) => res.json())
             .then(setMyRouts)
             .catch(() => console.error("Failed to fetch countries"));
+
+        fetch("/api/transfer-cars")
+            .then((res) => res.json())
+            .then((data) => {
+                setDataTransferCars(data)
+                console.log(data);
+            })
+            .catch(() => console.error("Failed to fetch countries"))
     }, []);
+
+    const handleSelectionChange = (selected: string[]) => {
+        setSelectedIds(selected);
+        setDataNewRoute({ ...dataNewRoute, transferCarIds: selected });
+    };
 
     const uploadImage = async (): Promise<string | null> => {
         if (!file) return null;
@@ -121,17 +153,19 @@ export default function MyRouts() {
                     }
                 ]
             },
-            description: ""
+            description: "",
+            transferCarIds: [],
         }
 
         )
     }
 
     const addRoute = async () => {
-        if (!city || !file || !dataNewRoute.cityId || !dataNewRoute.inRoute || !dataNewRoute.toRoute) return;
-
+        if (!city || !file || !dataNewRoute.cityId || !dataNewRoute.inRoute || !dataNewRoute.toRoute || !selectedIds) return;
         const imageUrl = await uploadImage();
         if (!imageUrl) return;
+        console.log(dataNewRoute);
+
 
         try {
             const res = await fetch("/api/my-routs", {
@@ -139,7 +173,8 @@ export default function MyRouts() {
                 body: JSON.stringify({
                     ...dataNewRoute,
                     pointsGoogleMap: JSON.stringify(dataNewRoute.pointsGoogleMap),
-                    imageUrl
+                    imageUrl,
+                    transferCarIds: dataNewRoute.transferCarIds
                 }),
                 headers: { "Content-Type": "application/json" },
             });
@@ -195,8 +230,8 @@ export default function MyRouts() {
 
     return (
         <div className="p-4">
-            <div className="mb-3 text-[#373F47] font-bold">Добьавить маршрут</div>
-            <Button onClick={() => { setShowFormAddRoute(true) }}>Добавить</Button>
+            <div className="mb-3 text-[#373F47] font-bold">Добавить маршрут</div>
+            <Button className="mb-8" onClick={() => { setShowFormAddRoute(true) }}>Добавить</Button>
             {
                 showFormAddRoute &&
                 <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#00000085] z-20 flex justify-center items-center">
@@ -221,6 +256,7 @@ export default function MyRouts() {
                         </Select>
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRoute: e.target.value }))} id="inRoute" type='text' className="" placeholder="От куда" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRoute: e.target.value }))} id="toRoute" type='text' className="" placeholder="Куда" />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" />
                         <div className=" flex flex-col gap-4 mt-3">
                             <p className="text-[#373F47] font-bold text-center">Точки маршрута для Googl карты</p>
                             <div className="flex gap-4">
@@ -280,7 +316,8 @@ export default function MyRouts() {
                         <Textarea onChange={(e) => setDataNewRoute(prev => ({ ...prev, description: e.target.value }))} placeholder="Введите описание маршрута" />
                         <p className="text-[#373F47] font-bold text-center mt-3">Фото для стрицы</p>
                         <Input className="cursor-pointer" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
-                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" />
+                        <p className="text-[#373F47] font-bold text-center mt-3">Авто</p>
+                        <MultiSelect options={options} onSelectionChange={handleSelectionChange} />
                         <Button className="mt-3" onClick={() => { addRoute() }}>Сохранить маршрут</Button>
                     </div>
 
@@ -294,6 +331,7 @@ export default function MyRouts() {
                         <TableHead className="px-6">Куда</TableHead>
                         <TableHead className="px-6">Город</TableHead>
                         <TableHead className="px-6">Популярный маршрут?</TableHead>
+                        <TableHead className="px-6">Классы авто</TableHead>
                         <TableHead className="px-6"></TableHead>
                     </TableRow>
                 </TableHeader>
@@ -316,6 +354,9 @@ export default function MyRouts() {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6C7C8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-star hover:fill-[#FFE6B8] hover:stroke-[#F9AC1A]"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></svg>
                                     </div>
                                 }
+                            </TableCell>
+                            <TableCell className="px-6">
+                                <MultiSelect options={options} onSelectionChange={handleSelectionChange} />
                             </TableCell>
                             <TableCell className="px-6">
                                 <Trash2 onClick={() => { deleteRoute(myRoute.id) }} className="cursor-pointer text-[#6C7C8C] hover:text-rose-500" />

@@ -1,28 +1,33 @@
+import { ITransferCars } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CarComponent() {
+interface ICarComponentProps {
+    carData: ITransferCars;
+}
+
+export default function CarComponent({ carData }: ICarComponentProps) {
     return (
         <div className="shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] pb-24 bg-[#fff] w-[500px] rounded-[10px] mx-auto relative">
             <div className="flex px-5 pt-[20px] pb-[37px] gap-[30px]">
                 <div className="max-w-[215px]">
-                    <Image className="mb-[10px]" src={"/images/car-images/car-economy.jpg"} width={215} height={95} alt="" />
+                    <Image className="mb-[10px]" src={carData.imageUrl} width={215} height={95} alt="" />
                     <div className="bg-[#F6F7F8] rounded-[5px] text-[#6C7C8C]">
                         <p className="py-1 px-3 text-[13px] text-center">
-                            Toyota Camry, VW Passat, Toyota Fortuner, Chevrolet Suburban
+                            {carData.cars}
                         </p>
                     </div>
                 </div>
                 <div className="max-w-[199px]">
-                    <h3 className="font-rubik text-[#373F47] text-[28px] mb-[15px] font-bold">Эконом</h3>
+                    <h3 className="font-rubik text-[#373F47] text-[28px] mb-[15px] font-bold">{carData.name}</h3>
                     <div className="flex gap-[20px] text-[18px] text-[#373F47] font-rubik font-bold mb-[20px]">
                         <div className="flex gap-[7px]">
                             <Image src={"/icons/car-icons/car-qty-person.svg"} width={24} height={24} alt="" />
-                            <span>3</span>
+                            <span>{carData.qtyPerson}</span>
                         </div>
                         <div className="flex gap-[7px]">
                             <Image src={"/icons/car-icons/car-bag.svg"} width={24} height={24} alt="" />
-                            <span>2</span>
+                            <span>{carData.qtyBags}</span>
                         </div>
                     </div>
                     <div className="flex gap-[5px] mb-[10px]">
@@ -36,7 +41,7 @@ export default function CarComponent() {
                 </div>
             </div>
             <div className="bg-[#292929] py-[29px] px-[27px] flex justify-between rounded-b-[10px] absolute bottom-0 w-full">
-                <p className="text-[28px] text-white font-rubik font-bold">5 300 RUB</p>
+                <p className="text-[28px] text-white font-rubik font-bold">{carData.price.toLocaleString("ru-RU")} RUB</p>
                 <Link href={"#"} className="bg-[#F9AC1A] text-white py-[13px] px-[15px] rounded-[5px]">Забронировать</Link>
             </div>
         </div>

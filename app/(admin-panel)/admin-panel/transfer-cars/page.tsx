@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ITransferCars } from "@/lib/types";
+import { CircleX, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -27,6 +28,7 @@ export default function TransferCars() {
         qtyBags: 0,
         price: 0,
     });
+    const [showModal, setShowModal] = useState(false);
     const [dataTransferCars, setDataTransferCars] = useState<ITransferCars[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -34,9 +36,12 @@ export default function TransferCars() {
     useEffect(() => {
         fetch("/api/transfer-cars")
             .then((res) => res.json())
-            .then(setDataTransferCars)
+            .then((data) => {
+                setDataTransferCars(data)
+            })
             .catch(() => console.error("Failed to fetch countries"))
             .finally(() => setIsLoading(false));
+
     }, []);
 
 
@@ -69,10 +74,11 @@ export default function TransferCars() {
         if (!imageUrl) return;
 
         try {
-            const res = await fetch("/api/my-routs", {
+            const res = await fetch("/api/transfer-cars", {
                 method: "POST",
                 body: JSON.stringify({
                     ...newTransferCars,
+                    imageUrl,
                 }),
                 headers: { "Content-Type": "application/json" },
             });
@@ -82,52 +88,103 @@ export default function TransferCars() {
             const newCar: ITransferCars = await res.json();
             setDataTransferCars([...dataTransferCars, newCar]);
             setFile(null);
+            setNewTransferCars({ name: "", imageUrl: "", cars: "", qtyPerson: 0, qtyBags: 0, price: 0 });
+            setShowModal(false);
         } catch (error) {
             console.error(error);
+        }
+    };
+
+    const deleteTransferCat = async (id: string) => {
+        try {
+            const res = await fetch(`/api/transfer-cars/${id}`, { method: "DELETE" });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "Failed to delete route");
+            }
+
+            setDataTransferCars(dataTransferCars.filter((transferCar) => transferCar.id !== id));
+        } catch (error) {
+            console.error("Error deleting country:", error);
         }
     };
 
 
     return (
         <div className="p-4">
-            <div className="mb-3 text-[#373F47] font-bold">Добьавить страну</div>
-            <div className="flex gap-2 mb-4">
-                <Input type="text" value={newTransferCars?.name || ""}
-                    onChange={(e) => setNewTransferCars((prev) => ({
-                        ...prev,
-                        name: e.target.value,
-                    }))} placeholder="Например Эконом, Бизнес" />
-                <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} ref={fileInputRef} />
-                <Input type="number" placeholder="Цена" value={newTransferCars?.price ?? ""}
-                    onChange={(e) => setNewTransferCars((prev) => ({
-                        ...prev,
-                        price: Number(e.target.value) || 0,
-                    }))} />
-                <Input type="text" placeholder="Модели авто через запятую" value={newTransferCars?.cars ?? ""}
-                    onChange={(e) => setNewTransferCars((prev) => ({
-                        ...prev,
-                        cars: e.target.value || "",
-                    }))} />
-                <Input type="number" placeholder="Количество пассажиров" value={newTransferCars?.qtyPerson ?? ""} onChange={
-                    (e) => setNewTransferCars((prev) => ({
-                        ...prev,
-                        qtyPerson: Number(e.target.value) || 0,
-                    }))
-                } />
-                <Input type="number" placeholder="Количество багажа" value={newTransferCars?.qtyBags ?? ""} onChange={
-                    (e) => setNewTransferCars((prev) => ({
-                        ...prev,
-                        qtyBags: Number(e.target.value) || 0,
-                    }))
-                } />
-                <Button onClick={() => { addNewTransferCar() }}>Добавить</Button>
-            </div>
+            <div className="mb-3 text-[#373F47] font-bold">Добавить авто</div>
+            {showModal &&
+                <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#00000085] z-20 flex justify-center items-center">
+                    <div className="z-30 bg-white p-4 max-w-[450px] max-h-[500px] rounded-[10px] flex flex-col gap-4 pb-16 overflow-y-auto custom-scroll">
+                        <button onClick={() => {
+                            setNewTransferCars({ name: "", imageUrl: "", cars: "", qtyPerson: 0, qtyBags: 0, price: 0 });
+                            setFile(null)
+                            setShowModal(false)
+                        }} className="cursor-pointer text-[#f02f2f] self-end"><CircleX /></button>
+                        <div className="mb-3 text-[#373F47] font-bold self-center">Добавить новый маршрут</div>
+                        <div className="flex flex-col gap-2 mb-4">
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="name" className="">Название</label>
+                                <Input required id="name" type="text" value={newTransferCars?.name || ""}
+                                    onChange={(e) => setNewTransferCars((prev) => ({
+                                        ...prev,
+                                        name: e.target.value,
+                                    }))} placeholder="Например Эконом, Бизнес" />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="" className="">Картинка</label>
+                                <Input required type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} ref={fileInputRef} />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="" className="">Цена</label>
+                                <Input required type="number" placeholder="Цена" value={newTransferCars?.price ?? ""}
+                                    onChange={(e) => setNewTransferCars((prev) => ({
+                                        ...prev,
+                                        price: Number(e.target.value) || 0,
+                                    }))} />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="" className="">Модели</label>
+                                <Input required type="text" placeholder="Модели авто через запятую" value={newTransferCars?.cars ?? ""}
+                                    onChange={(e) => setNewTransferCars((prev) => ({
+                                        ...prev,
+                                        cars: e.target.value || "",
+                                    }))} />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="" className="">Число пассажиров</label>
+                                <Input required type="number" placeholder="Количество пассажиров" value={newTransferCars?.qtyPerson ?? ""} onChange={
+                                    (e) => setNewTransferCars((prev) => ({
+                                        ...prev,
+                                        qtyPerson: Number(e.target.value) || 0,
+                                    }))
+                                } />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="" className="">Количество багажа</label>
+                                <Input required type="number" placeholder="Количество багажа" value={newTransferCars?.qtyBags ?? ""} onChange={
+                                    (e) => setNewTransferCars((prev) => ({
+                                        ...prev,
+                                        qtyBags: Number(e.target.value) || 0,
+                                    }))
+                                } />
+                            </div>
+                            <Button className="self-center mt-5" onClick={() => { addNewTransferCar() }}>Добавить</Button>
+                        </div>
+                    </div>
+                </div>}
+
+            <Button className="mb-10" onClick={() => { setShowModal(true) }}>Добавить новое авто</Button>
 
             <Table>
                 <TableHeader>
                     <TableRow>
                         <TableHead>Название</TableHead>
                         <TableHead>Картинка</TableHead>
+                        <TableHead>Модели</TableHead>
+                        <TableHead>Число пассажиров</TableHead>
+                        <TableHead>Количество багажа</TableHead>
                         <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
@@ -176,7 +233,19 @@ export default function TransferCars() {
                                     {transferCars.imageUrl && <Image src={transferCars.imageUrl} width={100} height={100} alt={transferCars.name} className="max-h-[100px] max-w-[100px] object-contain rounded-md" />}
                                 </TableCell>
                                 <TableCell>
-                                    {/* <Trash2 onClick={() => deleteCountry(country.id)} className="cursor-pointer text-[#6C7C8C] hover:text-rose-500" /> */}
+                                    {transferCars.price}
+                                </TableCell>
+                                <TableCell>
+                                    {transferCars.cars}
+                                </TableCell>
+                                <TableCell>
+                                    {transferCars.qtyPerson}
+                                </TableCell>
+                                <TableCell>
+                                    {transferCars.qtyBags}
+                                </TableCell>
+                                <TableCell>
+                                    <Trash2 onClick={() => { deleteTransferCat(transferCars.id); }} className="cursor-pointer text-[#6C7C8C] hover:text-rose-500" />
                                 </TableCell>
                             </TableRow>
                         ))
