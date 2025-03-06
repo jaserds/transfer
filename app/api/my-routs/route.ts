@@ -17,7 +17,17 @@ interface IRequestMyRoute {
 
 export async function GET() {
     try {
-        const routes = await prisma.route.findMany();
+        const routes = await prisma.route.findMany(
+            {
+                include: {
+                    transferCars: {
+                        include: {
+                            transferCar: true,
+                        },
+                    },
+                }
+            }
+        );
         return NextResponse.json(routes);
     } catch (error) {
         return NextResponse.json({ error: error instanceof Error ? error.message : "Unknown error" }, { status: 500 });
@@ -25,6 +35,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+
 
     const session = await getAppSessionStrictServer();
 

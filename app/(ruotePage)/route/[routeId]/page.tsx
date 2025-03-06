@@ -1,6 +1,8 @@
 "use server";
 
 import CarsComponentContainer from "@/components/CarsComponent/CarsComponentContainer";
+import ContactAndFAQContainer from "@/components/ContactAndFAQSection/ContactAndFAQContainer";
+import ContactsFomContainer from "@/components/ContactsFomSection/ContactsFomContainer";
 import Footer from "@/components/Footer/Footer";
 import Advantages from "@/components/MainComponents/AdvantagesComponent";
 import HeaderComponent from "@/components/MainComponents/HeaderComponent";
@@ -30,6 +32,13 @@ export default async function TransferCars({ params }: { params: { routeId: stri
         },
     });
 
+    const routeData = await prisma.route.findUnique({
+        where: {
+            id: routeId,
+        },
+    });
+
+
     const onlyTransferCars: TransferCar[] = classCar.map((item) => item.transferCar);
 
 
@@ -41,6 +50,25 @@ export default async function TransferCars({ params }: { params: { routeId: stri
                 <Advantages />
             </MainComponent>
             <CarsComponentContainer onlyTransferCars={onlyTransferCars} />
+            <div className="mb-[72px] relative w-full h-[300px] bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-center" style={{ backgroundImage: `url('${routeData?.imageUrl}')` }}>
+                <div className="absolute inset-0 bg-black opacity-30"></div>
+                <h1 className="relative text-[36px] text-white font-rubik font-bold">
+                    {routeData?.toRoute}
+                </h1>
+            </div>
+            <section className="mb-[120px]">
+                <div className="max-w-[1070px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p className="text-lg text-[#373F47]">
+                        {routeData?.description}
+                    </p>
+                    {/* <div className="w-[490px] h-[314px] bg-white rounded-lg shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] px-[10px] pt-[10xp] pb-[20px]" >
+                        <div className="w-full h-[250px] mb-[20px]"></div>
+                        <p className="text-[#6C7C8C] text-[20px] font-bold text-center ">{routeData?.inRoute} - {routeData?.toRoute}</p>
+                    </div> */}
+                </div>
+            </section>
+            <ContactAndFAQContainer />
+            <ContactsFomContainer />
             <Footer />
         </>
     );

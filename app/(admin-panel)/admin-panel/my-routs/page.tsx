@@ -31,6 +31,11 @@ interface IMyRoute {
     transferCars: ITransferCarsResponse[];
 }
 
+interface ITransferCarsByRoute {
+    routeId: string;
+    transferCarsIds: string[];
+}
+
 interface INewMyRoute {
     inRoute: string
     toRoute: string;
@@ -59,7 +64,7 @@ export default function MyRouts() {
     const [dataTransferCars, setDataTransferCars] = useState<ITransferCars[]>([]);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [file, setFile] = useState<File | null>(null);
-    const [multiSelectserverData, setMultiSelectserverData] = useState<ITransferCars[]>([]);
+    const [multiSelectserverData, setMultiSelectserverData] = useState<ITransferCarsByRoute[]>([]);
     const [dataNewRoute, setDataNewRoute] = useState<INewMyRoute>({
         inRoute: "",
         toRoute: "",
@@ -95,21 +100,67 @@ export default function MyRouts() {
 
         fetch("/api/my-routs")
             .then((res) => res.json())
-            .then(setMyRouts)
+            .then((data) => {
+                setMyRouts(data);
+                setMultiSelectserverData(data.map((myRoute: IMyRoute) => ({ routeId: myRoute.id, transferCarsIds: myRoute.transferCars.map((transferCar) => transferCar.transferCarId) })));
+            })
             .catch(() => console.error("Failed to fetch countries"));
 
         fetch("/api/transfer-cars")
             .then((res) => res.json())
             .then((data) => {
                 setDataTransferCars(data)
-                console.log(data);
             })
             .catch(() => console.error("Failed to fetch countries"))
+
     }, []);
+
+    useEffect(() => {
+        console.log("multiSelectserverData", multiSelectserverData);
+    }, [multiSelectserverData]);
 
     const handleSelectionChange = (selected: string[]) => {
         setSelectedIds(selected);
         setDataNewRoute({ ...dataNewRoute, transferCarIds: selected });
+    };
+
+
+    const handleSelectionServerChange = (selected: string[], routeId: string) => {
+        const oldArray = multiSelectserverData.filter((route) => route.routeId === routeId).map((classCar) => classCar.transferCarsIds).flat()
+
+        const deletedIds = oldArray.filter(id => !selected.includes(id));
+        const addedIds = selected.filter(id => !oldArray.includes(id));
+
+        console.log("deletedIds", deletedIds);
+        console.log("addedIds", addedIds);
+
+
+        setMultiSelectserverData(multiSelectserverData.map((route) => route.routeId === routeId ? { ...route, transferCarsIds: selected } : route));
+
+        if (addedIds.length > 0) {
+            fetch(`/api/my-routs/add-transfer-car`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ addedId: addedIds[0], routeId: routeId }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("data", data);
+                })
+                .catch(() => console.error("Failed to fetch countries"));
+            return
+        }
+
+        if (deletedIds.length > 0) {
+            fetch(`/api/my-routs/delete-transfer-car`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ routeId: routeId, deletedId: deletedIds[0] }),
+            })
+                .then((res) => res.json())
+            return
+        }
+
     };
 
     const uploadImage = async (): Promise<string | null> => {
@@ -164,8 +215,6 @@ export default function MyRouts() {
         if (!city || !file || !dataNewRoute.cityId || !dataNewRoute.inRoute || !dataNewRoute.toRoute || !selectedIds) return;
         const imageUrl = await uploadImage();
         if (!imageUrl) return;
-        console.log(dataNewRoute);
-
 
         try {
             const res = await fetch("/api/my-routs", {
@@ -356,7 +405,11 @@ export default function MyRouts() {
                                 }
                             </TableCell>
                             <TableCell className="px-6">
-                                <MultiSelect options={options} onSelectionChange={handleSelectionChange} />
+                                <MultiSelect
+                                    options={options}
+                                    initialSelected={
+                                        multiSelectserverData.filter((route) => route.routeId === myRoute.id).map((classCar) => classCar.transferCarsIds).flat()}
+                                    onSelectionChange={(selectedIds) => handleSelectionServerChange(selectedIds, myRoute.id)} />
                             </TableCell>
                             <TableCell className="px-6">
                                 <Trash2 onClick={() => { deleteRoute(myRoute.id) }} className="cursor-pointer text-[#6C7C8C] hover:text-rose-500" />

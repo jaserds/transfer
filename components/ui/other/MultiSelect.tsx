@@ -7,12 +7,13 @@ interface Option {
 
 interface MultiSelectProps {
     options: Option[];
+    initialSelected?: string[];
     onSelectionChange: (selectedIds: string[]) => void;
 }
 
-const MultiSelect: React.FC<MultiSelectProps> = ({ options, onSelectionChange }) => {
+const MultiSelect: React.FC<MultiSelectProps> = ({ options, initialSelected = [], onSelectionChange }) => {
     // Состояние для выбранных элементов
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(initialSelected);
 
     const handleCheckboxChange = (id: string) => {
         const updatedSelection = selectedOptions.includes(id)
