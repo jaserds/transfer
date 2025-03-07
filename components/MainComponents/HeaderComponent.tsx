@@ -21,12 +21,12 @@ export default function HeaderComponent() {
                 <nav>
                     <ul className="flex items-center">
                         <li className="mr-12"><Link href="/">Главная</Link></li>
-                        <li className="mr-12"><Link href="#">Города</Link></li>
-                        <li className="mr-12"><Link href="#">Популярные маршруты</Link></li>
-                        <li className=""><Link className="flex items-center " href="#"><Image className="mr-2" src="/icons/header-icons/excursionsLogo.svg"
+                        <li className="mr-12"><Link href="/cities">Города</Link></li>
+                        <li className="mr-12"><Link href="/popular-routes">Популярные маршруты</Link></li>
+                        {/* <li className=""><Link className="flex items-center " href="#"><Image className="mr-2" src="/icons/header-icons/excursionsLogo.svg"
                             width={35}
                             height={35}
-                            alt="" />Экскурсии</Link></li>
+                            alt="" />Экскурсии</Link></li> */}
                     </ul>
                 </nav>
                 <div className="flex items-center gap-10">

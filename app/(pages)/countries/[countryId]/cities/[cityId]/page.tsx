@@ -47,7 +47,4 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
     } catch (error) {
         return NextResponse.json({ error: error }, { status: 500 });
     }
-
-
-
 }
