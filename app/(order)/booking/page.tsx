@@ -18,8 +18,8 @@ export default function Booking() {
     const [personPhone, setPersonPhone] = useState<string>("");
     const [personEmail, setPersonEmail] = useState<string>("");
     const [count, setCount] = useState(Number(searchParams.get("qtyPerson")) || 1);
-    // const [isChecked, setIsChecked] = useState(false);
-    // const [comment, setComment] = useState("");
+    const [isChecked, setIsChecked] = useState(false);
+    const [comment, setComment] = useState("");
 
     const [isOnOutTransfer, setIsOnOutTransfer] = useState(false);
     const [isOnCommetnary, setIsOnCommetnary] = useState(false);
