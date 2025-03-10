@@ -36,11 +36,23 @@ export default async function TransferCars({ params }: { params: { routeId: stri
         where: {
             id: routeId,
         },
+        select: {
+            id: true,
+            toRoute: true,
+            description: true,
+            imageUrl: true,
+            inRoute: true,
+            price: true,
+        }
     });
 
 
-    const onlyTransferCars: TransferCar[] = classCar.map((item) => item.transferCar);
+    if (!routeData) {
+        return <div>Маршрут не найден</div>;
+    }
 
+
+    const onlyTransferCars: TransferCar[] = classCar.map((item) => item.transferCar);
 
     return (
         <>
@@ -49,7 +61,7 @@ export default async function TransferCars({ params }: { params: { routeId: stri
                 <SearchRouteComponent />
                 <Advantages />
             </MainComponent>
-            <CarsComponentContainer onlyTransferCars={onlyTransferCars} />
+            <CarsComponentContainer onlyTransferCars={onlyTransferCars} routeData={routeData} />
             <div className="mb-[72px] relative w-full h-[300px] bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-center" style={{ backgroundImage: `url('${routeData?.imageUrl}')` }}>
                 <div className="absolute inset-0 bg-black opacity-30"></div>
                 <h1 className="relative text-[36px] text-white font-rubik font-bold">

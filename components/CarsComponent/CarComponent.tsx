@@ -4,9 +4,17 @@ import Link from "next/link";
 
 interface ICarComponentProps {
     carData: ITransferCars;
+    routeData: {
+        id: string;
+        toRoute: string;
+        description: string;
+        imageUrl: string;
+        inRoute: string;
+        price: number;
+    };
 }
 
-export default function CarComponent({ carData }: ICarComponentProps) {
+export default function CarComponent({ carData, routeData }: ICarComponentProps) {
     return (
         <div className="shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] pb-24 bg-[#fff] w-[500px] rounded-[10px] mx-auto relative">
             <div className="flex px-5 pt-[20px] pb-[37px] gap-[30px]">
@@ -42,7 +50,10 @@ export default function CarComponent({ carData }: ICarComponentProps) {
             </div>
             <div className="bg-[#292929] py-[29px] px-[27px] flex justify-between rounded-b-[10px] absolute bottom-0 w-full">
                 <p className="text-[28px] text-white font-rubik font-bold">{carData.price.toLocaleString("ru-RU")} RUB</p>
-                <Link href={"#"} className="bg-[#F9AC1A] text-white py-[13px] px-[15px] rounded-[5px]">Забронировать</Link>
+                <Link href={
+                    `/booking?rid=${routeData.id}&inRoute=${routeData.inRoute}&toRoute=${routeData.toRoute}&price=${routeData.price}&name=${carData.name}&qtyPerson=${carData.qtyPerson}&qtyBags=${carData.qtyBags}`
+                }
+                    className="bg-[#F9AC1A] text-white py-[13px] px-[15px] rounded-[5px]">Забронировать</Link>
             </div>
         </div>
     )

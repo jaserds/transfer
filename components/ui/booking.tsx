@@ -1,8 +1,22 @@
 import React, { useState } from "react";
 
-const CustomDatePicker = () => {
+interface CustomDatePickerProps {
+    selectedDate: Date | null;
+    setSelectedDate: (date: Date | null) => void;
+}
+
+interface CustomTimePickerProps {
+    selectedTime: string | null;
+    setSelectedTime: (time: string) => void;
+}
+
+interface CustomCheckBoxProps {
+    setIsChecked: (isChecked: boolean) => void;
+}
+
+const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSelectedDate }) => {
     const [isCalendarVisible, setIsCalendarVisible] = useState(false);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth());
     const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
@@ -140,9 +154,9 @@ const CustomDatePicker = () => {
     );
 };
 
-const CustomTimePicker = () => {
+const CustomTimePicker: React.FC<CustomTimePickerProps> = ({ selectedTime, setSelectedTime }) => {
     const [isTimeVisible, setIsTimeVisible] = useState(false);
-    const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
 
     // Вспомогательная функция для генерации времени
     const generateTimeOptions = () => {
@@ -245,10 +259,13 @@ function CounterOrder({ count, setCount }: CounterOrderProps) {
     );
 }
 
-export default function CustomCheckbox() {
+const CustomCheckbox: React.FC<CustomCheckBoxProps> = ({ setIsChecked }) => {
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsChecked(event.target.checked);
+    };
     return (
         <label className="flex items-center cursor-pointer">
-            <input type="checkbox" className="hidden peer" />
+            <input type="checkbox" className="hidden peer" onChange={handleCheckboxChange} />
             <div className="w-[15px] h-[15px] mr-[10px] rounded-[5px] border-[1px] border-[#F9AC1A] peer-checked:bg-[#F9AC1A] peer-checked:border-[#F9AC1A] flex items-center justify-center transition">
             </div>
             <span className="text-[#6C7C8C] text-[14px]">Хочу, что бы со мной связались</span>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Rubik, Open_Sans } from 'next/font/google';
 import { AppProviders } from "./_providers/app-providers";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Трансфер",
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={`${rubik.className} ${openSans.className}`}>
         <AppProviders >
           {children}
+          <Toaster />
         </AppProviders>
 
       </body>

@@ -23,6 +23,7 @@ export default function HeaderComponent() {
                         <li className="mr-12"><Link href="/">Главная</Link></li>
                         <li className="mr-12"><Link href="/cities">Города</Link></li>
                         <li className="mr-12"><Link href="/popular-routes">Популярные маршруты</Link></li>
+                        {session.data?.user.role === "ADMIN" && <li className="mr-12"><Link href="/admin-panel">Админ панель</Link></li>}
                         {/* <li className=""><Link className="flex items-center " href="#"><Image className="mr-2" src="/icons/header-icons/excursionsLogo.svg"
                             width={35}
                             height={35}

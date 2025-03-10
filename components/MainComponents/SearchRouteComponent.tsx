@@ -1,23 +1,64 @@
 'use client';
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+
+interface ICityResponse {
+    name: string;
+}
+
+interface IRouteResponce {
+    id: string;
+    inRoute: string;
+    toRoute: string;
+    city: ICityResponse;
+}
 
 export default function SearchRouteComponent() {
     const [isFocusedIsWere, setIsFocusedIsWere] = useState(false);
-    const [isFocusedInWer, setIsFocusedInWer] = useState(false);
-    const [inputIsWere, setInputIsWere] = useState("");
+    const [isFocusedInWere, setIsFocusedInWer] = useState(false);
     const [inputInWere, setInputInWere] = useState("");
+    const [inputToWere, setInputToWere] = useState("");
     const [isOpenPassengers, setIsOpenPassengers] = useState(false);
+    const [passengers, setPassengers] = useState(2);
+    const [isInOpenLocations, setInOpenLocations] = useState(false);
+    const [isToOpenLocations, setToOpenLocations] = useState(false);
+    const [routes, setRoutes] = useState<IRouteResponce[]>([]);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const dropdownLocationsRef = useRef<HTMLDivElement | null>(null);
-    const [passengers, setPassengers] = useState(2);
-    const [isOpenLocations, setIsOpenLocations] = useState(false);
-    const possibleLocations = ["Москва", "Минск", "Берлин", "Париж", "Рим", "Мадрид"];
+    const dropdownToLocationsRef = useRef<HTMLDivElement | null>(null);
+    const router = useRouter();
 
-    const filteredLocations = possibleLocations.filter(location =>
-        location.toLowerCase().includes(inputIsWere.toLowerCase())
-    );
+    const filteredRoutesInWere = routes
+        .filter(route =>
+            route.inRoute.toLowerCase().includes(inputInWere.toLowerCase())
+        )
+        .reduce((uniqueRoutes: IRouteResponce[], route) => {
+            // Проверяем, есть ли уже такой маршрут по полю `inRoute` в уникальном списке
+            if (!uniqueRoutes.some(r => r.inRoute === route.inRoute)) {
+                uniqueRoutes.push(route);
+            }
+            return uniqueRoutes;
+        }, []);
+
+    const filteredRoutesToWere = routes.filter(route => route.inRoute === inputInWere);
+
+
+    const handleSearchRoute = () => {
+        const findRouteId = routes.find(route => route.inRoute === inputInWere && route.toRoute === inputToWere)?.id;
+        if (inputInWere && inputToWere) {
+            if (findRouteId) {
+                router.push(`/route/${findRouteId}`);
+            } else {
+                toast("Маршрут не найден")
+            }
+        } else {
+            toast("Вы не выбрали маршрут")
+        }
+    };
 
     const handleSelect = (count: number) => {
         setPassengers(count);
@@ -25,24 +66,44 @@ export default function SearchRouteComponent() {
     };
 
     const handleReverseInputWhere = () => {
-        const temp = inputIsWere;
-        setInputIsWere(inputInWere);
-        setInputInWere(temp);
+        const temp = inputInWere;
+        setInputInWere(inputToWere);
+        setInputToWere(temp);
     }
 
     const handleLocationSelect = (location: string) => {
-        setInputIsWere(location);
-        setIsOpenLocations(false);
+        setInputInWere(location);
+        setInOpenLocations(false);
+    };
+
+    const handleToLocationSelect = (location: string) => {
+        setInputToWere(location);
+        setToOpenLocations(false);
     };
 
     useEffect(() => {
+
+        async function fetchRoutes() {
+            try {
+                const response = await fetch("/api/my-routs/search-routs"); // Подставь свой API эндпоинт
+                await response.json().then((data) => {
+                    setRoutes(data);
+                })
+
+
+            } catch (error) {
+                console.error("Ошибка загрузки маршрутов:", error);
+            }
+        }
+        fetchRoutes();
+
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsOpenPassengers(false);
             }
 
             if (dropdownLocationsRef.current && !dropdownLocationsRef.current.contains(event.target as Node)) {
-                setIsOpenLocations(false);
+                setInOpenLocations(false);
             }
         }
 
@@ -52,9 +113,15 @@ export default function SearchRouteComponent() {
             }
 
             if (dropdownLocationsRef.current && event.target instanceof Node && !dropdownLocationsRef.current.contains(event.target)) {
-                setIsOpenLocations(false);
+                setInOpenLocations(false);
+            }
+
+            if (dropdownToLocationsRef.current && event.target instanceof Node && !dropdownToLocationsRef.current.contains(event.target)) {
+                setToOpenLocations(false);
             }
         });
+
+
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
@@ -63,7 +130,7 @@ export default function SearchRouteComponent() {
             <div className="relative flex flex-col w-[28%] h-[60px] z-10" ref={dropdownLocationsRef}>
                 <span className="block absolute right-0 w-[2px] h-[80%] top-[10%] border-l-[2px] border-dashed border-[#D2D2D2]"></span>
                 <label
-                    className={`absolute left-4 transition-all ${isFocusedIsWere || inputIsWere
+                    className={`absolute left-4 transition-all ${isFocusedIsWere || inputInWere
                         ? "top-1 text-sm text-gray-500"
                         : "top-[25%] text-[20px] text-[#D2D2D2]"
                         }`}
@@ -77,25 +144,25 @@ export default function SearchRouteComponent() {
                        rounded-bl-[10px]"
                     type="text"
                     id="isWhereInput"
-                    value={inputIsWere}
-                    onClick={() => { setIsOpenLocations(true) }}
-                    onChange={(e) => setInputIsWere(e.target.value)}
+                    value={inputInWere}
+                    onClick={() => { setInOpenLocations(true) }}
+                    onChange={(e) => setInputInWere(e.target.value)}
                     onFocus={() => setIsFocusedIsWere(true)}
                     onBlur={() => setIsFocusedIsWere(false)}
+                    autoComplete="off"
                 />
-                {/* Выпадающий список */}
-                {isOpenLocations && inputIsWere && filteredLocations.length > 0 && (
+                {isInOpenLocations && inputInWere && filteredRoutesInWere.length > 0 && (
                     <ul className="absolute left-0 top-16 w-full mt-1 bg-white border rounded-l-lg shadow-md z-10">
-                        {filteredLocations.map((location, index) => (
+                        {filteredRoutesInWere.map((location, index) => (
                             <li
                                 key={index}
                                 className="relative px-4 py-2 cursor-pointer hover:bg-[#f9ab1a52] text-[#373F47] last:border-none"
                                 onClick={() => {
-                                    handleLocationSelect(location);
+                                    handleLocationSelect(location.inRoute);
                                 }}
                             >
-                                {location}
-                                <p className="text-[14px]">{location}, Московская область, Россия</p>
+                                {location.inRoute}
+                                <p className="text-[14px]">{location.inRoute}, {location.city.name}</p>
                                 <span className="block absolute bottom-0 w-[90%] h-[1px] border-b-[1px] border-[#D2D2D2]"></span>
                             </li>
                         ))}
@@ -105,13 +172,13 @@ export default function SearchRouteComponent() {
             <div className="relative flex flex-col w-[5%] h-[60px] bg-[#fff] z-0 cursor-pointer" onClick={handleReverseInputWhere}>
                 <Image src={"/icons/main-search-icons/arrow-reverse.svg"} width={30} height={30} alt="" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>
-            <div className="relative flex flex-col w-[28%] h-[60px] z-10">
+            <div className="relative flex flex-col w-[28%] h-[60px] z-10" ref={dropdownToLocationsRef}>
                 <span className="block absolute left-0 w-[2px] 
                                  h-[80%] top-[10%] border-l-[2px] border-dashed border-[#D2D2D2] overflow-hidden"></span>
                 <span className="block absolute right-0 w-[2px] 
                                  h-[80%] top-[10%] border-l-[2px] border-dashed border-[#D2D2D2] overflow-hidden"></span>
                 <label
-                    className={`absolute left-4 transition-all ${isFocusedInWer || inputInWere
+                    className={`absolute left-4 transition-all ${isFocusedInWere || inputInWere
                         ? "top-1 text-sm text-gray-500"
                         : "top-[25%] text-[20px] text-[#D2D2D2]"
                         }`}
@@ -124,11 +191,30 @@ export default function SearchRouteComponent() {
                       h-full w-full px-4 pt-5 pb-1 border-l-0 focus:border-l-0 text-[#373F47]"
                     type="text"
                     id="inWhereInput"
-                    value={inputInWere}
-                    onChange={(e) => setInputInWere(e.target.value)}
+                    value={inputToWere}
+                    onClick={() => { setToOpenLocations(true) }}
+                    onChange={(e) => setInputToWere(e.target.value)}
                     onFocus={() => setIsFocusedInWer(true)}
                     onBlur={() => setIsFocusedInWer(false)}
+                    autoComplete="off"
                 />
+                {isToOpenLocations && filteredRoutesToWere.length > 0 && (
+                    <ul className="absolute left-0 top-16 w-full mt-1 bg-white border rounded-l-lg shadow-md z-10">
+                        {filteredRoutesToWere.map((location, index) => (
+                            <li
+                                key={index}
+                                className="relative px-4 py-2 cursor-pointer hover:bg-[#f9ab1a52] text-[#373F47] last:border-none"
+                                onClick={() => {
+                                    handleToLocationSelect(location.toRoute);
+                                }}
+                            >
+                                {location.toRoute}
+                                <p className="text-[14px]">{location.toRoute}, {location.city.name}</p>
+                                <span className="block absolute bottom-0 w-[90%] h-[1px] border-b-[1px] border-[#D2D2D2]"></span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
             <div className="relative z-9" ref={dropdownRef}>
                 {/* Кнопка */}
@@ -186,7 +272,7 @@ export default function SearchRouteComponent() {
                     </ul>
                 )}
             </div>
-            <button className="text-[#fff] text-base font-semibold px-4 py-5 max-h-[60px] h-full bg-[#F9AC1A] rounded-r-[10px]">Подобрать авто</button>
+            <button onClick={handleSearchRoute} className="text-[#fff] text-base font-semibold px-4 py-5 max-h-[60px] h-full bg-[#F9AC1A] rounded-r-[10px]">Подобрать авто</button>
         </div>
     );
 }
