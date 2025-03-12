@@ -1,6 +1,7 @@
+import { Link } from "@/i18n/navigation";
 import { ITransferCars } from "@/lib/types";
 import Image from "next/image";
-import Link from "next/link";
+
 
 interface ICarComponentProps {
     carData: ITransferCars;

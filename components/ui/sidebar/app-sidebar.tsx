@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/sidebar"
 import { useAppSession } from "@/lib/use-app-session"
 import Image from "next/image"
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+
 
 // Menu items.
 const items = [

@@ -1,5 +1,7 @@
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
+
 
 interface ICitiesResponse {
     id: string
@@ -15,15 +17,18 @@ interface ITransferComponentCityProps {
     link: string;
 }
 
-const TransferComponentAllCities = ({ dataSet, link }: ITransferComponentCityProps) => {
+const TransferComponentAllCities = async ({ dataSet, link }: ITransferComponentCityProps) => {
+
+    const t = await getTranslations('AppTraslation')
+
 
     function getTransferString(count: number): string {
         if (count === 1) {
-            return `${count} трансфер`;
+            return `${count} ${t("components.TransferComponentCountry.iconTextOne")}`;
         } else if (count >= 2 && count <= 4) {
-            return `${count} трансфера`;
+            return `${count}  ${t("components.TransferComponentCountry.iconTextMoreTwo")}`;
         } else {
-            return `${count} трансферов`;
+            return `${count}  ${t("components.TransferComponentCountry.iconTextAll")}`;
         }
     }
 

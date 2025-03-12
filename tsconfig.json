@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/SectionTransfersComponent",
-    "app/(order)/layout.ts"
+    "app/[locale]/(order)/layout.ts"
   ],
   "exclude": [
     "node_modules"

@@ -3,42 +3,40 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
-
-const features = [
-    {
-        title: "Профессионализм и опыт",
-        description:
-            "Мы гордимся профессиональными водителями с многолетним опытом работы. Наши шоферы проходят тщательный отбор и обучение, чтобы предоставить вам только наилучший сервис. Мы знаем, как важно для наших клиентов чувствовать себя комфортно и уверенно, путешествуя с нами.",
-        image: "/images/features-car.png",
-    },
-    {
-        title: "Безопасность на первом месте",
-        description:
-            "Наши автомобили проходят регулярное техническое обслуживание, а водители – медицинские проверки и тренировки по безопасному вождению.",
-        image: "/images/car2.png",
-    },
-    {
-        title: "Индивидуальный подход",
-        description:
-            "Мы учитываем все пожелания клиентов, чтобы сделать поездку максимально удобной и приятной.",
-        image: "/images/features-car.png",
-    },
-    {
-        title: "Роскошь и комфорт",
-        description:
-            "Наши автомобили – это сочетание стиля, удобства и высокотехнологичного оснащения.",
-        image: "/images/features-car.png",
-    },
-    {
-        title: "Надежность и репутация",
-        description:
-            "Мы ценим каждого клиента и дорожим своей репутацией, предоставляя лучший сервис.",
-        image: "/images/features-car.png",
-    },
-];
 
 const FeaturesComponent = () => {
+
+    const t = useTranslations("AppTraslation")
+
+    const features = [
+        {
+            title: t("components.FeaturesComponent.title1"),
+            description: t("components.FeaturesComponent.description1"),
+            image: "/images/features-car.png",
+        },
+        {
+            title: t("components.FeaturesComponent.title2"),
+            description: t("components.FeaturesComponent.description2"),
+            image: "/images/defendeer-car.jpeg",
+        },
+        {
+            title: t("components.FeaturesComponent.title3"),
+            description: t("components.FeaturesComponent.description3"),
+            image: "/images/individual.jpg",
+        },
+        {
+            title: t("components.FeaturesComponent.title4"),
+            description: t("components.FeaturesComponent.description4"),
+            image: "/images/comfort.jpg",
+        },
+        {
+            title: t("components.FeaturesComponent.title5"),
+            description: t("components.FeaturesComponent.description5"),
+            image: "/images/repo.jpg",
+        },
+    ];
     const [selectedFeature, setSelectedFeature] = useState(features[0]);
 
     useEffect(() => {

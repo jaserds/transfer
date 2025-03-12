@@ -1,33 +1,35 @@
+"use server";
 
-
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
+const HowWorkContainer = async () => {
+    const t = await getTranslations("AppTraslation")
 
-const howWorkData = [
-    {
-        image: '/icons/how-work/how-work-route.svg',
-        title: 'Вы указываете маршрут и выбираете автомобиль',
-        text: 'Укажите начальную и конечную точку маршрута, выберите тип автомобиля и оставьте свои контактные данные',
-        alt: ''
-    },
-    {
-        image: '/icons/how-work/how-work-check.svg',
-        title: 'Подтверждаете свою поездку',
-        text: 'После заполнения формы мы свяжемся с вами для уточнения деталей и подтверждения бронирования',
-        alt: ''
-    },
-    {
-        image: '/icons/how-work/how-work-driver.svg',
-        title: 'Водитель встречает вас с табличкой в аэропорту',
-        text: 'Водитель будет ждать вас в зоне прилета с именной табличкой, чтобы вам не пришлось искать транспорт',
-        alt: ''
-    }
-]
+    const howWorkData = [
+        {
+            image: '/icons/how-work/how-work-route.svg',
+            title: t("components.HowWorkContainer.title1"),
+            text: t("components.HowWorkContainer.text1"),
+            alt: ''
+        },
+        {
+            image: '/icons/how-work/how-work-check.svg',
+            title: t("components.HowWorkContainer.title2"),
+            text: t("components.HowWorkContainer.text2"),
+            alt: ''
+        },
+        {
+            image: '/icons/how-work/how-work-driver.svg',
+            title: t("components.HowWorkContainer.title3"),
+            text: t("components.HowWorkContainer.text3"),
+            alt: ''
+        }
+    ]
 
-const HowWorkContainer = () => {
     return (
         <section className="mb-[120px] px-5">
-            <h2 className={`text-[#383F47] font-[rubik] text-4xl font-semibold text-center mb-[70px]`} >Как работает сервис</h2>
+            <h2 className={`text-[#383F47] font-[rubik] text-4xl font-semibold text-center mb-[70px]`} >{t("components.HowWorkContainer.pageTitle")}</h2>
             <div className="max-w-[1090px] mx-auto flex justify-between gap-5" >
                 {
                     howWorkData.map((howWorkItem, index) => {

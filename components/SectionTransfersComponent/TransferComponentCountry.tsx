@@ -1,6 +1,8 @@
+import { Link } from "@/i18n/navigation";
 import { ICountryResponse } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+
 
 interface ITransferComponentCountyProps {
     dataSet: ICountryResponse;
@@ -9,13 +11,15 @@ interface ITransferComponentCountyProps {
 
 const TransferComponentCountry = ({ dataSet, link }: ITransferComponentCountyProps) => {
 
+    const t = useTranslations('AppTraslation');
+
     function getTransferString(count: number): string {
         if (count === 1) {
-            return `${count} трансфер`;
+            return `${count} ${t('components.TransferComponentCountry.iconTextOne')}`;
         } else if (count >= 2 && count <= 4) {
-            return `${count} трансфера`;
+            return `${count} ${t('components.TransferComponentCountry.iconTextMoreTwo')}`;
         } else {
-            return `${count} трансферов`;
+            return `${count} ${t('components.TransferComponentCountry.iconTextAll')}`;
         }
     }
 

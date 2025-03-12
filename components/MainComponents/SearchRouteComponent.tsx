@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -31,6 +32,8 @@ export default function SearchRouteComponent() {
     const dropdownLocationsRef = useRef<HTMLDivElement | null>(null);
     const dropdownToLocationsRef = useRef<HTMLDivElement | null>(null);
     const router = useRouter();
+
+    const t = useTranslations("AppTraslation")
 
     const filteredRoutesInWere = routes
         .filter(route =>
@@ -136,7 +139,7 @@ export default function SearchRouteComponent() {
                         }`}
                     htmlFor="isWhereInput"
                 >
-                    Откуда
+                    {t("components.SearchRouteComponent.labelFrom")}
                 </label>
                 <input
                     className="focus:outline-none rounded-none text-[#373F47]
@@ -184,7 +187,7 @@ export default function SearchRouteComponent() {
                         }`}
                     htmlFor="inWhereInput"
                 >
-                    Куда
+                    {t("components.SearchRouteComponent.labelTo")}
                 </label>
                 <input
                     className="focus:outline-none rounded-none
@@ -238,7 +241,7 @@ export default function SearchRouteComponent() {
 
                     {/* Текст с количеством пассажиров */}
                     <span className="text-[#373F47]">
-                        {passengers} {passengers === 1 ? "пассажир" : passengers < 5 ? "пассажира" : "пассажиров"}
+                        {passengers} {passengers === 1 ? t("components.SearchRouteComponent.qtyOnePassengers") : passengers < 5 ? t("components.SearchRouteComponent.qty5Passengers") : t("components.SearchRouteComponent.qtyAllPassengers")}
                     </span>
 
                     {/* Иконка стрелки */}
@@ -266,13 +269,13 @@ export default function SearchRouteComponent() {
                                 className="px-4 py-2 cursor-pointer hover:bg-[#f9ab1a52] text-[#373F47]"
                                 onClick={() => handleSelect(num)}
                             >
-                                {num} {num === 1 ? "пассажир" : num < 5 ? "пассажира" : "пассажиров"}
+                                {num} {num === 1 ? t("components.SearchRouteComponent.qtyOnePassengers") : num < 5 ? t("components.SearchRouteComponent.qtyAllPassengers") : t("components.SearchRouteComponent.qtyAllPassengers")}
                             </li>
                         ))}
                     </ul>
                 )}
             </div>
-            <button onClick={handleSearchRoute} className="text-[#fff] text-base font-semibold px-4 py-5 max-h-[60px] h-full bg-[#F9AC1A] rounded-r-[10px]">Подобрать авто</button>
+            <button onClick={handleSearchRoute} className="text-[#fff] text-base font-semibold px-4 py-5 max-h-[60px] h-full bg-[#F9AC1A] rounded-r-[10px]">{t("components.SearchRouteComponent.button")}</button>
         </div>
     );
 }

@@ -30,7 +30,7 @@ export const nextAuthConfig: AuthOptions = {
         }
     },
     pages: {
-        signIn: "/auth/signin",
+        signIn: "/en/auth/signin",
     },
     providers: compact([
         privateConfig.GOOGLE_CLIENT_ID && privateConfig.GOOGLE_SECRET &&

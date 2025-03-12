@@ -1,16 +1,18 @@
 import { ICountryResponse } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 import TransferComponentCountry from "./TransferComponentCountry";
+import { useLocale, useTranslations } from "next-intl";
 
 
 const TransfersContainerComponentCountry = ({ dataSet, isLoading, }: { dataSet: ICountryResponse[], isLoading: boolean }) => {
-
+    const t = useTranslations('AppTraslation');
+    const locale = useLocale();
 
     return (
         <section className="flex flex-col items-center mt-[120px] mb-[120px]">
             <div className="px-[10px]">
                 <h2 className="text-[#383F47] font-[rubik] text-4xl font-semibold text-center mb-[70px]">
-                    Трансферы { }
+                    {t('components.TransfersContainerComponentCountry.title')}
                 </h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-[50px] justify-center">
@@ -30,7 +32,7 @@ const TransfersContainerComponentCountry = ({ dataSet, isLoading, }: { dataSet: 
                         ))
                         :
                         dataSet.map((country, index) => (
-                            <TransferComponentCountry key={index} dataSet={country} link={"countries/" + country.id + "/cities"} />))
+                            <TransferComponentCountry key={index} dataSet={country} link={locale + "/countries/" + country.id + "/cities"} />))
                     }
                 </div>
             </div>

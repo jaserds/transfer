@@ -1,0 +1,105 @@
+{
+    "AppTraslation": {
+        "components": {
+            "MainComponent": {
+                "title": "Premium airport transfer with a personal driver"
+            },
+            "SearchRouteComponent": {
+                "labelFrom": "From",
+                "labelTo": "To",
+                "qtyOnePassengers": "Passenger",
+                "qty5Passengers": "Passengers",
+                "qtyAllPassengers": "Passengers",
+                "button": "Choose a transfer"
+            },
+            "Advantages": {
+                "driver": "Russian-speaking driver",
+                "comfort": "Comfortable trip",
+                "defender": "Safety first",
+                "Premium": "Premium vehicles"
+            },
+            "TransfersContainerComponentCountry": {
+                "title": "Transfers"
+            },
+            "TransferComponentCountry": {
+                "iconTextOne": "Transfer",
+                "iconTextMoreTwo": "Transfers",
+                "iconTextAll": "Transfers"
+            },
+            "WhyChooseUsContainer": {
+                "title": "Why choose us?",
+                "subtitle": "By choosing us, you choose quality, safety, and comfort!"
+            },
+            "HeaderComponent": {
+                "signIn": "SignIn",
+                "signOut": "SignOut",
+                "homeLink": "Home",
+                "citiesLink": "Cities",
+                "popularRoutesLink": "Popular routes"
+            },
+            "FeaturesComponent": {
+                "title1": "Professionalism and Experience",
+                "title2": "Safety First",
+                "title3": "Personalized Approach",
+                "title4": "Luxury and Comfort",
+                "title5": "Reliability and Reputation",
+                "description1": "We take pride in our professional drivers with years of experience. Our chauffeurs undergo rigorous selection and training to provide you with the best service. We understand how important it is for our clients to feel comfortable and confident while traveling with us.",
+                "description2": "Our vehicles undergo regular maintenance, and our drivers receive medical check-ups and safety driving training.",
+                "description3": "We consider all client preferences to make every trip as comfortable and enjoyable as possible.",
+                "description4": "Our cars combine style, convenience, and high-tech equipment to ensure unparalleled pleasure in every ride. We offer only the best models, equipped with modern safety systems, premium materials, and innovative technologies to make your journey as comfortable, safe, and enjoyable as possible.",
+                "description5": "We value each client and cherish our reputation by providing the best service. Our drivers are experienced professionals, and our fleet consists of modern and well-maintained vehicles. We guarantee punctuality, safety, and a personalized approach to ensure your journey is as comfortable and secure as possible."
+            },
+            "HowWorkContainer": {
+                "pageTitle": "How the Service Works",
+                "title1": "You specify the route and choose a car",
+                "title2": "You confirm your trip",
+                "title3": "The driver meets you with a nameplate at the airport",
+                "text1": "Specify the starting and ending points of the route, choose the type of car, and leave your contact details.",
+                "text2": "After filling out the form, we will contact you to clarify details and confirm the booking.",
+                "text3": "The driver will be waiting for you in the arrivals area with a nameplate so you don't have to look for transport."
+            },
+            "ContactAndFAQContainer": {
+                "pageTitle": "Contact and FAQ",
+                "title1": "How can I book a transfer?",
+                "title2": "How can I check if my order has been successfully processed?",
+                "title3": "How can I find my driver?",
+                "title4": "What happens if my flight details change or it is significantly delayed?",
+                "title5": "Will the driver carry my luggage?",
+                "text1": "",
+                "text2": "",
+                "text3": "",
+                "text4": "",
+                "text5": ""
+            },
+            "ContactsFomContainer": {
+                "title1": "Contact Us",
+                "text1": "Got questions or need help with booking? Fill out the form and we will get back to you shortly!",
+                "title2": "For any inquiries",
+                "text2": "Call us",
+                "text3": "We are available 24/7 and ready to help you organize a comfortable journey!",
+                "name": "Name",
+                "phone": "Phone",
+                "q": "Question",
+                "button": "Submit"
+            },
+            "footer": {
+                "homeLink": "Home",
+                "citiesLink": "Cities",
+                "popularRoutesLink": "Popular Routes"
+            },
+            "TransfersContainerComponentCity": {
+                "title": "Transfers"
+            },
+            "PopularRoutes": {
+                "title": "Popular Routes",
+                "from": "From",
+                "to": "To",
+                "price": "From"
+            }
+        }
+    },
+    "LocaleSwitcher": {
+        "label": "Change language",
+        "locale": "{locale, select, ru {ru Russian} en {🇺🇸 English} other {Unknown}}"
+    }
+}

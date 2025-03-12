@@ -1,6 +1,10 @@
+import { useTranslations } from "next-intl";
+
+
 
 
 export default function MainComponent({ children }: Readonly<{ children: React.ReactNode }>) {
+    const t = useTranslations("AppTraslation");
 
     return (
         <div className="h-[500px] w-full bg-[url('/main-bg.png')] bg-cover bg-no-repeat bg-center relative">
@@ -17,7 +21,7 @@ export default function MainComponent({ children }: Readonly<{ children: React.R
                     font-[600]
                     mb-[50px]
                     `}>
-                    Премиальный трансфер из аэропорта с личным водителем
+                    {t('components.MainComponent.title')}
                 </h1>
                 {children}
             </div>
