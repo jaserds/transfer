@@ -11,14 +11,23 @@ export default async function PopularRoute() {
         where: {
             popularRoute: true,
         },
+        include: {
+            RouteTranslation: {
+                where: {
+                    locale: 'en',
+                }
+            },
+        },
         take: 30,
     });
+
 
     const responseData = popularRoutes.map((route) => ({
         id: route.id,
         inRoute: route.inRoute,
         toRoute: route.toRoute,
-        price: route.price
+        price: route.price,
+        routeTranslation: route.RouteTranslation[0]
     }))
 
     return (

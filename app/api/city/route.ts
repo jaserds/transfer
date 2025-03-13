@@ -21,11 +21,23 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { name, imageUrl, countryId }: { name: string; imageUrl: string, countryId: string } = await req.json();
-        if (!name || !imageUrl) {
+        const { name, nameEn, imageUrl, countryId }: { name: string; nameEn: string; imageUrl: string, countryId: string } = await req.json();
+        if (!name || !nameEn || !imageUrl) {
             return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
         }
-        const city = await prisma.city.create({ data: { name, imageUrl, countryId } });
+        const city = await prisma.city.create({
+            data: {
+                name,
+                imageUrl,
+                countryId,
+                CityTranslation: {
+                    create: [
+                        { locale: "en", name: nameEn },
+                        { locale: "ru", name: name },
+                    ],
+                }
+            }
+        });
 
         return NextResponse.json(city);
     } catch (error) {

@@ -1,5 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { ITransferCars } from "@/lib/types";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
 
@@ -15,7 +16,9 @@ interface ICarComponentProps {
     };
 }
 
-export default function CarComponent({ carData, routeData }: ICarComponentProps) {
+export default async function CarComponent({ carData, routeData }: ICarComponentProps) {
+    const t = await getTranslations("AppTraslation");
+
     return (
         <div className="shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] pb-24 bg-[#fff] w-[500px] rounded-[10px] mx-auto relative">
             <div className="flex px-5 pt-[20px] pb-[37px] gap-[30px]">
@@ -41,11 +44,11 @@ export default function CarComponent({ carData, routeData }: ICarComponentProps)
                     </div>
                     <div className="flex gap-[5px] mb-[10px]">
                         <Image src={"/icons/car-icons/car-ex-order.svg"} width={20} height={20} alt="" />
-                        <span className="text-[#6C7C8C] text-[13px]">Бесплатная отмена заказа</span>
+                        <span className="text-[#6C7C8C] text-[13px]">{t("components.CarComponent.orderCancellation")}</span>
                     </div>
                     <div className="flex gap-[5px]">
                         <Image src={"/icons/car-icons/car-time.svg"} width={20} height={20} alt="" />
-                        <span className="text-[#6C7C8C] text-[13px]">Бесплатная отмена заказа</span>
+                        <span className="text-[#6C7C8C] text-[13px]">{t("components.CarComponent.Expectation")}</span>
                     </div>
                 </div>
             </div>

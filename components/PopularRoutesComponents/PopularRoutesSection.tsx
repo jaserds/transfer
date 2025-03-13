@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { IPopularRouteResponse } from "@/lib/types";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 
 
@@ -9,6 +9,7 @@ interface PopularRouteProps {
 }
 
 const PopularRoutesSection = async ({ popularRoute, itemName }: PopularRouteProps & { itemName: string }) => {
+    const locale = await getLocale();
 
     const t = await getTranslations("AppTraslation")
 
@@ -25,9 +26,9 @@ const PopularRoutesSection = async ({ popularRoute, itemName }: PopularRouteProp
                                 <p className="w-1/2">{t("components.PopularRoutes.to")}</p>
                             </div>
                             <div className="flex justify-between gap-5 text-[#373F47]">
-                                <p className="w-1/2">{route.inRoute}</p>
+                                <p className="w-1/2">{locale === "en" ? route.routeTranslation.inRoute : route.inRoute}</p>
                                 <Image src="/icons/popular-route/popular-route-icon.svg" width={50} height={50} alt="" />
-                                <p className="w-1/2">{route.toRoute}</p>
+                                <p className="w-1/2">{locale === "en" ? route.routeTranslation.toRoute : route.toRoute}</p>
                             </div>
                             <p className="flex justify-end text-[#26A65B] text-base font-bold">{t("components.PopularRoutes.price")} {route.price} р.</p>
                         </Link>

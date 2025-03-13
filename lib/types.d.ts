@@ -1,8 +1,15 @@
+
+interface ICountryTranslation {
+    locale: string;
+    name: string;
+}
+
 export interface ICountryResponse {
     id: string;
     name: string;
     imageUrl: string;
     routeCount: number;
+    translation: ICountryTranslation[];
 }
 
 export interface ICityAdminPanelResponse {
@@ -25,6 +32,7 @@ export interface ICityData {
     countryId: string;
     routeCount: number;
     routes: ICityRoute[];
+    translations: { name: string; }
 }
 
 export interface ICityByCountryResponse {
@@ -32,11 +40,21 @@ export interface ICityByCountryResponse {
     data: ICityData;
 }
 
+interface IRouteTranslation {
+    id: string;
+    routeId: string;
+    locale: string;
+    inRoute: string;
+    toRoute: string;
+    description: string;
+}
+
 export interface IPopularRouteResponse {
     id: string;
     inRoute: string;
     toRoute: string;
     price: number;
+    routeTranslation: IRouteTranslation;
 }
 
 export interface ITransferCars {

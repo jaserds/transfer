@@ -12,7 +12,6 @@ export default async function Countries() {
   const res = await fetch("http://localhost:3000/api/country");
   const countries: ICountryResponse[] = await res.json();
 
-
   return (
     <>
       <MainComponent>

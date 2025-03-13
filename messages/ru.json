@@ -95,6 +95,13 @@
                 "from": "От куда",
                 "to": "Куда",
                 "price": "От"
+            },
+            "CarsComponentContainer": {
+                "title": "Автопарк"
+            },
+            "CarComponent": {
+                "orderCancellation": "Бесплатная отмена заказа",
+                "Expectation": "Ожидание в случае задержки"
             }
         }
     },

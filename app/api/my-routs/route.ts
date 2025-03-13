@@ -7,10 +7,13 @@ interface IRequestMyRoute {
     imageUrl: string;
     inRoute: string;
     toRoute: string;
+    inRouteEn: string;
+    toRouteEn: string;
     cityId: string;
     popularRoute: boolean;
     pointsGoogleMap: Prisma.JsonValue;
     description: string;
+    descriptionEn: string;
     price: number;
     transferCarIds: string[];
 }
@@ -44,9 +47,9 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description, price, transferCarIds }: IRequestMyRoute = await req.json();
+        const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description, price, transferCarIds, inRouteEn, toRouteEn, descriptionEn }: IRequestMyRoute = await req.json();
 
-        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !price || !transferCarIds) {
+        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !price || !transferCarIds || !inRouteEn || !toRouteEn || !descriptionEn) {
             return NextResponse.json(
                 { error: "Not all fields were filled (imageUrl, inRoute, toRoute, cityId, pointsGoogleMap, description)" },
                 { status: 400 }
@@ -67,6 +70,16 @@ export async function POST(req: Request) {
                     create: transferCarIds.map((id) => ({
                         transferCar: { connect: { id } },
                     })),
+                },
+                RouteTranslation: {
+                    create: [
+                        {
+                            locale: "en",
+                            inRoute: inRouteEn,
+                            toRoute: toRouteEn,
+                            description: descriptionEn,
+                        }
+                    ],
                 },
             },
             include: { transferCars: { include: { transferCar: true } } },

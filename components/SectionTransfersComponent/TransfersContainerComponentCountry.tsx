@@ -1,12 +1,14 @@
+"use server";
+
 import { ICountryResponse } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 import TransferComponentCountry from "./TransferComponentCountry";
-import { useLocale, useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 
 
-const TransfersContainerComponentCountry = ({ dataSet, isLoading, }: { dataSet: ICountryResponse[], isLoading: boolean }) => {
-    const t = useTranslations('AppTraslation');
-    const locale = useLocale();
+const TransfersContainerComponentCountry = async ({ dataSet, isLoading, }: { dataSet: ICountryResponse[], isLoading: boolean }) => {
+    const t = await getTranslations('AppTraslation');
+    const locale = await getLocale();
 
     return (
         <section className="flex flex-col items-center mt-[120px] mb-[120px]">
@@ -31,7 +33,7 @@ const TransfersContainerComponentCountry = ({ dataSet, isLoading, }: { dataSet: 
                             </div>
                         ))
                         :
-                        dataSet.map((country, index) => (
+                        dataSet.length > 0 && dataSet.map((country, index) => (
                             <TransferComponentCountry key={index} dataSet={country} link={locale + "/countries/" + country.id + "/cities"} />))
                     }
                 </div>

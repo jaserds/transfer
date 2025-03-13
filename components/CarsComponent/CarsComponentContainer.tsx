@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import CarComponent from "./CarComponent";
 
 interface TransferCar {
@@ -24,12 +25,12 @@ interface CarsComponentContainerProps {
     routeData: RouteData;
 }
 
-export default function CarsComponentContainer({ onlyTransferCars, routeData }: CarsComponentContainerProps) {
-
+export default async function CarsComponentContainer({ onlyTransferCars, routeData }: CarsComponentContainerProps) {
+    const t = await getTranslations("AppTraslation")
     return (
         <section className="px-4 mb-[120px] mt-[120px]">
             <div className="flex flex-col items-center mb-[72px]">
-                <h2 className="text-4xl text-[#383F47] font-semibold font-[rubik] mb-[20px]">{routeData.inRoute} - {routeData.toRoute}</h2>
+                <h2 className="text-4xl text-[#383F47] font-semibold font-[rubik] mb-[20px]">{t("components.CarsComponentContainer.title")}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 max-w-[1090px] mx-auto gap-[50px]">
                 {onlyTransferCars.map((car) => <CarComponent key={car.id} carData={car} routeData={routeData} />)}

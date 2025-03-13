@@ -4,25 +4,35 @@ import SearchRouteComponent from "@/components/MainComponents/SearchRouteCompone
 import PopularRoutesSection from "@/components/PopularRoutesComponents/PopularRoutesSection";
 import TransfersContainerComponentCity from "@/components/SectionTransfersComponent/TransfersContainerComponentCity";
 import { prisma } from "@/lib/prisma";
+import { getLocale } from "next-intl/server";
 
 
 export default async function Cities({ params }: { params: Promise<{ countryId: string }> }) {
 
     const { countryId } = await params;
+    const locale = await getLocale();
 
     const cities = await prisma.city.findMany({
         where: { countryId },
         include: {
-            country: { select: { name: true } },
+            country: { select: { CountryTranslation: { where: { locale: locale } } } },
             routes: { select: { id: true, inRoute: true, toRoute: true } },
             _count: {
                 select: { routes: true },
             },
+            CityTranslation: {
+                where: {
+                    locale: locale,
+                },
+                select: {
+                    name: true
+                }
+            }
         },
     });
 
     const formattedCities = cities.map(city => ({
-        countryName: city.country.name,
+        countryName: city.country.CountryTranslation[0].name,
         data: {
             id: city.id,
             name: city.name,
@@ -34,8 +44,12 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
                 inRoute: route.inRoute,
                 toRoute: route.toRoute,
             })),
+            translations: city.CityTranslation[0]
         }
     }));
+
+    console.log(formattedCities);
+
 
     const popularRoutes = await prisma.route.findMany({
         where: {
@@ -44,6 +58,13 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
             },
             popularRoute: true,
         },
+        include: {
+            RouteTranslation: {
+                where: {
+                    locale: 'en',
+                },
+            }
+        },
         take: 12,
     });
 
@@ -51,7 +72,8 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
         id: route.id,
         inRoute: route.inRoute,
         toRoute: route.toRoute,
-        price: route.price
+        price: route.price,
+        routeTranslation: route.RouteTranslation[0],
     }))
 
     return (

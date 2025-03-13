@@ -11,6 +11,12 @@ export async function GET() {
                 id: true,
                 name: true,
                 imageUrl: true,
+                CountryTranslation: {
+                    select: {
+                        name: true,
+                        locale: true
+                    }
+                },
                 cities: {
                     select: {
                         routes: true,
@@ -23,10 +29,17 @@ export async function GET() {
             id: country.id,
             name: country.name,
             imageUrl: country.imageUrl,
-            routeCount: country.cities.reduce((total, city) => total + city.routes.length, 0), // Суммируем маршруты по городам
+            routeCount: country.cities.reduce((total, city) => total + city.routes.length, 0),
+            translation: country.CountryTranslation
         }));
 
-        return NextResponse.json(countries);
+        if (Array.isArray(countries) === false) {
+            return NextResponse.json([]);
+        } else {
+            return NextResponse.json(countries);
+        }
+
+
     } catch (error) {
         return NextResponse.json({ error: error }, { status: 500 });
     }
@@ -39,11 +52,22 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Access denied" }, { status: 403 });
     }
     try {
-        const { name, imageUrl }: { name: string; imageUrl: string } = await req.json();
-        if (!name || !imageUrl) {
+        const { name, nameEn, imageUrl }: { name: string; nameEn: string; imageUrl: string; } = await req.json();
+        if (!name || !nameEn || !imageUrl) {
             return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
         }
-        const country = await prisma.country.create({ data: { name, imageUrl } });
+        const country = await prisma.country.create({
+            data: {
+                name,
+                imageUrl,
+                CountryTranslation: {
+                    create: [
+                        { locale: "en", name: nameEn },
+                        { locale: "ru", name: name },
+                    ],
+                }
+            },
+        });
 
         return NextResponse.json(country);
     } catch (error) {

@@ -9,6 +9,7 @@ import HeaderComponent from "@/components/MainComponents/HeaderComponent";
 import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import { prisma } from "@/lib/prisma";
+import { getLocale } from "next-intl/server";
 
 interface TransferCar {
     id: string;
@@ -22,6 +23,8 @@ interface TransferCar {
 
 export default async function TransferCars({ params }: { params: { routeId: string } }) {
     const { routeId } = await params
+
+    const t = await getLocale()
 
     const classCar = await prisma.transferCarsOnRoutes.findMany({
         where: {
@@ -43,6 +46,7 @@ export default async function TransferCars({ params }: { params: { routeId: stri
             imageUrl: true,
             inRoute: true,
             price: true,
+            RouteTranslation: true
         }
     });
 
@@ -65,13 +69,13 @@ export default async function TransferCars({ params }: { params: { routeId: stri
             <div className="mb-[72px] relative w-full h-[300px] bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-center" style={{ backgroundImage: `url('${routeData?.imageUrl}')` }}>
                 <div className="absolute inset-0 bg-black opacity-30"></div>
                 <h1 className="relative text-[36px] text-white font-rubik font-bold">
-                    {routeData?.toRoute}
+                    {t === "ru" ? routeData?.toRoute : routeData.RouteTranslation[0].inRoute} - {t === "ru" ? routeData?.toRoute : routeData.RouteTranslation[0].toRoute}
                 </h1>
             </div>
             <section className="mb-[120px]">
                 <div className="max-w-[1070px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
                     <p className="text-lg text-[#373F47]">
-                        {routeData?.description}
+                        {t === "ru" ? routeData?.description : routeData.RouteTranslation[0].description}
                     </p>
                     {/* <div className="w-[490px] h-[314px] bg-white rounded-lg shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] px-[10px] pt-[10xp] pb-[20px]" >
                         <div className="w-full h-[250px] mb-[20px]"></div>

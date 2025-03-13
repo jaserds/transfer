@@ -22,6 +22,11 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
                         name: true,
                     },
                 },
+                RouteTranslation: {
+                    where: {
+                        locale: 'en',
+                    }
+                }
             },
             take: 12,
         });
@@ -31,7 +36,8 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
             inRoute: route.inRoute,
             toRoute: route.toRoute,
             cityName: route.city.name,
-            price: route.price
+            price: route.price,
+            routeTranslation: route.RouteTranslation[0],
         }))
 
         return (

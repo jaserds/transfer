@@ -14,33 +14,67 @@ datasource db {
 }
 
 model Country {
-  id       String  @id @default(uuid())
-  name     String
-  imageUrl String?
-  cities   City[]
+  id                 String               @id @default(uuid())
+  name               String
+  imageUrl           String?
+  cities             City[]
+  CountryTranslation CountryTranslation[]
+}
+
+model CountryTranslation {
+  id        String @id @default(uuid())
+  countryId String
+  locale    String // "en", "ru", "fr" и т. д.
+  name      String
+
+  country Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
+
+  @@unique([countryId, locale]) // Уникальная пара countryId + locale
 }
 
 model City {
-  id        String  @id @default(uuid())
-  name      String
-  imageUrl  String?
-  countryId String
-  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
-  routes    Route[]
+  id              String            @id @default(uuid())
+  name            String
+  imageUrl        String?
+  countryId       String
+  country         Country           @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  routes          Route[]
+  CityTranslation CityTranslation[]
+}
+
+model CityTranslation {
+  id     String @id @default(uuid())
+  cityId String
+  city   City   @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  locale String // Например: "en", "fr", "de"
+  name   String
 }
 
 model Route {
-  id              String                 @id @default(uuid())
-  inRoute         String
-  toRoute         String
-  cityId          String
-  popularRoute    Boolean?
-  imageUrl        String
-  city            City                   @relation(fields: [cityId], references: [id], onDelete: Cascade)
-  pointsGoogleMap Json
-  description     String
-  price           Float
-  transferCars    TransferCarsOnRoutes[]
+  id               String                 @id @default(uuid())
+  inRoute          String
+  toRoute          String
+  cityId           String
+  popularRoute     Boolean?
+  imageUrl         String
+  city             City                   @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  pointsGoogleMap  Json
+  description      String
+  price            Float
+  transferCars     TransferCarsOnRoutes[]
+  RouteTranslation RouteTranslation[]
+}
+
+model RouteTranslation {
+  id          String @id @default(uuid())
+  routeId     String
+  locale      String // Например, 'en' или 'ru'
+  inRoute     String
+  toRoute     String
+  description String
+  route       Route  @relation(fields: [routeId], references: [id], onDelete: Cascade)
+
+  @@unique([routeId, locale]) // Гарантирует, что для каждой локали будет только один перевод
 }
 
 model TransferCars {

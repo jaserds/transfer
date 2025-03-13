@@ -37,8 +37,10 @@ interface ITransferCarsByRoute {
 }
 
 interface INewMyRoute {
-    inRoute: string
+    inRoute: string;
     toRoute: string;
+    inRouteEn: string;
+    toRouteEn: string;
     cityId: string;
     price: number;
     popularRoute: boolean;
@@ -46,6 +48,7 @@ interface INewMyRoute {
         points: Array<{ lat: number, lng: number }>
     };
     description: string;
+    descriptionEn: string;
     transferCarIds: string[];
 }
 
@@ -68,6 +71,8 @@ export default function MyRouts() {
     const [dataNewRoute, setDataNewRoute] = useState<INewMyRoute>({
         inRoute: "",
         toRoute: "",
+        inRouteEn: "",
+        toRouteEn: "",
         cityId: "",
         popularRoute: false,
         price: 0,
@@ -84,6 +89,7 @@ export default function MyRouts() {
             ]
         },
         description: "",
+        descriptionEn: "",
         transferCarIds: [],
     })
 
@@ -189,6 +195,8 @@ export default function MyRouts() {
         setDataNewRoute({
             inRoute: "",
             toRoute: "",
+            inRouteEn: "",
+            toRouteEn: "",
             cityId: "",
             price: 0,
             popularRoute: false,
@@ -205,6 +213,7 @@ export default function MyRouts() {
                 ]
             },
             description: "",
+            descriptionEn: "",
             transferCarIds: [],
         }
 
@@ -305,6 +314,8 @@ export default function MyRouts() {
                         </Select>
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRoute: e.target.value }))} id="inRoute" type='text' className="" placeholder="От куда" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRoute: e.target.value }))} id="toRoute" type='text' className="" placeholder="Куда" />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRouteEn: e.target.value }))} id="inRouteEn" type='text' className="" placeholder="От куда En" />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRouteEn: e.target.value }))} id="toRouteEn" type='text' className="" placeholder="Куда En" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" />
                         <div className=" flex flex-col gap-4 mt-3">
                             <p className="text-[#373F47] font-bold text-center">Точки маршрута для Googl карты</p>
@@ -363,6 +374,7 @@ export default function MyRouts() {
                         </div>
                         <p className="text-[#373F47] font-bold text-center mt-3">Описание маршрута</p>
                         <Textarea onChange={(e) => setDataNewRoute(prev => ({ ...prev, description: e.target.value }))} placeholder="Введите описание маршрута" />
+                        <Textarea onChange={(e) => setDataNewRoute(prev => ({ ...prev, descriptionEn: e.target.value }))} placeholder="Описание маршрута En" />
                         <p className="text-[#373F47] font-bold text-center mt-3">Фото для стрицы</p>
                         <Input className="cursor-pointer" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
                         <p className="text-[#373F47] font-bold text-center mt-3">Авто</p>

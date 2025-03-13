@@ -23,12 +23,14 @@ interface Country {
     id: string;
     name: string;
     imageUrl?: string;
+    translation: { name: string; locale: string }[];
 }
 
 export default function City() {
     const [city, setCity] = useState<City[]>([]);
     const [countries, setCountries] = useState<Country[]>([]);
     const [newCity, setNewCity] = useState<string>("");
+    const [newCityEn, setNewCityEn] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -83,7 +85,7 @@ export default function City() {
 
             const res = await fetch("/api/city", {
                 method: "POST",
-                body: JSON.stringify({ name: newCity, imageUrl, countryId: selectedCountry }),
+                body: JSON.stringify({ name: newCity, nameEn: newCityEn, imageUrl, countryId: selectedCountry }),
                 headers: { "Content-Type": "application/json" },
             });
 
@@ -92,6 +94,7 @@ export default function City() {
             const country: City = await res.json();
             setCity([...city, country]);
             setNewCity("");
+            setNewCityEn("");
             setFile(null);
         } catch (error) {
             console.error(error);
@@ -127,6 +130,7 @@ export default function City() {
             <div className="mb-3 text-[#373F47] font-bold">Добьавить город</div>
             <div className="flex gap-2 mb-4">
                 <Input value={newCity} onChange={(e) => setNewCity(e.target.value)} placeholder="Название города" />
+                <Input value={newCityEn} onChange={(e) => setNewCityEn(e.target.value)} placeholder="Название города En" />
                 <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
                 <Select onValueChange={setSelectedCountry}>
                     <SelectTrigger className="w-[180px]">

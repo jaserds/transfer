@@ -95,6 +95,13 @@
                 "from": "From",
                 "to": "To",
                 "price": "From"
+            },
+            "CarsComponentContainer": {
+                "title": "Fleet"
+            },
+            "CarComponent": {
+                "orderCancellation": "Free order cancellation",
+                "Expectation": "Waiting in case of delay"
             }
         }
     },
