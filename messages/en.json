@@ -103,6 +103,9 @@
                 "orderCancellation": "Free order cancellation",
                 "Expectation": "Waiting in case of delay",
                 "button": "Reserve a car"
+            },
+            "providerButton": {
+                "title": "Sign in with"
             }
         }
     },
@@ -145,6 +148,75 @@
             "email": "Email",
             "total": "Total:",
             "button": "Submit Request"
+        }
+    },
+    "imagesAlt": {
+        "CityPage": {},
+        "CountriesPage": {},
+        "BookingPage": {
+            "calendar": "Calendar icon for date selection",
+            "calendarInfo": "Calendar icon for stratosphere information",
+            "time": "Clock icon for selecting transfer time",
+            "timeInfo": "Clock icon for stratosphere information",
+            "person": "Person icon for entering passenger details",
+            "phone": "Phone icon for entering a phone number",
+            "mail": "Mail icon for entering an email address",
+            "qtyOrder": "Icon for entering the number of passengers"
+        },
+        "CarComponent": {
+            "carIcon": "Car icon",
+            "qtyPerson": "Number of passengers",
+            "qtyBags": "Number of bags",
+            "exOrder": "Free order cancellation",
+            "time": "Waiting time in case of delay"
+        },
+        "ContactsFomContainer": {
+            "phoneIcon": "Phone icon",
+            "mailIcon": "Mail icon"
+        },
+        "Footer": {
+            "logo": "Logo",
+            "wa": "WhatsApp icon",
+            "telegram": "Telegram icon",
+            "ins": "Instagram icon"
+        },
+        "Advantages": {
+            "rule": "Russian-speaking driver icon",
+            "seat": "Comfortable trip",
+            "defence": "Safety first",
+            "car": "Premium car"
+        },
+        "HeaderComponent": {
+            "logo": "Logo",
+            "wa": "WhatsApp icon",
+            "telegram": "Telegram icon",
+            "ins": "Instagram icon"
+        },
+        "SearchRouteComponent": {
+            "reverse": "Reverse route"
+        },
+        "AllPopularRoutesSection": {
+            "popular": "Popular routes"
+        },
+        "PopularRoutesSection": {
+            "popular": "Popular routes"
+        },
+        "HowWorkContainer": {
+            "icon1": "You specify the route and choose a car",
+            "icon2": "You confirm your trip",
+            "icon3": "The driver meets you with a sign at the airport"
+        },
+        "TransferComponentAllCities": {
+            "city": "City",
+            "route": "Number of routes"
+        },
+        "TransferComponentCity": {
+            "city": "City",
+            "route": "Number of routes"
+        },
+        "TransferComponentCountry": {
+            "country": "Country",
+            "route": "Number of routes"
         }
     }
 }

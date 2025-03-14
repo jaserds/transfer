@@ -11,6 +11,8 @@ interface PopularRouteProps {
 const AllPopularRoutesSection = async ({ popularRoute }: PopularRouteProps) => {
 
     const t = await getTranslations("AppTraslation")
+    const ticons = await getTranslations("imagesAlt")
+
     return (
         <section className="mb-[120px] px-5 bg-[url('/bg-popular-routes.png')] bg-no-repeat bg-cover bg-center max-h-[732px] mt-[120px]">
             <h2 className={`text-[#383F47] font-[rubik] text-4xl font-semibold text-center mb-[70px]`} >{t("components.PopularRoutes.title")}</h2>
@@ -25,7 +27,7 @@ const AllPopularRoutesSection = async ({ popularRoute }: PopularRouteProps) => {
                             </div>
                             <div className="flex justify-between gap-5 text-[#373F47]">
                                 <p className="w-1/2">{route.routeTranslation.inRoute}</p>
-                                <Image src="/icons/popular-route/popular-route-icon.svg" width={50} height={50} alt="" />
+                                <Image src="/icons/popular-route/popular-route-icon.svg" width={50} height={50} alt={ticons("AllPopularRoutesSection.popular")} />
                                 <p className="w-1/2">{route.routeTranslation.toRoute}</p>
                             </div>
                             <p className="flex justify-end text-[#26A65B] text-base font-bold">{t("components.PopularRoutes.price")} {route.price} р.</p>

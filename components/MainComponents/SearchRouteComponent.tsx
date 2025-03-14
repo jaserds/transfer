@@ -34,6 +34,7 @@ export default function SearchRouteComponent() {
     const router = useRouter();
 
     const t = useTranslations("AppTraslation")
+    const ticons = useTranslations("imagesAlt")
 
     const filteredRoutesInWere = routes
         .filter(route =>
@@ -173,7 +174,7 @@ export default function SearchRouteComponent() {
                 )}
             </div>
             <div className="relative flex flex-col w-[5%] h-[60px] bg-[#fff] z-0 cursor-pointer" onClick={handleReverseInputWhere}>
-                <Image src={"/icons/main-search-icons/arrow-reverse.svg"} width={30} height={30} alt="" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <Image src={"/icons/main-search-icons/arrow-reverse.svg"} width={30} height={30} alt={ticons("SearchRouteComponent.reverse")} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>
             <div className="relative flex flex-col w-[28%] h-[60px] z-10" ref={dropdownToLocationsRef}>
                 <span className="block absolute left-0 w-[2px] 

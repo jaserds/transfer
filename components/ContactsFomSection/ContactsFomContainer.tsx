@@ -4,6 +4,7 @@ import Image from "next/image";
 export default async function ContactsFomContainer() {
 
     const t = await getTranslations("AppTraslation");
+    const ticons = await getTranslations("imagesAlt");
     return (
         <section className="flex justify-center mb-[120px]">
             <div className="max-w-[1480px] bg-[linear-gradient(rgba(250,243,225,0.39),rgba(250,243,225,0.3)),url('/images/contact-forma-bg.jpg')] bg-cover bg-center w-full flex justify-center py-10 rounded-[50px]">
@@ -12,8 +13,12 @@ export default async function ContactsFomContainer() {
                         <h3 className="mb-5 font-bold text-[22px] text-[#373F47]">{t("components.ContactsFomContainer.title1")}</h3>
                         <p className="mb-8 text-[18px] text-[#373F47]">{t("components.ContactsFomContainer.text1")}</p>
                         <h4 className="mb-5 font-bold text-[18px] text-[#373F47]">{t("components.ContactsFomContainer.title2")}</h4>
-                        <a className="mb-3 text-[#373F47] flex items-center gap-[10px]" href="mailto:help@domename.ru"><Image src="/icons/contacts-form/phone-icon.svg" width={20} height={20} alt="" />help@domename.ru</a>
-                        <a className="mb-8 text-[#373F47] flex items-center gap-[10px]" href="tel:+79999999999"><Image src="/icons/contacts-form/mail-icon.svg" width={20} height={20} alt="" />{t("components.ContactsFomContainer.text2")} + 7 (934)-22-33</a>
+                        <a className="mb-3 text-[#373F47] flex items-center gap-[10px]" href="mailto:help@domename.ru">
+                            <Image src="/icons/contacts-form/mail-icon.svg" width={20} height={20} alt={ticons("ContactsFomContainer.mailIcon")} />
+                            help@domename.ru
+                        </a>
+                        <a className="mb-8 text-[#373F47] flex items-center gap-[10px]" href="tel:+79999999999">
+                            <Image src="/icons/contacts-form/phone-icon.svg" width={20} height={20} alt={ticons("ContactsFomContainer.phoneIcon")} />{t("components.ContactsFomContainer.text2")} + 7 (934)-22-33</a>
                         <p className="text-[#373F47]">{t("components.ContactsFomContainer.text3")}</p>
                     </div>
                     <div className="w-1/2 px-5">

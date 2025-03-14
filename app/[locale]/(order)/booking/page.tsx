@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 export default function Booking() {
     const searchParams = useSearchParams();
     const t = useTranslations('bookingPage');
+    const ticons = useTranslations('imagesAlt');
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const [selectedBackTime, setSelectedBackTime] = useState<string | null>(null);
@@ -56,7 +57,7 @@ export default function Booking() {
                                 <div className="flex flex-col w-1/2">
                                     <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                         <span className="flex gap-3 items-center">
-                                            <Image src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt="" />
+                                            <Image src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt={ticons("BookingPage.calendar")} />
                                             {t("infoBlock.date")}
                                         </span>
                                     </label>
@@ -65,7 +66,7 @@ export default function Booking() {
                                 <div className="flex flex-col w-1/2">
                                     <label htmlFor="" className="text-sm text-[#6c7c8c] mb-[18px]">
                                         <span className="flex gap-3 items-center">
-                                            <Image src={"/icons/booking/time-icon.svg"} width={20} height={20} alt="" />
+                                            <Image src={"/icons/booking/time-icon.svg"} width={20} height={20} alt={ticons("BookingPage.time")} />
                                             {t("infoBlock.time")}
                                         </span>
                                     </label>
@@ -82,7 +83,7 @@ export default function Booking() {
                                     <div className="flex flex-col w-1/2">
                                         <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                             <span className="flex gap-3 items-center">
-                                                <Image src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt="" />
+                                                <Image src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt={ticons("BookingPage.calendar")} />
                                                 {t("infoBlock.date")}
                                             </span>
                                         </label>
@@ -91,7 +92,7 @@ export default function Booking() {
                                     <div className="flex flex-col w-1/2">
                                         <label htmlFor="" className="text-sm text-[#6c7c8c] mb-[18px]">
                                             <span className="flex gap-3 items-center">
-                                                <Image src={"/icons/booking/time-icon.svg"} width={20} height={20} alt="" />
+                                                <Image src={"/icons/booking/time-icon.svg"} width={20} height={20} alt={ticons("BookingPage.time")} />
                                                 {t("infoBlock.time")}
                                             </span>
                                         </label>
@@ -111,7 +112,7 @@ export default function Booking() {
                                 <div className="flex flex-col w-full">
                                     <label htmlFor="PersonNameOrder" className="text-sm text-[#6c7c8c] mb-4">
                                         <span className="flex gap-3 items-center">
-                                            <Image src={"/icons/booking/person-order-icon.svg"} width={20} height={20} alt="" />
+                                            <Image src={"/icons/booking/person-order-icon.svg"} width={20} height={20} alt={ticons("BookingPage.person")} />
                                             {t("passengersBlock.name")}
                                         </span>
                                     </label>
@@ -126,21 +127,21 @@ export default function Booking() {
 
                             <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                 <span className="flex gap-3 items-center">
-                                    <Image src={"/icons/booking/phone-order-icon.svg"} width={20} height={20} alt="" />
+                                    <Image src={"/icons/booking/phone-order-icon.svg"} width={20} height={20} alt={ticons("BookingPage.phone")} />
                                     {t("passengersBlock.phone")}
                                 </span>
                             </label>
                             <input type="phone" className="w-2/4 p-2 border border-gray-300 rounded-lg focus:outline-none mb-[30px] text-[#373F47] text-base" placeholder="+" onChange={(e) => setPersonPhone(e.target.value)} />
                             <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                 <span className="flex gap-3 items-center">
-                                    <Image src={"/icons/booking/mail-order-icon.svg"} width={20} height={20} alt="" />
+                                    <Image src={"/icons/booking/mail-order-icon.svg"} width={20} height={20} alt={ticons("BookingPage.mail")} />
                                     {t("passengersBlock.email")}
                                 </span>
                             </label>
                             <input type="mail" className="w-2/4 p-2 border border-gray-300 rounded-lg focus:outline-none mb-[30px] text-[#373F47] text-base" placeholder="@" onChange={(e) => setPersonEmail(e.target.value)} />
                             <div className="text-sm text-[#6c7c8c] flex justify-between mb-[30px]">
                                 <span className="flex gap-3 items-center">
-                                    <Image src={"/icons/booking/person-qty-order-icon.svg"} width={20} height={20} alt="" />
+                                    <Image src={"/icons/booking/person-qty-order-icon.svg"} width={20} height={20} alt={ticons("BookingPage.qtyOrder")} />
                                     {t("passengersBlock.qtyPassengers")}
                                 </span>
                                 <div className="">
@@ -183,7 +184,7 @@ export default function Booking() {
                         <div className="flex flex-col mb-[20px]">
                             <p className="text-[14px] text-[#6C7C8C] font-semibold mb-[10px]">{t("infoOrderBlock.transfer")}</p>
                             <div className="flex mb-[10px]">
-                                <Image className="mr-3" src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt="" />
+                                <Image className="mr-3" src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt={ticons("BookingPage.calendarInfo")} />
                                 <p className="text-[16px] text-[#4f5b67] font-semibold">{selectedDate && selectedDate?.toLocaleDateString()} {selectedTime}</p>
                             </div>
                             <div className="flex p-[10px] w-fit bg-[#FFE6B8] text-center text-[14px] rounded-[10px] text-[#6C7C8C]">{searchParams.get('inRoute')} - {searchParams.get('toRoute')}</div>
@@ -192,7 +193,7 @@ export default function Booking() {
                             <div className="flex flex-col mb-[20px]" >
                                 <p className="text-[14px] text-[#6C7C8C] font-semibold mb-[10px]">{t("infoOrderBlock.backTransfer")}</p>
                                 <div className="flex mb-[10px]">
-                                    <Image className="mr-3" src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt="" />
+                                    <Image className="mr-3" src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt={ticons("BookingPage.calendarInfo")} />
                                     <p className="text-[16px] text-[#4f5b67] font-semibold">{selectedBackDate && selectedBackDate?.toLocaleDateString()} {selectedBackTime}</p>
                                 </div>
                                 <div className="flex p-[10px] w-fit bg-[#FFE6B8] text-center text-[14px] rounded-[10px] text-[#6C7C8C]">{searchParams.get('toRoute')} - {searchParams.get('inRoute')}</div>

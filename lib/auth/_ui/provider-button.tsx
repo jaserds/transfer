@@ -8,13 +8,12 @@ import Image from "next/image";
 
 export function ProviderButton({ provider }: { provider: ClientSafeProvider }) {
     const oauthSignIn = useOAuthSignIn(provider);
-
     const getIcon = (provider: ClientSafeProvider) => {
         switch (provider.id) {
             case "github":
                 return <Github />;
             case 'google':
-                return <Image src="/icons/icon-google.svg" width={20} height={20} alt="" />;
+                return <Image src="/icons/icon-google.svg" width={20} height={20} alt="google icon" />;
             default:
                 return null;
         }

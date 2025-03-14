@@ -5,25 +5,26 @@ import Image from "next/image";
 
 const HowWorkContainer = async () => {
     const t = await getTranslations("AppTraslation")
+    const ticons = await getTranslations("imagesAlt")
 
     const howWorkData = [
         {
             image: '/icons/how-work/how-work-route.svg',
             title: t("components.HowWorkContainer.title1"),
             text: t("components.HowWorkContainer.text1"),
-            alt: ''
+            alt: ticons("HowWorkContainer.icon1")
         },
         {
             image: '/icons/how-work/how-work-check.svg',
             title: t("components.HowWorkContainer.title2"),
             text: t("components.HowWorkContainer.text2"),
-            alt: ''
+            alt: ticons("HowWorkContainer.icon2")
         },
         {
             image: '/icons/how-work/how-work-driver.svg',
             title: t("components.HowWorkContainer.title3"),
             text: t("components.HowWorkContainer.text3"),
-            alt: ''
+            alt: ticons("HowWorkContainer.icon3")
         }
     ]
 
