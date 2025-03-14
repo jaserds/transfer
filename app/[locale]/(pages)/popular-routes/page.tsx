@@ -3,9 +3,11 @@ import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import AllPopularRoutesSection from "@/components/PopularRoutesComponents/AllPopularRoutesSection";
 import { prisma } from "@/lib/prisma";
+import { getLocale } from "next-intl/server";
 
 
 export default async function PopularRoute() {
+    const locale = await getLocale();
 
     const popularRoutes = await prisma.route.findMany({
         where: {
@@ -14,7 +16,7 @@ export default async function PopularRoute() {
         include: {
             RouteTranslation: {
                 where: {
-                    locale: 'en',
+                    locale: locale,
                 }
             },
         },

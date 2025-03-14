@@ -19,21 +19,42 @@ interface TransferCar {
     qtyPerson: number;
     qtyBags: number;
     price: number;
+    TransferCarsTranslation: { name: string }[]
 }
 
 export default async function TransferCars({ params }: { params: { routeId: string } }) {
     const { routeId } = await params
 
-    const t = await getLocale()
+    const locale = await getLocale()
 
     const classCar = await prisma.transferCarsOnRoutes.findMany({
         where: {
             routeId: routeId,
         },
         select: {
-            transferCar: true,
+            transferCar: {
+                select: {
+                    id: true,
+                    name: true,
+                    imageUrl: true,
+                    cars: true,
+                    qtyPerson: true,
+                    qtyBags: true,
+                    price: true,
+                    TransferCarsTranslation: {
+                        where: {
+                            locale: locale,
+                        },
+                        select: {
+                            name: true,
+                        }
+                    }
+                }
+            },
         },
     });
+
+    const onlyTransferCars: TransferCar[] = classCar.map((item) => item.transferCar);
 
     const routeData = await prisma.route.findUnique({
         where: {
@@ -46,9 +67,21 @@ export default async function TransferCars({ params }: { params: { routeId: stri
             imageUrl: true,
             inRoute: true,
             price: true,
-            RouteTranslation: true
+            RouteTranslation: {
+                where: {
+                    locale: locale,
+                },
+                select: {
+                    inRoute: true,
+                    toRoute: true,
+                    description: true,
+                }
+            }
         }
     });
+
+    console.log("routeData", routeData);
+
 
 
     if (!routeData) {
@@ -56,7 +89,6 @@ export default async function TransferCars({ params }: { params: { routeId: stri
     }
 
 
-    const onlyTransferCars: TransferCar[] = classCar.map((item) => item.transferCar);
 
     return (
         <>
@@ -69,13 +101,13 @@ export default async function TransferCars({ params }: { params: { routeId: stri
             <div className="mb-[72px] relative w-full h-[300px] bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-center" style={{ backgroundImage: `url('${routeData?.imageUrl}')` }}>
                 <div className="absolute inset-0 bg-black opacity-30"></div>
                 <h1 className="relative text-[36px] text-white font-rubik font-bold">
-                    {t === "ru" ? routeData?.toRoute : routeData.RouteTranslation[0].inRoute} - {t === "ru" ? routeData?.toRoute : routeData.RouteTranslation[0].toRoute}
+                    {routeData.RouteTranslation[0].inRoute} - {routeData.RouteTranslation[0].toRoute}
                 </h1>
             </div>
             <section className="mb-[120px]">
                 <div className="max-w-[1070px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
                     <p className="text-lg text-[#373F47]">
-                        {t === "ru" ? routeData?.description : routeData.RouteTranslation[0].description}
+                        {routeData.RouteTranslation[0].description}
                     </p>
                     {/* <div className="w-[490px] h-[314px] bg-white rounded-lg shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] px-[10px] pt-[10xp] pb-[20px]" >
                         <div className="w-full h-[250px] mb-[20px]"></div>

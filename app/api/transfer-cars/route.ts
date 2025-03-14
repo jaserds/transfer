@@ -19,7 +19,29 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Access denied" }, { status: 403 });
         }
 
-        const newDataTransferCars = await prisma.transferCars.create({ data: await req.json() });
+        const { name, nameEn, imageUrl, cars, qtyPerson, qtyBags, price } = await req.json();
+
+
+        if (!name || !nameEn || !imageUrl || !cars || !qtyPerson || !qtyBags || !price) {
+            return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
+        }
+
+        const newDataTransferCars = await prisma.transferCars.create({
+            data: {
+                name,
+                imageUrl,
+                cars,
+                qtyPerson,
+                qtyBags,
+                price,
+                TransferCarsTranslation: {
+                    create: [
+                        { locale: "en", name: nameEn },
+                        { locale: "ru", name: name },
+                    ]
+                }
+            }
+        });
         return NextResponse.json(newDataTransferCars);
     } catch (error) {
         return NextResponse.json({ error: error instanceof Error ? error.message : "Unknown error" }, { status: 500 });

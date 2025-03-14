@@ -78,14 +78,23 @@ model RouteTranslation {
 }
 
 model TransferCars {
-  id        String                 @id @default(uuid())
-  name      String
-  imageUrl  String
-  cars      String
-  qtyPerson Int
-  qtyBags   Int
-  price     Float
-  routes    TransferCarsOnRoutes[]
+  id                      String                    @id @default(uuid())
+  name                    String
+  imageUrl                String
+  cars                    String
+  qtyPerson               Int
+  qtyBags                 Int
+  price                   Float
+  routes                  TransferCarsOnRoutes[]
+  TransferCarsTranslation TransferCarsTranslation[]
+}
+
+model TransferCarsTranslation {
+  id            String       @id @default(uuid())
+  transferCarId String
+  transferCar   TransferCars @relation(fields: [transferCarId], references: [id], onDelete: Cascade)
+  locale        String // Например, "en", "fr", "de"
+  name          String
 }
 
 model TransferCarsOnRoutes {

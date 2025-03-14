@@ -65,5 +65,6 @@ export interface ITransferCars {
     qtyPerson: number;
     qtyBags: number;
     price: number;
+    TransferCarsTranslation: { name: string }[]
 }
 

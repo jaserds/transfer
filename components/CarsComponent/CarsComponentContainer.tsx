@@ -9,6 +9,7 @@ interface TransferCar {
     qtyPerson: number;
     qtyBags: number;
     price: number;
+    TransferCarsTranslation: { name: string }[];
 }
 
 interface RouteData {
@@ -18,6 +19,12 @@ interface RouteData {
     imageUrl: string;
     inRoute: string;
     price: number;
+    RouteTranslation: {
+        inRoute: string;
+        toRoute: string;
+        description: string;
+    }[]
+
 }
 
 interface CarsComponentContainerProps {

@@ -101,12 +101,50 @@
             },
             "CarComponent": {
                 "orderCancellation": "Free order cancellation",
-                "Expectation": "Waiting in case of delay"
+                "Expectation": "Waiting in case of delay",
+                "button": "Reserve a car"
             }
         }
     },
     "LocaleSwitcher": {
         "label": "Change language",
         "locale": "{locale, select, ru {ru Russian} en {🇺🇸 English} other {Unknown}}"
+    },
+    "bookingPage": {
+        "infoBlock": {
+            "title": "Transfer Information",
+            "date": "Transfer Date",
+            "changeData": "Select a date",
+            "time": "Time",
+            "changeTime": "Select a time",
+            "place": "Destination: address or hotel name",
+            "backTransfer": "Return Transfer"
+        },
+        "passengersBlock": {
+            "title": "Passenger Information",
+            "name": "First and Last Name *",
+            "placeholderName": "James Johnson",
+            "phone": "Phone *",
+            "email": "Email",
+            "qtyPassengers": "Number of Passengers *",
+            "checkBocks": "I want to be contacted"
+        },
+        "commentaryBlock": {
+            "title": "Order Comments",
+            "subtitle": "Additional travel requests",
+            "text": "For example, if you have non-standard luggage, need water on the way, or require a child seat.",
+            "textArea": "I have a small child with me..."
+        },
+        "infoOrderBlock": {
+            "transfer": "Transfer",
+            "textPassengers": "passenger",
+            "textBags": "baggage",
+            "backTransfer": "Return Transfer",
+            "name": "First and Last Name:",
+            "phone": "Phone *",
+            "email": "Email",
+            "total": "Total:",
+            "button": "Submit Request"
+        }
     }
 }

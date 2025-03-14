@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 interface CustomDatePickerProps {
@@ -15,6 +16,7 @@ interface CustomCheckBoxProps {
 }
 
 const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSelectedDate }) => {
+    const t = useTranslations('bookingPage');
     const [isCalendarVisible, setIsCalendarVisible] = useState(false);
 
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -106,7 +108,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSe
                 value={selectedDate ? selectedDate.toLocaleDateString() : ""}
                 onClick={() => setIsCalendarVisible(!isCalendarVisible)} // Показываем/скрываем календарь
                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none text-[#373F47]"
-                placeholder="Выбирите дату"
+                placeholder={t("infoBlock.changeData")}
             />
 
             {/* Календарь с анимацией */}
@@ -156,6 +158,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSe
 
 const CustomTimePicker: React.FC<CustomTimePickerProps> = ({ selectedTime, setSelectedTime }) => {
     const [isTimeVisible, setIsTimeVisible] = useState(false);
+    const t = useTranslations('bookingPage');
 
 
     // Вспомогательная функция для генерации времени
@@ -184,7 +187,7 @@ const CustomTimePicker: React.FC<CustomTimePickerProps> = ({ selectedTime, setSe
                 value={selectedTime || ""}
                 onClick={() => setIsTimeVisible(!isTimeVisible)} // Показываем/скрываем список времени
                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none text-[#373F47]"
-                placeholder="Выберите время"
+                placeholder={t("infoBlock.changeTime")}
             />
 
             {/* Список времени с анимацией */}
@@ -260,6 +263,7 @@ function CounterOrder({ count, setCount }: CounterOrderProps) {
 }
 
 const CustomCheckbox: React.FC<CustomCheckBoxProps> = ({ setIsChecked }) => {
+    const t = useTranslations('bookingPage');
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
     };
@@ -268,7 +272,7 @@ const CustomCheckbox: React.FC<CustomCheckBoxProps> = ({ setIsChecked }) => {
             <input type="checkbox" className="hidden peer" onChange={handleCheckboxChange} />
             <div className="w-[15px] h-[15px] mr-[10px] rounded-[5px] border-[1px] border-[#F9AC1A] peer-checked:bg-[#F9AC1A] peer-checked:border-[#F9AC1A] flex items-center justify-center transition">
             </div>
-            <span className="text-[#6C7C8C] text-[14px]">Хочу, что бы со мной связались</span>
+            <span className="text-[#6C7C8C] text-[14px]">{t("passengersBlock.checkBocks")}</span>
         </label>
     );
 }

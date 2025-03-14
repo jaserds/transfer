@@ -48,9 +48,6 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
         }
     }));
 
-    console.log(formattedCities);
-
-
     const popularRoutes = await prisma.route.findMany({
         where: {
             city: {
@@ -61,7 +58,7 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
         include: {
             RouteTranslation: {
                 where: {
-                    locale: 'en',
+                    locale: locale,
                 },
             }
         },

@@ -12,7 +12,6 @@ export async function POST(req: Request) {
     }
 
     const { routeId, deletedId } = await req.json();
-    console.log(routeId, deletedId);
 
     if (!routeId || !deletedId) {
         return NextResponse.json({ error: 'Missing routeId or deletedId' }, { status: 400 });

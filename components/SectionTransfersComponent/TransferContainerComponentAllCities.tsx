@@ -8,6 +8,7 @@ interface ICitiesResponse {
     imageUrl: string | null
     countryId: string
     routeCount: number
+    routeTranslation: { name: string; }
 }
 
 interface ITransferContainerComponentAllCitiesProps {
@@ -16,6 +17,7 @@ interface ITransferContainerComponentAllCitiesProps {
 }
 
 const TransferContainerComponentAllCities = ({ dataSet, isLoading }: ITransferContainerComponentAllCitiesProps) => {
+
     return (
         <section className="flex flex-col items-center mt-[120px] mb-[120px]">
             <div className="px-[10px]">

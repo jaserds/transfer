@@ -137,10 +137,6 @@ export default function MyRouts() {
         const deletedIds = oldArray.filter(id => !selected.includes(id));
         const addedIds = selected.filter(id => !oldArray.includes(id));
 
-        console.log("deletedIds", deletedIds);
-        console.log("addedIds", addedIds);
-
-
         setMultiSelectserverData(multiSelectserverData.map((route) => route.routeId === routeId ? { ...route, transferCarsIds: selected } : route));
 
         if (addedIds.length > 0) {

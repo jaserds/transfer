@@ -74,6 +74,12 @@ export async function POST(req: Request) {
                 RouteTranslation: {
                     create: [
                         {
+                            locale: "ru",
+                            inRoute: inRoute,
+                            toRoute: toRoute,
+                            description: description,
+                        },
+                        {
                             locale: "en",
                             inRoute: inRouteEn,
                             toRoute: toRouteEn,

@@ -4,11 +4,12 @@ import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import PopularRoutesSection from "@/components/PopularRoutesComponents/PopularRoutesSection";
 import { prisma } from "@/lib/prisma";
+import { getLocale } from "next-intl/server";
 import { NextResponse } from "next/server";
 
 
 export default async function PopularRouteCity({ params }: { params: Promise<{ cityId: string }> }) {
-
+    const locale = await getLocale();
     const { cityId } = await params;
     try {
         const popularRoutes = await prisma.route.findMany({
@@ -18,13 +19,17 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
             },
             include: {
                 city: {
-                    select: {
-                        name: true,
-                    },
+                    include: {
+                        CityTranslation: {
+                            where: {
+                                locale: locale
+                            }
+                        }
+                    }
                 },
                 RouteTranslation: {
                     where: {
-                        locale: 'en',
+                        locale: locale,
                     }
                 }
             },
@@ -35,7 +40,7 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
             id: route.id,
             inRoute: route.inRoute,
             toRoute: route.toRoute,
-            cityName: route.city.name,
+            cityName: route.city.CityTranslation[0].name,
             price: route.price,
             routeTranslation: route.RouteTranslation[0],
         }))

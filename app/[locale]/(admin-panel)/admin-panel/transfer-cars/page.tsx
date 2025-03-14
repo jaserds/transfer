@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 interface IDataTransferCars {
     name: string;
+    nameEn: string;
     imageUrl: string;
     cars: string;
     qtyPerson: number;
@@ -22,6 +23,7 @@ export default function TransferCars() {
     const [isLoading, setIsLoading] = useState(true);
     const [newTransferCars, setNewTransferCars] = useState<IDataTransferCars>({
         name: "",
+        nameEn: "",
         imageUrl: "",
         cars: "",
         qtyPerson: 0,
@@ -88,7 +90,7 @@ export default function TransferCars() {
             const newCar: ITransferCars = await res.json();
             setDataTransferCars([...dataTransferCars, newCar]);
             setFile(null);
-            setNewTransferCars({ name: "", imageUrl: "", cars: "", qtyPerson: 0, qtyBags: 0, price: 0 });
+            setNewTransferCars({ name: "", nameEn: "", imageUrl: "", cars: "", qtyPerson: 0, qtyBags: 0, price: 0 });
             setShowModal(false);
         } catch (error) {
             console.error(error);
@@ -118,11 +120,11 @@ export default function TransferCars() {
                 <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#00000085] z-20 flex justify-center items-center">
                     <div className="z-30 bg-white p-4 max-w-[450px] max-h-[500px] rounded-[10px] flex flex-col gap-4 pb-16 overflow-y-auto custom-scroll">
                         <button onClick={() => {
-                            setNewTransferCars({ name: "", imageUrl: "", cars: "", qtyPerson: 0, qtyBags: 0, price: 0 });
+                            setNewTransferCars({ name: "", nameEn: "", imageUrl: "", cars: "", qtyPerson: 0, qtyBags: 0, price: 0 });
                             setFile(null)
                             setShowModal(false)
                         }} className="cursor-pointer text-[#f02f2f] self-end"><CircleX /></button>
-                        <div className="mb-3 text-[#373F47] font-bold self-center">Добавить новый маршрут</div>
+                        <div className="mb-3 text-[#373F47] font-bold self-center">Добавить новое авто</div>
                         <div className="flex flex-col gap-2 mb-4">
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="name" className="">Название</label>
@@ -131,6 +133,11 @@ export default function TransferCars() {
                                         ...prev,
                                         name: e.target.value,
                                     }))} placeholder="Например Эконом, Бизнес" />
+                                <Input required id="name" type="text" value={newTransferCars?.nameEn || ""}
+                                    onChange={(e) => setNewTransferCars((prev) => ({
+                                        ...prev,
+                                        nameEn: e.target.value,
+                                    }))} placeholder="Например Economy, Business" />
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="" className="">Картинка</label>
