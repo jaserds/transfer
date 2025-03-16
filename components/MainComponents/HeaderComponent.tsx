@@ -8,22 +8,25 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import LocaleSwitcher from "../ui/other/LocaleSwitcher";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 
 export default function HeaderComponent() {
 
     const session = useAppSession();
     const signOut = useSignOut();
-    const avatarUrl = session.data?.user.image;
     const t = useTranslations('AppTraslation');
     const ticons = useTranslations('imagesAlt');
+    const [menuOpen, setMenuOpen] = useState(false);
 
 
 
     return (
-        <div className="w-full h-[70px] bg-[#fff] flex justify-center px-[15px] relative">
-            <Image className="absolute left-0 ml-4" src="/icons/header-icons/logo.svg" width={137} height={70} alt={ticons("HeaderComponent.logo")}></Image>
-            <div className="w-[1070px] flex items-center justify-between">
+        <div className="w-full h-[70px] bg-[#fff] flex lg:justify-center max-md:justify-between md:justify-between px-[15px] relative">
+
+            <Image className="ml-4 mr-8" src="/icons/header-icons/logo.svg" width={137} height={70} alt={ticons("HeaderComponent.logo")}></Image>
+
+            <div className="max-w-[1070px] flex items-center justify-between max-md:hidden md:hidden lg:flex">
                 <nav>
                     <ul className="flex items-center">
                         <li className="mr-12 text-[#373F47]"><Link href="/">{t("components.HeaderComponent.homeLink")}</Link></li>
@@ -42,17 +45,6 @@ export default function HeaderComponent() {
                         <Image src='/icons/social-icons/tg.svg' width={40} height={40} alt={ticons("HeaderComponent.telegram")} />
                         <Image src='/icons/social-icons/ig.svg' width={40} height={40} alt={ticons("HeaderComponent.ins")} />
                         <LocaleSwitcher />
-                        {avatarUrl && (
-                            // <Avatar>
-                            //     <AvatarImage className="w-[40px] h-[40px] rounded-full"
-                            //         src={avatarUrl}
-                            //     />
-                            //     <AvatarFallback>
-                            //         {session.data?.user.name?.slice(0, 2)} {/* Показываем первые 2 буквы имени, если аватар не загрузился */}
-                            //     </AvatarFallback>
-                            // </Avatar>
-                            <></>
-                        )}
                     </div>
                     {session.status === 'loading' && <div className="bg-gray-200 animate-pulse px-9 py-3 rounded-[5px] w-[100px] h-[40px]"></div>}
                     {session.status === "unauthenticated" ?
@@ -69,6 +61,9 @@ export default function HeaderComponent() {
                 </div>
 
             </div>
+            <button className="lg:hidden text-gray-700" onClick={() => setMenuOpen(!menuOpen)}>
+                {menuOpen ? "✖" : "☰"}
+            </button>
         </div>
     );
 }

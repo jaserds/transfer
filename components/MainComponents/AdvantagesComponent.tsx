@@ -8,7 +8,7 @@ const Advantages = async () => {
 
     return (
         <div className="max-w-[710px] w-full">
-            <ul className="flex justify-between gap-10">
+            <ul className="flex justify-between gap-10 md:mb-[60px] max-md:mb-[60px] max-md:grid max-md:grid-cols-2">
                 <li className="flex flex-col items-center flex-1">
                     <Image src="/icons/main-advantages-icons/rule-icon.svg" width={60} height={60} alt={ticons("Advantages.rule")} />
                     <p className={`text-center font-[rubik] text-base font-medium text-[#FFFFFF]`}>{t("components.Advantages.driver")}</p>

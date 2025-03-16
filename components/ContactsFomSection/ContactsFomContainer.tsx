@@ -8,8 +8,8 @@ export default async function ContactsFomContainer() {
     return (
         <section className="flex justify-center mb-[120px]">
             <div className="max-w-[1480px] bg-[linear-gradient(rgba(250,243,225,0.39),rgba(250,243,225,0.3)),url('/images/contact-forma-bg.jpg')] bg-cover bg-center w-full flex justify-center py-10 rounded-[50px]">
-                <div className="max-w-[1090px]  flex gap-5">
-                    <div className="w-1/2 pl-5 flex flex-col">
+                <div className="max-w-[1090px] flex gap-5 max-md:flex-col">
+                    <div className="w-1/2 max-md:w-full max-md:mb-10 pl-5 flex flex-col">
                         <h3 className="mb-5 font-bold text-[22px] text-[#373F47]">{t("components.ContactsFomContainer.title1")}</h3>
                         <p className="mb-8 text-[18px] text-[#373F47]">{t("components.ContactsFomContainer.text1")}</p>
                         <h4 className="mb-5 font-bold text-[18px] text-[#373F47]">{t("components.ContactsFomContainer.title2")}</h4>
@@ -21,7 +21,7 @@ export default async function ContactsFomContainer() {
                             <Image src="/icons/contacts-form/phone-icon.svg" width={20} height={20} alt={ticons("ContactsFomContainer.phoneIcon")} />{t("components.ContactsFomContainer.text2")} + 7 (934)-22-33</a>
                         <p className="text-[#373F47]">{t("components.ContactsFomContainer.text3")}</p>
                     </div>
-                    <div className="w-1/2 px-5">
+                    <div className="w-1/2 max-md:w-full px-5">
                         <form className=" bg-[#F7E8C6] flex flex-col justify-center px-[69px] py-[30px] rounded-[10px]">
                             <label htmlFor="contactFormName" className="mb-[5px] text-[#373F47] text-[18px]">{t("components.ContactsFomContainer.name")}</label>
                             <input id="contactFormName" className="h-[50px] mb-[20px] rounded-[10px] px-[10px] outline-none border-none focus:outline-none focus:ring-2 focus:ring-[#F9AC1A] focus:border-[#F9AC1A] transition-shadow" type="text" />

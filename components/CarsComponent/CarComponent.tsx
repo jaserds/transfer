@@ -26,8 +26,8 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
     const ticons = await getTranslations("imagesAlt");
 
     return (
-        <div className="shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] pb-24 bg-[#fff] w-[500px] rounded-[10px] mx-auto relative">
-            <div className="flex px-5 pt-[20px] pb-[37px] gap-[30px]">
+        <div className="shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] pb-24 max-md:pb-36 bg-[#fff] w-[500px] max-md:w-auto rounded-[10px] mx-auto relative">
+            <div className="flex max-md:flex-col max-md:items-center px-5 pt-[20px] pb-[37px] gap-[30px]">
                 <div className="max-w-[215px]">
                     <Image className="mb-[10px]" src={carData.imageUrl} width={215} height={95} alt={ticons("CarComponent.carIcon")} />
                     <div className="bg-[#F6F7F8] rounded-[5px] text-[#6C7C8C]">
@@ -58,12 +58,12 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
                     </div>
                 </div>
             </div>
-            <div className="bg-[#292929] py-[29px] px-[27px] flex justify-between rounded-b-[10px] absolute bottom-0 w-full">
-                <p className="text-[28px] text-white font-rubik font-bold">{carData.price.toLocaleString("ru-RU")} RUB</p>
+            <div className="bg-[#292929] py-[29px] px-[27px] flex max-md:flex-col justify-between rounded-b-[10px] absolute bottom-0 w-full">
+                <p className="text-[28px] text-white font-rubik font-bold max-md:mb-4">{carData.price.toLocaleString("ru-RU")} RUB</p>
                 <Link href={
                     `/booking?rid=${routeData.id}&inRoute=${routeData.RouteTranslation[0].inRoute}&toRoute=${routeData.RouteTranslation[0].toRoute}&price=${routeData.price}&name=${carData.TransferCarsTranslation[0].name}&qtyPerson=${carData.qtyPerson}&qtyBags=${carData.qtyBags}`
                 }
-                    className="bg-[#F9AC1A] text-white py-[13px] px-[15px] rounded-[5px]">{t("components.CarComponent.button")}</Link>
+                    className="bg-[#F9AC1A] text-white max-md:text-center py-[13px] px-[15px] rounded-[5px]">{t("components.CarComponent.button")}</Link>
             </div>
         </div>
     )
