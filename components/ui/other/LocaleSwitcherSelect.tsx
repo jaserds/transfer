@@ -26,7 +26,7 @@ export default function LocaleSwitcherSelect({
         const nextLocale = event.target.value as Locale;
         startTransition(() => {
             router.replace(
-                { pathname, params },
+                { pathname, ...params },
                 { locale: nextLocale }
             );
         });

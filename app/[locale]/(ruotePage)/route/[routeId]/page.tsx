@@ -22,7 +22,7 @@ interface TransferCar {
     TransferCarsTranslation: { name: string }[]
 }
 
-export default async function TransferCars({ params }: { params: { routeId: string } }) {
+export default async function TransferCars({ params }: { params: Promise<{ routeId: string }> }) {
     const { routeId } = await params
 
     const locale = await getLocale()

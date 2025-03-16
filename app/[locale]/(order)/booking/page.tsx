@@ -36,6 +36,7 @@ export default function Booking() {
 
 
     const handleSubmitOrder = () => {
+        console.log(isChecked, comment);
         if (!selectedDate || !selectedTime) {
             toast("Вы не заполнили дату и время трансфера");
         }
