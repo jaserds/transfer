@@ -42,7 +42,6 @@ export default async function Cities() {
                 <Advantages />
             </MainComponent>
             {cities.length > 0 && <TransferContainerComponentAllCities dataSet={formattedCities} isLoading={false} />}
-
         </>
     );
 }
