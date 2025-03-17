@@ -35,8 +35,8 @@ export const nextAuthConfig: AuthOptions = {
     providers: compact([
         privateConfig.GOOGLE_CLIENT_ID && privateConfig.GOOGLE_SECRET &&
         GoogleProvider({
-            clientId: privateConfig.GOOGLE_CLIENT_ID,
-            clientSecret: privateConfig.GOOGLE_SECRET,
+            clientId: privateConfig.GOOGLE_CLIENT_ID!,
+            clientSecret: privateConfig.GOOGLE_SECRET!,
         }),
     ]),
 }

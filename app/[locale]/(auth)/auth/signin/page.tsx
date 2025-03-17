@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 export default async function SignIn() {
     const t = await getTranslations("AppTraslation");
     const providers = await getProviders();
+    console.log("OAuth Providers:", providers);
     const oauthProviders = Object.values(providers ?? {}).filter(provider => provider.type === "oauth");
 
     return (
