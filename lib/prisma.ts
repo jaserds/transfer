@@ -1,5 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+// lib/prisma.ts
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+// Это предотвратит создание нового клиента при каждом запросе.
+const prisma = global.prisma || new PrismaClient();
 
-export { prisma };
+if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
+
+export default prisma;
