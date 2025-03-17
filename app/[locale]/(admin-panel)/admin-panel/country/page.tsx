@@ -23,7 +23,7 @@ export default function Countries() {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        fetch("/api/country")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/country`)
             .then((res) => res.json())
             .then((countries) => {
                 setCountries(countries)
@@ -39,7 +39,7 @@ export default function Countries() {
         formData.append("file", file);
 
         try {
-            const res = await fetch("/api/upload", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -62,7 +62,7 @@ export default function Countries() {
 
         try {
 
-            const res = await fetch("/api/country", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/country`, {
                 method: "POST",
                 body: JSON.stringify({ name: newCountry, nameEn: newCountryEn, imageUrl }),
                 headers: { "Content-Type": "application/json" },
@@ -86,7 +86,7 @@ export default function Countries() {
 
     const deleteCountry = async (id: string) => {
         try {
-            const res = await fetch(`/api/country/${id}`, { method: "DELETE" });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/country/${id}`, { method: "DELETE" });
 
             if (!res.ok) {
                 const errorData = await res.json();

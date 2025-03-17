@@ -9,7 +9,7 @@ import { ICountryResponse } from "@/lib/types";
 
 
 export default async function Countries() {
-  const res = await fetch(`${process.env.API_URL}/country`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/country`);
   if (!res.ok) {
     // Если запрос не удался, выводим ошибку
     const errorText = await res.text();

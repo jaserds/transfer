@@ -86,7 +86,7 @@ export default function SearchRouteComponent() {
 
         async function fetchRoutes() {
             try {
-                const response = await fetch("/api/my-routs/search-routs?locale=" + locale);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs/search-routs?locale=` + locale);
                 await response.json().then((data) => {
                     setRoutes(data);
                 })

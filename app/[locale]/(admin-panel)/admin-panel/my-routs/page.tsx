@@ -99,12 +99,12 @@ export default function MyRouts() {
     }));
 
     useEffect(() => {
-        fetch("/api/city")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/city`)
             .then((res) => res.json())
             .then(setCity)
             .catch(() => console.error("Failed to fetch countries"));
 
-        fetch("/api/my-routs")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs`)
             .then((res) => res.json())
             .then((data) => {
                 setMyRouts(data);
@@ -112,7 +112,7 @@ export default function MyRouts() {
             })
             .catch(() => console.error("Failed to fetch countries"));
 
-        fetch("/api/transfer-cars")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/transfer-cars`)
             .then((res) => res.json())
             .then((data) => {
                 setDataTransferCars(data)
@@ -136,7 +136,7 @@ export default function MyRouts() {
         setMultiSelectserverData(multiSelectserverData.map((route) => route.routeId === routeId ? { ...route, transferCarsIds: selected } : route));
 
         if (addedIds.length > 0) {
-            fetch(`/api/my-routs/add-transfer-car`, {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs/add-transfer-car`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ addedId: addedIds[0], routeId: routeId }),
@@ -147,7 +147,7 @@ export default function MyRouts() {
         }
 
         if (deletedIds.length > 0) {
-            fetch(`/api/my-routs/delete-transfer-car`, {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs/delete-transfer-car`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ routeId: routeId, deletedId: deletedIds[0] }),
@@ -165,7 +165,7 @@ export default function MyRouts() {
         formData.append("file", file);
 
         try {
-            const res = await fetch("/api/upload", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -215,7 +215,7 @@ export default function MyRouts() {
         if (!imageUrl) return;
 
         try {
-            const res = await fetch("/api/my-routs", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs`, {
                 method: "POST",
                 body: JSON.stringify({
                     ...dataNewRoute,
@@ -241,7 +241,7 @@ export default function MyRouts() {
 
     const deleteRoute = async (id: string) => {
         try {
-            const res = await fetch(`/api/my-routs/${id}`, { method: "DELETE" });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs/${id}`, { method: "DELETE" });
 
             if (!res.ok) {
                 const errorData = await res.json();
@@ -256,7 +256,7 @@ export default function MyRouts() {
 
     const updatePopularRoute = async (id: string, popularRoute: boolean) => {
         try {
-            const res = await fetch(`/api/my-routs/${id}/set-popular-route`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs/${id}/set-popular-route`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ popularRoute }),

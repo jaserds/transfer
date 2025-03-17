@@ -36,7 +36,7 @@ export default function TransferCars() {
     const [file, setFile] = useState<File | null>(null);
 
     useEffect(() => {
-        fetch("/api/transfer-cars")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/transfer-cars`)
             .then((res) => res.json())
             .then((data) => {
                 setDataTransferCars(data)
@@ -54,7 +54,7 @@ export default function TransferCars() {
         formData.append("file", file);
 
         try {
-            const res = await fetch("/api/upload", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -76,7 +76,7 @@ export default function TransferCars() {
         if (!imageUrl) return;
 
         try {
-            const res = await fetch("/api/transfer-cars", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transfer-cars`, {
                 method: "POST",
                 body: JSON.stringify({
                     ...newTransferCars,
@@ -99,7 +99,7 @@ export default function TransferCars() {
 
     const deleteTransferCat = async (id: string) => {
         try {
-            const res = await fetch(`/api/transfer-cars/${id}`, { method: "DELETE" });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transfer-cars/${id}`, { method: "DELETE" });
 
             if (!res.ok) {
                 const errorData = await res.json();

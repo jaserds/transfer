@@ -37,12 +37,12 @@ export default function City() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/api/city")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/city`)
             .then((res) => res.json())
             .then(setCity)
             .catch(() => console.error("Failed to fetch countries"));
 
-        fetch("/api/country")
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/country`)
             .then((res) => res.json())
             .then((countries) => {
                 setCountries(countries)
@@ -60,7 +60,7 @@ export default function City() {
         formData.append("file", file);
 
         try {
-            const res = await fetch("/api/upload", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -83,7 +83,7 @@ export default function City() {
 
         try {
 
-            const res = await fetch("/api/city", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/city`, {
                 method: "POST",
                 body: JSON.stringify({ name: newCity, nameEn: newCityEn, imageUrl, countryId: selectedCountry }),
                 headers: { "Content-Type": "application/json" },
@@ -104,7 +104,7 @@ export default function City() {
 
     const deleteCity = async (id: string) => {
         try {
-            const res = await fetch(`/api/city/${id}`, { method: "DELETE" });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/city/${id}`, { method: "DELETE" });
 
             if (!res.ok) {
                 const errorData = await res.json();
