@@ -10,7 +10,9 @@
                 "qtyOnePassengers": "Passenger",
                 "qty5Passengers": "Passengers",
                 "qtyAllPassengers": "Passengers",
-                "button": "Choose a transfer"
+                "button": "Choose a transfer",
+                "noFindRoute": "Route not found",
+                "noCheckRoute": "You have not selected a route"
             },
             "Advantages": {
                 "driver": "Russian-speaking driver",

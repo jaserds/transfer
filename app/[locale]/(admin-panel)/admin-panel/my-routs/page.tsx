@@ -121,10 +121,6 @@ export default function MyRouts() {
 
     }, []);
 
-    useEffect(() => {
-        console.log("multiSelectserverData", multiSelectserverData);
-    }, [multiSelectserverData]);
-
     const handleSelectionChange = (selected: string[]) => {
         setSelectedIds(selected);
         setDataNewRoute({ ...dataNewRoute, transferCarIds: selected });
@@ -146,9 +142,6 @@ export default function MyRouts() {
                 body: JSON.stringify({ addedId: addedIds[0], routeId: routeId }),
             })
                 .then((res) => res.json())
-                .then((data) => {
-                    console.log("data", data);
-                })
                 .catch(() => console.error("Failed to fetch countries"));
             return
         }

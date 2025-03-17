@@ -31,7 +31,7 @@ const HowWorkContainer = async () => {
     return (
         <section className="mb-[120px] px-5">
             <h2 className={`text-[#383F47] font-[rubik] text-4xl font-semibold text-center mb-[70px]`} >{t("components.HowWorkContainer.pageTitle")}</h2>
-            <div className="max-w-[1090px] mx-auto flex flex-col sm:flex-row flex-wrap justify-center gap-5 lg:justify-between">
+            <div className="max-w-[1090px] mx-auto flex flex-row flex-wrap justify-center gap-5 lg:justify-between">
                 {
                     howWorkData.map((howWorkItem, index) => {
                         return (

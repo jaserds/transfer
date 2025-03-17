@@ -37,8 +37,8 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
                     </div>
                 </div>
                 <div className="max-w-[199px]">
-                    <h3 className="font-rubik text-[#373F47] text-[28px] mb-[15px] font-bold">{carData.TransferCarsTranslation[0].name}</h3>
-                    <div className="flex gap-[20px] text-[18px] text-[#373F47] font-rubik font-bold mb-[20px]">
+                    <h3 className="font-[rubik] text-[#373F47] text-[28px] mb-[15px] font-bold">{carData.TransferCarsTranslation[0].name}</h3>
+                    <div className="flex gap-[20px] text-[18px] text-[#373F47] font-[rubik] font-bold mb-[20px]">
                         <div className="flex gap-[7px]">
                             <Image src={"/icons/car-icons/car-qty-person.svg"} width={24} height={24} alt={ticons("CarComponent.qtyPerson")} />
                             <span>{carData.qtyPerson}</span>
@@ -59,7 +59,7 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
                 </div>
             </div>
             <div className="bg-[#292929] py-[29px] px-[27px] flex max-md:flex-col justify-between rounded-b-[10px] absolute bottom-0 w-full">
-                <p className="text-[28px] text-white font-rubik font-bold max-md:mb-4">{carData.price.toLocaleString("ru-RU")} RUB</p>
+                <p className="text-[28px] text-white font-[rubik] font-bold max-md:mb-4">{carData.price.toLocaleString("ru-RU")} RUB</p>
                 <Link href={
                     `/booking?rid=${routeData.id}&inRoute=${routeData.RouteTranslation[0].inRoute}&toRoute=${routeData.RouteTranslation[0].toRoute}&price=${routeData.price}&name=${carData.TransferCarsTranslation[0].name}&qtyPerson=${carData.qtyPerson}&qtyBags=${carData.qtyBags}`
                 }

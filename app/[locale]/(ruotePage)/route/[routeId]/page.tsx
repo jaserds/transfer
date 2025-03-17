@@ -80,10 +80,6 @@ export default async function TransferCars({ params }: { params: Promise<{ route
         }
     });
 
-    console.log("routeData", routeData);
-
-
-
     if (!routeData) {
         return <div>Маршрут не найден</div>;
     }
@@ -100,7 +96,7 @@ export default async function TransferCars({ params }: { params: Promise<{ route
             <CarsComponentContainer onlyTransferCars={onlyTransferCars} routeData={routeData} />
             <div className="mb-[72px] relative w-full h-[300px] bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-center" style={{ backgroundImage: `url('${routeData?.imageUrl}')` }}>
                 <div className="absolute inset-0 bg-black opacity-30"></div>
-                <h1 className="relative text-[36px] text-white font-rubik font-bold">
+                <h1 className="relative text-[36px] text-white font-[rubik] font-bold">
                     {routeData.RouteTranslation[0].inRoute} - {routeData.RouteTranslation[0].toRoute}
                 </h1>
             </div>

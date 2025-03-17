@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
+
 interface CustomDatePickerProps {
     selectedDate: Date | null;
     setSelectedDate: (date: Date | null) => void;
@@ -106,14 +107,14 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSe
                 type="text"
                 readOnly
                 value={selectedDate ? selectedDate.toLocaleDateString() : ""}
-                onClick={() => setIsCalendarVisible(!isCalendarVisible)} // Показываем/скрываем календарь
+                onClick={() => setIsCalendarVisible(!isCalendarVisible)}
                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none text-[#373F47]"
                 placeholder={t("infoBlock.changeData")}
             />
 
             {/* Календарь с анимацией */}
             <div
-                className={`absolute mt-2 p-4 bg-white border rounded-lg shadow-lg transition-opacity duration-300 ease-in-out ${isCalendarVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+                className={`absolute z-50 mt-2 p-4 bg-white border rounded-lg shadow-lg transition-opacity duration-300 ease-in-out ${isCalendarVisible ? "opacity-100" : "opacity-0 pointer-events-none"
                     }`}
             >
                 <div className="text-center mb-4">

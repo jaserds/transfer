@@ -7,15 +7,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
-interface ICityResponse {
-    name: string;
-}
-
 interface IRouteResponce {
     id: string;
     inRoute: string;
     toRoute: string;
-    city: ICityResponse;
+    city: string;
 }
 
 export default function SearchRouteComponent() {
@@ -39,7 +35,7 @@ export default function SearchRouteComponent() {
 
     const filteredRoutesInWere = routes
         .filter(route =>
-            route.inRoute.toLowerCase().includes(inputInWere.toLowerCase())
+            route.inRoute.toLowerCase().includes(inputInWere.toLowerCase()) || route.city.toLowerCase().includes(inputInWere.toLowerCase())
         )
         .reduce((uniqueRoutes: IRouteResponce[], route) => {
             // Проверяем, есть ли уже такой маршрут по полю `inRoute` в уникальном списке
@@ -58,10 +54,10 @@ export default function SearchRouteComponent() {
             if (findRouteId) {
                 router.push(`${locale}/route/${findRouteId}`);
             } else {
-                toast("Маршрут не найден")
+                toast(t("components.SearchRouteComponent.noFindRoute"))
             }
         } else {
-            toast("Вы не выбрали маршрут")
+            toast(t("components.SearchRouteComponent.noCheckRoute"))
         }
     };
 
@@ -90,7 +86,7 @@ export default function SearchRouteComponent() {
 
         async function fetchRoutes() {
             try {
-                const response = await fetch("/api/my-routs/search-routs"); // Подставь свой API эндпоинт
+                const response = await fetch("/api/my-routs/search-routs?locale=" + locale);
                 await response.json().then((data) => {
                     setRoutes(data);
                 })
@@ -167,7 +163,7 @@ export default function SearchRouteComponent() {
                                     }}
                                 >
                                     {location.inRoute}
-                                    <p className="text-[14px]">{location.inRoute}, {location.city.name}</p>
+                                    <p className="text-[14px]">{location.inRoute}, {location.city}</p>
                                     <span className="block absolute bottom-0 w-[90%] h-[1px] border-b-[1px] border-[#D2D2D2]"></span>
                                 </li>
                             ))}
@@ -177,7 +173,7 @@ export default function SearchRouteComponent() {
                 <div className="relative flex flex-col w-[8%] h-[60px] bg-[#fff] z-0 cursor-pointer max-md:w-full max-md:border-[1px] border-[#d2d2d264]" onClick={handleReverseInputWhere}>
                     <Image src={"/icons/main-search-icons/arrow-reverse.svg"} width={30} height={30} alt={ticons("SearchRouteComponent.reverse")} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                 </div>
-                <div className="relative flex flex-col w-[46%] max-md:w-full h-[60px] z-10" ref={dropdownToLocationsRef}>
+                <div className="relative flex flex-col w-[47%] max-md:w-full h-[60px] z-10" ref={dropdownToLocationsRef}>
                     <span className="max-md:hidden block absolute left-0 w-[2px] 
                                  h-[80%] top-[10%] border-l-[2px] border-dashed border-[#D2D2D2] overflow-hidden"></span>
                     <span className="max-md:hidden block absolute right-0 w-[2px] 
@@ -214,7 +210,7 @@ export default function SearchRouteComponent() {
                                     }}
                                 >
                                     {location.toRoute}
-                                    <p className="text-[14px]">{location.toRoute}, {location.city.name}</p>
+                                    <p className="text-[14px]">{location.toRoute}, {location.city}</p>
                                     <span className="block absolute bottom-0 w-[90%] h-[1px] border-b-[1px] border-[#D2D2D2]"></span>
                                 </li>
                             ))}

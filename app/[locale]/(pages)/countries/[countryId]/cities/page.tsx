@@ -32,7 +32,7 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
     });
 
     const formattedCities = cities.map(city => ({
-        countryName: city.country.CountryTranslation[0].name,
+        countryName: city.country.CountryTranslation[0]?.name,
         data: {
             id: city.id,
             name: city.name,

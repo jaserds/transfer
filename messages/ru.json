@@ -10,7 +10,9 @@
                 "qtyOnePassengers": "Пассажир",
                 "qty5Passengers": "Пассажира",
                 "qtyAllPassengers": "Пассажиров",
-                "button": "Подобрать авто"
+                "button": "Подобрать авто",
+                "noFindRoute": "Маршрут не найден",
+                "noCheckRoute": "Вы не выбрали маршрут"
             },
             "Advantages": {
                 "driver": "Русскоговорящий водитель",

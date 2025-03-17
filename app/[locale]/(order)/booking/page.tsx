@@ -7,6 +7,17 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+// import {
+//     Drawer,
+//     DrawerClose,
+//     DrawerContent,
+//     DrawerDescription,
+//     DrawerFooter,
+//     DrawerHeader,
+//     DrawerTitle,
+//     DrawerTrigger,
+// } from "@/components/ui/drawer"
+
 
 export default function Booking() {
     const searchParams = useSearchParams();
@@ -215,6 +226,21 @@ export default function Booking() {
                     </div>
                 </div>
             </div>
+            {/* <Drawer>
+                <DrawerTrigger>Open</DrawerTrigger>
+                <DrawerContent>
+                    <DrawerHeader>
+                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                    </DrawerHeader>
+                    <DrawerFooter>
+                        <Button>Submit</Button>
+                        <DrawerClose>
+                            <Button variant="outline">Cancel</Button>
+                        </DrawerClose>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer> */}
         </section >
     );
 }
