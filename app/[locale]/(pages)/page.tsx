@@ -9,7 +9,7 @@ import { ICountryResponse } from "@/lib/types";
 
 
 export default async function Countries() {
-  const res = await fetch("http://localhost:3000/api/country");
+  const res = await fetch(`${process.env.API_URL}/api/country`);
   const countries: ICountryResponse[] = await res.json();
 
   return (
