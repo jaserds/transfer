@@ -1,7 +1,7 @@
 {
   "name": "transfer",
   "version": "0.1.0",
-  "homepage": "https://jaserds.github.io/transfer",
+  "homepage": "https://jaserds.github.io/transfer/",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

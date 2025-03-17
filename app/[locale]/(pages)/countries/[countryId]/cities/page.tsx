@@ -7,6 +7,14 @@ import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 
 
+export async function generateStaticParams() {
+    const cities = await prisma.city.findMany();
+    return cities.map((city) => ({
+        countryId: city.countryId,
+    }));
+}
+
+
 export default async function Cities({ params }: { params: Promise<{ countryId: string }> }) {
 
     const { countryId } = await params;

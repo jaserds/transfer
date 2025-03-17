@@ -8,6 +8,15 @@ import { getLocale } from "next-intl/server";
 import { NextResponse } from "next/server";
 
 
+export async function generateStaticParams() {
+    const cities = await prisma.city.findMany();  // Получаем все города (или другие данные для маршрутов)
+
+    // Возвращаем параметры для каждой страницы
+    return cities.map((city) => ({
+        cityId: city.id,  // Параметр для маршрута
+    }));
+}
+
 export default async function PopularRouteCity({ params }: { params: Promise<{ cityId: string }> }) {
     const locale = await getLocale();
     const { cityId } = await params;
@@ -40,7 +49,7 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
             id: route.id,
             inRoute: route.inRoute,
             toRoute: route.toRoute,
-            cityName: route.city.CityTranslation[0].name,
+            cityName: route.city.CityTranslation[0]?.name,
             price: route.price,
             routeTranslation: route.RouteTranslation[0],
         }))
