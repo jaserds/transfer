@@ -61,9 +61,45 @@ export default function HeaderComponent() {
                 </div>
 
             </div>
-            <button className="lg:hidden text-gray-700" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? "✖" : "☰"}
             </button>
+            <nav className={`
+                    absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50
+                    ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0'}
+                    overflow-hidden
+                    transition-all duration-700
+                `}>
+                <ul className="flex flex-col items-start p-4 space-y-4">
+                    <li><Link href="/" className="text-[#373F47] block py-2" onClick={() => setMenuOpen(false)}>{t("components.HeaderComponent.homeLink")}</Link></li>
+                    <li><Link href="/cities" className="text-[#373F47] block py-2" onClick={() => setMenuOpen(false)}>{t("components.HeaderComponent.citiesLink")}</Link></li>
+                    <li><Link href="/popular-routes" className="text-[#373F47] block py-2" onClick={() => setMenuOpen(false)}>{t("components.HeaderComponent.popularRoutesLink")}</Link></li>
+                    {session.data?.user.role === "ADMIN" && (
+                        <li><Link href="/admin-panel" className="text-[#373F47] block py-2" onClick={() => setMenuOpen(false)}>АП</Link></li>
+                    )}
+                    <li className="flex items-center gap-4">
+                        <Image src='/icons/social-icons/wa.svg' width={30} height={30} alt={ticons("HeaderComponent.wa")} />
+                        <Image src='/icons/social-icons/tg.svg' width={30} height={30} alt={ticons("HeaderComponent.telegram")} />
+                        <Image src='/icons/social-icons/ig.svg' width={30} height={30} alt={ticons("HeaderComponent.ins")} />
+                    </li>
+                    <li>
+                        <LocaleSwitcher />
+                    </li>
+                    <li>
+                        {session.status === "unauthenticated" ? (
+                            <button className="w-full text-left text-[#373F47] border border-gray-300 px-4 py-2 rounded-md"
+                                onClick={() => { signIn(); setMenuOpen(false); }}
+                            >{t("components.HeaderComponent.signIn")}</button>
+                        ) : (
+                            session.status === "authenticated" && (
+                                <button className="w-full text-left text-[#373F47] border border-gray-300 px-4 py-2 rounded-md"
+                                    onClick={() => { signOut.signOut(); setMenuOpen(false); }}
+                                >{t("components.HeaderComponent.signOut")}</button>
+                            )
+                        )}
+                    </li>
+                </ul>
+            </nav>
         </div>
     );
 }

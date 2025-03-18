@@ -9,6 +9,28 @@ export default {
 	],
 	theme: {
 		extend: {
+			keyframes: {
+				expandHeight: {
+					'0%': { height: '0', opacity: '0' },
+					'20%': { height: '20%', opacity: '0.2' },
+					'40%': { height: '40%', opacity: '0.4' },
+					'60%': { height: '60%', opacity: '0.6' },
+					'80%': { height: '80%', opacity: '0.8' },
+					'100%': { height: '100%', opacity: '1' },
+				},
+				expandHeightOut: {
+					'0%': { height: '100%', opacity: '1' },
+					'20%': { height: '80%', opacity: '0.8' },
+					'40%': { height: '60%', opacity: '0.6' },
+					'60%': { height: '40%', opacity: '0.4' },
+					'80%': { height: '20%', opacity: '0.2' },
+					'100%': { height: '0', opacity: '0' },
+				},
+			},
+			animation: {
+				expandHeight: 'expandHeight 3.5s ease-in-in',
+				expandHeightOut: 'expandHeightOut 3.5s ease-in-in',
+			},
 			fontFamily: {
 				rubik: ["var(--font-rubik)", "sans-serif"],
 			},

@@ -38,16 +38,18 @@ const HowWorkContainer = async () => {
                             <div className="
                             relative
                             min-w-[300px] max-w-[300px]
+                            min-h-[362px]
                             border-dash-16
                             px-[15px]
                             py-[25px]
                             flex
                             flex-col
+                            justify-center
                             "
                                 key={index}>
                                 <Image className="mx-auto mb-[22px]" src={howWorkItem.image} width={120} height={120} alt={howWorkItem.alt} />
                                 <h4 className="text-[rubik] font-semibold text-[16px] text-[#373F47] text-center mb-4">{howWorkItem.title}</h4>
-                                <p className="text-[16px] text-[#373F47] text-center mt-auto">{howWorkItem.text}</p>
+                                <p className="text-[16px] text-[#373F47] text-center mt-[10px]">{howWorkItem.text}</p>
                             </div>
                         )
 
