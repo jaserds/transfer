@@ -6,7 +6,7 @@ export default async function ContactsFomContainer() {
     const t = await getTranslations("AppTraslation");
     const ticons = await getTranslations("imagesAlt");
     return (
-        <section className="flex justify-center mb-[120px]">
+        <section className="flex justify-center mb-[120px] pt-[120px]">
             <div className="max-w-[1480px] bg-[linear-gradient(rgba(250,243,225,0.39),rgba(250,243,225,0.3)),url('/images/contact-forma-bg.jpg')] bg-cover bg-center w-full flex justify-center py-10 rounded-[50px]">
                 <div className="max-w-[1090px] flex gap-5 max-md:flex-col">
                     <div className="w-1/2 max-md:w-full max-md:mb-10 pl-5 flex flex-col">
