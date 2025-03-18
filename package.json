@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && npx prisma generate",
+    "build": "npx prisma generate && next build",
     "prisma:migrate": "prisma migrate deploy",
+    "postinstall": "prisma generate",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "npm run build && gh-pages -d .next"
+    "lint": "next lint"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
