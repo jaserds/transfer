@@ -5,7 +5,7 @@ import Accordion from "./Accordion";
 export default async function ContactAndFAQContainer() {
     const t = await getTranslations("AppTraslation");
     return (
-        <div className="flex justify-center items-center bg-gray-50 mb-[85] pb-[35px]">
+        <div className="flex justify-center items-center bg-gray-50 pb-[35px]">
             <div className="w-full p-4 max-w-[800px]">
                 <h2 className="text-[#383F47] font-[rubik] text-4xl font-semibold text-center mb-[70px] mt-[70px]">{t("components.ContactAndFAQContainer.pageTitle")}</h2>
                 <Accordion

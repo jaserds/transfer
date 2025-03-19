@@ -22,7 +22,7 @@ export default async function ContactsFomContainer() {
                         <p className="text-[#373F47]">{t("components.ContactsFomContainer.text3")}</p>
                     </div>
                     <div className="w-1/2 max-md:w-full px-5">
-                        <form className=" bg-[#F7E8C6] flex flex-col justify-center px-[69px] py-[30px] rounded-[10px]">
+                        <form className=" bg-[#F7E8C6] flex flex-col justify-center px-[40px] py-[30px] rounded-[10px]">
                             <label htmlFor="contactFormName" className="mb-[5px] text-[#373F47] text-[18px]">{t("components.ContactsFomContainer.name")}</label>
                             <input id="contactFormName" className="h-[50px] mb-[20px] rounded-[10px] px-[10px] outline-none border-none focus:outline-none focus:ring-2 focus:ring-[#F9AC1A] focus:border-[#F9AC1A] transition-shadow" type="text" />
                             <label htmlFor="contactFormPhone" className="mb-[5px] text-[#373F47] text-[18px]">{t("components.ContactsFomContainer.phone")}</label>

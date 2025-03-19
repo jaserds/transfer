@@ -46,15 +46,15 @@ const FeaturesComponent = () => {
                 const nextIndex = (currentIndex + 1) % features.length;
                 return features[nextIndex];
             });
-        }, 5000);
+        }, 10000);
 
         return () => clearInterval(interval);
     }, [])
 
     return (
-        <div className="flex gap-6 max-w-[1090px] mx-auto">
+        <div className="lg:flex md:flex-col lg:flex-row gap-6 max-w-[1090px] mx-auto">
             {/* Левая часть - меню */}
-            <div className="w-1/3 flex flex-col gap-4">
+            <div className="lg:w-1/3 flex flex-col md:mb-4 max-md:mb-4 lg:mb-0 gap-4">
                 {features.map((feature) => (
                     <button
                         key={feature.title}
@@ -70,7 +70,7 @@ const FeaturesComponent = () => {
             </div>
 
             {/* Правая часть - контент */}
-            <div className="w-2/3 bg-[#292929] pl-[50px] pt-[20px] pb-[20px] pr-[20px] rounded-lg flex items-center gap-6">
+            <div className="lg:w-2/3 bg-[#292929] pl-[50px] pt-[20px] pb-[20px] pr-[20px] rounded-lg flex items-center gap-6">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={selectedFeature.title}
