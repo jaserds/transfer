@@ -52,8 +52,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Access denied" }, { status: 403 });
     }
     try {
-        const { name, nameEn, imageUrl }: { name: string; nameEn: string; imageUrl: string; } = await req.json();
-        if (!name || !nameEn || !imageUrl) {
+        const { name, nameEn, nameFr, imageUrl }: { name: string; nameEn: string; nameFr: string; imageUrl: string; } = await req.json();
+        if (!name || !nameEn || !nameFr || !imageUrl) {
             return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
         }
         const country = await prisma.country.create({
@@ -62,8 +62,9 @@ export async function POST(req: Request) {
                 imageUrl,
                 CountryTranslation: {
                     create: [
-                        { locale: "en", name: nameEn },
                         { locale: "ru", name: name },
+                        { locale: "en", name: nameEn },
+                        { locale: "fr", name: nameFr },
                     ],
                 }
             },

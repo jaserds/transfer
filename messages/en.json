@@ -113,7 +113,7 @@
     },
     "LocaleSwitcher": {
         "label": "Change language",
-        "locale": "{locale, select, ru {ru Russian} en {🇺🇸 English} other {Unknown}}"
+        "locale": "{locale, select, ru {ru Russian} en {🇺🇸 English} fr {🇫🇷 French} other {Unknown}}"
     },
     "bookingPage": {
         "infoBlock": {

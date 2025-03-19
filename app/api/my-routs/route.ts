@@ -9,11 +9,14 @@ interface IRequestMyRoute {
     toRoute: string;
     inRouteEn: string;
     toRouteEn: string;
+    toRouteFr: string;
+    inRouteFr: string;
     cityId: string;
     popularRoute: boolean;
     pointsGoogleMap: Prisma.JsonValue;
     description: string;
     descriptionEn: string;
+    descriptionFr: string;
     price: number;
     transferCarIds: string[];
 }
@@ -47,9 +50,9 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description, price, transferCarIds, inRouteEn, toRouteEn, descriptionEn }: IRequestMyRoute = await req.json();
+        const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description, price, transferCarIds, inRouteEn, toRouteEn, descriptionEn, inRouteFr, toRouteFr, descriptionFr }: IRequestMyRoute = await req.json();
 
-        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !price || !transferCarIds || !inRouteEn || !toRouteEn || !descriptionEn) {
+        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !price || !transferCarIds || !inRouteEn || !toRouteEn || !descriptionEn || !inRouteFr || !toRouteFr || !descriptionFr) {
             return NextResponse.json(
                 { error: "Not all fields were filled (imageUrl, inRoute, toRoute, cityId, pointsGoogleMap, description)" },
                 { status: 400 }
@@ -84,6 +87,12 @@ export async function POST(req: Request) {
                             inRoute: inRouteEn,
                             toRoute: toRouteEn,
                             description: descriptionEn,
+                        },
+                        {
+                            locale: "fr",
+                            inRoute: inRouteFr,
+                            toRoute: toRouteFr,
+                            description: descriptionFr,
                         }
                     ],
                 },

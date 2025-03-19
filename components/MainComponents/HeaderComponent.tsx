@@ -64,9 +64,8 @@ export default function HeaderComponent() {
             <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? "✖" : "☰"}
             </button>
-            <nav className={`
-                    absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50
-                    ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0'}
+            <nav className={`absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200
+                    ${menuOpen ? 'animate-expandHeight opacity-1 z-50' : 'animate-expandHeightOut opacity-0 z-[-50]'}
                     overflow-hidden
                     transition-all duration-700
                 `}>

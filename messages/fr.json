@@ -1,0 +1,222 @@
+{
+    "AppTraslation": {
+        "components": {
+            "MainComponent": {
+                "title": "Transfert premium depuis l'aéroport avec chauffeur privé"
+            },
+            "SearchRouteComponent": {
+                "labelFrom": "D'où",
+                "labelTo": "Où",
+                "qtyOnePassengers": "Passager",
+                "qty5Passengers": "Passagers",
+                "qtyAllPassengers": "Passagers",
+                "button": "Choisir une voiture",
+                "noFindRoute": "Itinéraire introuvable",
+                "noCheckRoute": "Vous n'avez pas sélectionné d'itinéraire"
+            },
+            "Advantages": {
+                "driver": "Chauffeur francophone",
+                "comfort": "Voyage confortable",
+                "defender": "La sécurité avant tout",
+                "Premium": "Voitures premium"
+            },
+            "TransfersContainerComponentCountry": {
+                "title": "Transferts"
+            },
+            "TransferComponentCountry": {
+                "iconTextOne": "Transfert",
+                "iconTextMoreTwo": "Transferts",
+                "iconTextAll": "Transferts"
+            },
+            "WhyChooseUsContainer": {
+                "title": "Pourquoi nous choisir ?",
+                "subtitle": "En nous choisissant, vous choisissez la qualité, la sécurité et le confort !"
+            },
+            "HeaderComponent": {
+                "signIn": "Se connecter",
+                "signOut": "Se déconnecter",
+                "homeLink": "Accueil",
+                "citiesLink": "Villes",
+                "popularRoutesLink": "Itinéraires populaires"
+            },
+            "FeaturesComponent": {
+                "title1": "Professionnalisme et expérience",
+                "title2": "La sécurité avant tout",
+                "title3": "Approche individuelle",
+                "title4": "Luxe et confort",
+                "title5": "Fiabilité et réputation",
+                "description1": "Nous sommes fiers de nos chauffeurs professionnels avec de nombreuses années d'expérience. Nos chauffeurs sont soigneusement sélectionnés et formés pour vous offrir le meilleur service. Nous savons à quel point il est important pour nos clients de se sentir à l'aise et en sécurité lorsqu'ils voyagent avec nous.",
+                "description2": "Nos véhicules subissent un entretien régulier et nos chauffeurs passent des contrôles médicaux et des formations sur la conduite sécurisée.",
+                "description3": "Nous prenons en compte toutes les préférences de nos clients pour rendre le voyage aussi confortable et agréable que possible.",
+                "description4": "Nos véhicules allient style, confort et haute technologie pour vous offrir un plaisir inégalé à chaque trajet. Nous proposons uniquement les meilleurs modèles, équipés de systèmes de sécurité modernes, de matériaux premium et de technologies innovantes, garantissant un voyage confortable, sécurisé et agréable.",
+                "description5": "Nous apprécions chaque client et tenons à notre réputation en offrant le meilleur service. Nos chauffeurs sont des professionnels expérimentés et notre flotte est composée de véhicules modernes et fiables. Nous garantissons ponctualité, sécurité et approche personnalisée pour que votre voyage se déroule avec un maximum de confort et de sérénité."
+            },
+            "HowWorkContainer": {
+                "pageTitle": "Comment fonctionne le service",
+                "title1": "Vous indiquez votre itinéraire et choisissez une voiture",
+                "title2": "Vous confirmez votre voyage",
+                "title3": "Le chauffeur vous attend à l'aéroport avec une pancarte",
+                "text1": "Indiquez le point de départ et d'arrivée, choisissez un type de véhicule et laissez vos coordonnées",
+                "text2": "Après avoir rempli le formulaire, nous vous contacterons pour confirmer la réservation.",
+                "text3": "Le chauffeur vous attendra dans la zone d'arrivée avec une pancarte nominative, afin que vous n'ayez pas à chercher votre transport."
+            },
+            "ContactAndFAQContainer": {
+                "pageTitle": "Contacts et FAQ",
+                "title1": "Comment puis-je réserver un transfert ?",
+                "title2": "Comment puis-je vérifier si ma réservation a été traitée avec succès ?",
+                "title3": "Comment puis-je trouver mon chauffeur ?",
+                "title4": "Que se passe-t-il si mon vol est modifié ou sérieusement retardé ?",
+                "title5": "Le chauffeur portera-t-il mes bagages ?",
+                "text1": "",
+                "text2": "",
+                "text3": "",
+                "text4": "",
+                "text5": ""
+            },
+            "ContactsFomContainer": {
+                "title1": "Contactez-nous",
+                "text1": "Vous avez des questions ou besoin d'aide pour réserver ? Remplissez le formulaire et nous vous contacterons sous peu !",
+                "title2": "Pour toute question",
+                "text2": "Appelez-nous",
+                "text3": "Nous sommes disponibles 24h/24 et 7j/7 pour vous aider à organiser un voyage confortable !",
+                "name": "Nom",
+                "phone": "Téléphone",
+                "q": "Question",
+                "button": "Envoyer"
+            },
+            "footer": {
+                "homeLink": "Accueil",
+                "citiesLink": "Villes",
+                "popularRoutesLink": "Itinéraires populaires"
+            },
+            "TransfersContainerComponentCity": {
+                "title": "Transferts"
+            },
+            "PopularRoutes": {
+                "title": "Itinéraires populaires",
+                "from": "D'où",
+                "to": "Où",
+                "price": "À partir de"
+            },
+            "CarsComponentContainer": {
+                "title": "Flotte de véhicules"
+            },
+            "CarComponent": {
+                "orderCancellation": "Annulation gratuite",
+                "Expectation": "Temps d'attente en cas de retard",
+                "button": "Réserver"
+            },
+            "providerButton": {
+                "title": "Connectez-vous avec"
+            }
+        }
+    },
+    "LocaleSwitcher": {
+        "label": "Choisissez la langue",
+        "locale": "{locale, select, ru {ru Russe} en {🇺🇸 Anglais} fr {🇫🇷 Français} other {Inconnu}}"
+    },
+    "bookingPage": {
+        "infoBlock": {
+            "title": "Informations sur le transfert",
+            "date": "Date du transfert",
+            "changeData": "Choisissez une date",
+            "time": "Heure",
+            "changeTime": "Choisissez une heure",
+            "place": "Destination : adresse ou nom de l'hôtel",
+            "backTransfer": "Transfert retour"
+        },
+        "passengersBlock": {
+            "title": "À propos du passager",
+            "name": "Nom et prénom *",
+            "placeholderName": "Ivan Ivanov",
+            "phone": "Téléphone *",
+            "email": "Email",
+            "qtyPassengers": "Nombre de passagers *",
+            "checkBocks": "Je souhaite être contacté"
+        },
+        "commentaryBlock": {
+            "title": "Commentaires sur la commande",
+            "subtitle": "Souhaits supplémentaires pour le voyage",
+            "text": "Par exemple, si vous avez des bagages spéciaux, si vous avez besoin d'eau pendant le trajet ou d'un siège enfant.",
+            "textArea": "J'ai un petit enfant..."
+        },
+        "infoOrderBlock": {
+            "transfer": "Transfert",
+            "textPassengers": "passager",
+            "textBags": "bagages",
+            "backTransfer": "Transfert retour",
+            "name": "Nom et prénom :",
+            "phone": "Téléphone *",
+            "email": "Email",
+            "total": "Total :",
+            "button": "Envoyer la demande"
+        }
+    },
+    "imagesAlt": {
+        "BookingPage": {
+            "calendar": "Icône de calendrier pour choisir la date",
+            "calendarInfo": "Icône de calendrier pour les informations sur le transfert",
+            "time": "Icône d'horloge pour choisir l'heure du transfert",
+            "timeInfo": "Icône d'horloge pour les informations sur le transfert",
+            "person": "Icône de personne pour entrer les données du passager",
+            "phone": "Icône de téléphone pour entrer le numéro de téléphone",
+            "mail": "Icône de mail pour entrer l'email",
+            "qtyOrder": "Icône pour entrer le nombre de passagers"
+        },
+        "CarComponent": {
+            "carIcon": "Icône de voiture",
+            "qtyPerson": "Nombre de passagers",
+            "qtyBags": "Nombre de bagages",
+            "exOrder": "Annulation gratuite de la commande",
+            "time": "Temps d'attente en cas de retard"
+        },
+        "ContactsFomContainer": {
+            "phoneIcon": "Icône de téléphone",
+            "mailIcon": "Icône de mail"
+        },
+        "Footer": {
+            "logo": "Logo",
+            "wa": "Icône WhatsApp",
+            "telegram": "Icône Telegram",
+            "ins": "Icône Instagram"
+        },
+        "Advantages": {
+            "rule": "Icône Chauffeur parlant russe",
+            "seat": "Voyage confortable",
+            "defence": "La sécurité avant tout",
+            "car": "Voiture premium"
+        },
+        "HeaderComponent": {
+            "logo": "Logo",
+            "wa": "Icône WhatsApp",
+            "telegram": "Icône Telegram",
+            "ins": "Icône Instagram"
+        },
+        "SearchRouteComponent": {
+            "reverse": "Inverser l'itinéraire"
+        },
+        "AllPopularRoutesSection": {
+            "popular": "Itinéraires populaires"
+        },
+        "PopularRoutesSection": {
+            "popular": "Itinéraires populaires"
+        },
+        "HowWorkContainer": {
+            "icon1": "Vous indiquez l'itinéraire et choisissez la voiture",
+            "icon2": "Vous confirmez votre trajet",
+            "icon3": "Le chauffeur vous rencontre avec une pancarte à l'aéroport"
+        },
+        "TransferComponentAllCities": {
+            "city": "Ville",
+            "route": "Nombre d'itinéraires"
+        },
+        "TransferComponentCity": {
+            "city": "Ville",
+            "route": "Nombre d'itinéraires"
+        },
+        "TransferComponentCountry": {
+            "country": "Pays",
+            "route": "Nombre d'itinéraires"
+        }
+    }
+}

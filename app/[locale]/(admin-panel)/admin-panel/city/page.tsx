@@ -31,6 +31,7 @@ export default function City() {
     const [countries, setCountries] = useState<Country[]>([]);
     const [newCity, setNewCity] = useState<string>("");
     const [newCityEn, setNewCityEn] = useState<string>("");
+    const [newCityFr, setNewCityFr] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -85,7 +86,7 @@ export default function City() {
 
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/city`, {
                 method: "POST",
-                body: JSON.stringify({ name: newCity, nameEn: newCityEn, imageUrl, countryId: selectedCountry }),
+                body: JSON.stringify({ name: newCity, nameEn: newCityEn, nameFr: newCityFr, imageUrl, countryId: selectedCountry }),
                 headers: { "Content-Type": "application/json" },
             });
 
@@ -95,6 +96,7 @@ export default function City() {
             setCity([...city, country]);
             setNewCity("");
             setNewCityEn("");
+            setNewCityFr("");
             setFile(null);
         } catch (error) {
             console.error(error);
@@ -131,6 +133,7 @@ export default function City() {
             <div className="flex gap-2 mb-4">
                 <Input value={newCity} onChange={(e) => setNewCity(e.target.value)} placeholder="Название города" />
                 <Input value={newCityEn} onChange={(e) => setNewCityEn(e.target.value)} placeholder="Название города En" />
+                <Input value={newCityFr} onChange={(e) => setNewCityFr(e.target.value)} placeholder="Название города Fr" />
                 <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
                 <Select onValueChange={setSelectedCountry}>
                     <SelectTrigger className="w-[180px]">

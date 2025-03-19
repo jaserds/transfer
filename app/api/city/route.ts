@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { name, nameEn, imageUrl, countryId }: { name: string; nameEn: string; imageUrl: string, countryId: string } = await req.json();
+        const { name, nameEn, nameFr, imageUrl, countryId }: { name: string; nameEn: string; nameFr: string; imageUrl: string, countryId: string } = await req.json();
         if (!name || !nameEn || !imageUrl) {
             return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
         }
@@ -34,6 +34,7 @@ export async function POST(req: Request) {
                     create: [
                         { locale: "en", name: nameEn },
                         { locale: "ru", name: name },
+                        { locale: "fr", name: nameFr },
                     ],
                 }
             }

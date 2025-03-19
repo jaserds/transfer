@@ -18,6 +18,7 @@ export default function Countries() {
     const [countries, setCountries] = useState<Country[]>([]);
     const [newCountry, setNewCountry] = useState<string>("");
     const [newCountryEn, setNewCountryEn] = useState<string>("");
+    const [newCountryFr, setNewCountryFr] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -55,7 +56,7 @@ export default function Countries() {
     };
 
     const addCountry = async () => {
-        if (!newCountry || !newCountryEn || !file) return;
+        if (!newCountry || !newCountryEn || !newCountryFr || !file) return;
 
         const imageUrl = await uploadImage();
         if (!imageUrl) return;
@@ -64,7 +65,7 @@ export default function Countries() {
 
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/country`, {
                 method: "POST",
-                body: JSON.stringify({ name: newCountry, nameEn: newCountryEn, imageUrl }),
+                body: JSON.stringify({ name: newCountry, nameEn: newCountryEn, nameFr: newCountryFr, imageUrl }),
                 headers: { "Content-Type": "application/json" },
             });
 
@@ -74,6 +75,7 @@ export default function Countries() {
             setCountries([...countries, country]);
             setNewCountry("");
             setNewCountryEn("");
+            setNewCountryFr("");
             setFile(null);
             if (fileInputRef.current) {
                 fileInputRef.current.value = ""; // Очистка инпута
@@ -105,6 +107,7 @@ export default function Countries() {
             <div className="flex gap-2 mb-4">
                 <Input value={newCountry} onChange={(e) => setNewCountry(e.target.value)} placeholder="Название страны" />
                 <Input value={newCountryEn} onChange={(e) => setNewCountryEn(e.target.value)} placeholder="Название страны En" />
+                <Input value={newCountryFr} onChange={(e) => setNewCountryFr(e.target.value)} placeholder="Название страны Fr" />
                 <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} ref={fileInputRef} />
                 <Button onClick={addCountry}>Добавить</Button>
             </div>

@@ -19,10 +19,10 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Access denied" }, { status: 403 });
         }
 
-        const { name, nameEn, imageUrl, cars, qtyPerson, qtyBags, price } = await req.json();
+        const { name, nameEn, nameFr, imageUrl, cars, qtyPerson, qtyBags, price } = await req.json();
 
 
-        if (!name || !nameEn || !imageUrl || !cars || !qtyPerson || !qtyBags || !price) {
+        if (!name || !nameEn || !nameFr || !imageUrl || !cars || !qtyPerson || !qtyBags || !price) {
             return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
         }
 
@@ -38,6 +38,7 @@ export async function POST(req: Request) {
                     create: [
                         { locale: "en", name: nameEn },
                         { locale: "ru", name: name },
+                        { locale: "fr", name: nameFr },
                     ]
                 }
             }
