@@ -12,14 +12,11 @@ import { useState } from "react";
 
 
 export default function HeaderComponent() {
-
     const session = useAppSession();
     const signOut = useSignOut();
     const t = useTranslations('AppTraslation');
     const ticons = useTranslations('imagesAlt');
     const [menuOpen, setMenuOpen] = useState(false);
-
-
 
     return (
         <div className="w-full h-[70px] bg-[#fff] flex lg:justify-center max-md:justify-between md:justify-between px-[15px] relative">
@@ -57,15 +54,15 @@ export default function HeaderComponent() {
                             onClick={() => signOut.signOut()}
                         >{t("components.HeaderComponent.signOut")}</div>
                     }
-
                 </div>
 
             </div>
             <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? "✖" : "☰"}
             </button>
-            <nav className={`absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200
-                    ${menuOpen ? 'animate-expandHeight opacity-1 z-50' : 'animate-expandHeightOut opacity-0 z-[-50]'}
+            <nav className={`
+                    absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50
+                    ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0'}
                     overflow-hidden
                     transition-all duration-700
                 `}>

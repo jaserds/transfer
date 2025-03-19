@@ -229,7 +229,7 @@ export default function Booking() {
             <Drawer>
                 <DrawerTrigger className="flex-col shadow-[0_4px_8px_0_rgba(0,_0,_0,_0.1)] bg-background inset-x-0 z-50 lg:hidden max-md:flex md:flex w-full h-[70px] fixed bottom-0 text-[#fff] rounded-t-[10px]">
                     <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted"></div>
-                    <div className="text-[#373F47] font-[rubik] font-bold mt-3">
+                    <div className="text-[#373F47] text-center font-[rubik] font-bold mt-3">
                         Посмотреть детали заказа
                     </div>
                 </DrawerTrigger>

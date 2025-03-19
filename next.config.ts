@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
         hostname: "avatars.githubusercontent.com",
       },
     ],
+    minimumCacheTTL: 86400,
   },
 };
 
