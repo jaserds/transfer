@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Link } from "@/i18n/navigation";
 import { useSignOut } from "@/lib/auth/use-sign-out";
@@ -60,11 +60,7 @@ export default function HeaderComponent() {
             <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? "✖" : "☰"}
             </button>
-            <nav className={`
-                    absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50
-                    ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0'}
-                    overflow-hidden
-                    transition-all duration-700
+            <nav className={`absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50 ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0 z-[-50]'} overflow-hidden transition-all duration-700
                 `}>
                 <ul className="flex flex-col items-start p-4 space-y-4">
                     <li><Link href="/" className="text-[#373F47] block py-2" onClick={() => setMenuOpen(false)}>{t("components.HeaderComponent.homeLink")}</Link></li>
