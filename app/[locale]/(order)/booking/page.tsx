@@ -8,22 +8,15 @@ import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-// import {
-//     Drawer,
-//     DrawerClose,
-//     DrawerContent,
-//     DrawerDescription,
-//     DrawerFooter,
-//     DrawerHeader,
-//     DrawerTitle,
-//     DrawerTrigger,
-// } from "@/components/ui/drawer"
+import FullPageLoader from "@/components/ui/loaders/FullPageLoader";
+
 
 
 export default function Booking() {
     const searchParams = useSearchParams();
     const t = useTranslations('bookingPage');
     const ticons = useTranslations('imagesAlt');
+
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const [selectedBackTime, setSelectedBackTime] = useState<string | null>(null);
@@ -34,6 +27,10 @@ export default function Booking() {
     const [count, setCount] = useState(Number(searchParams.get("qtyPerson")) || 1);
     const [isChecked, setIsChecked] = useState(false);
     const [comment, setComment] = useState("");
+
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState("");
 
     const [isOnOutTransfer, setIsOnOutTransfer] = useState(false);
     const [isOnCommetnary, setIsOnCommetnary] = useState(false);
@@ -47,18 +44,81 @@ export default function Booking() {
     }, [isOnOutTransfer])
 
 
-    const handleSubmitOrder = () => {
-        console.log(isChecked, comment);
+    const handleSubmitOrder = async (e: React.FormEvent) => {
         if (!selectedDate || !selectedTime) {
-            toast("Вы не заполнили дату и время трансфера");
+            toast.error(t("toastTexts.SubmitOrder.errorDateTime"));
+
         }
         if (!personName || !personPhone || !personEmail) {
-            toast("Вы не заполнили имя телефон или почту");
+            toast.error(t("toastTexts.SubmitOrder.errorNamePhoneMail"));
         }
+        e.preventDefault();
+        setLoading(true);
+        const formData = {
+            name: searchParams.get('name'),
+            inRoute: searchParams.get('inRoute'),
+            toRoute: searchParams.get('toRoute'),
+            selectedDate: selectedDate ? selectedDate.toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+            }) : '',
+            selectedTime: selectedTime,
+            selectedBackDate: selectedBackDate ? selectedBackDate.toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+            }) : '',
+            selectedBackTime: selectedBackTime,
+            personName: personName,
+            personPhone: personPhone,
+            personEmail: personEmail,
+            count: count,
+            qtyBags: searchParams.get('qtyBags'),
+            isChecked: isChecked,
+            isOnOutTransfer: isOnOutTransfer,
+            comment: comment,
+            price: searchParams.get('price'),
+        }
+
+        try {
+            const response = await fetch("/api/telegrambot/sendTelegramOrder", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+            setLoading(false);
+
+            if (result.success) {
+                setSuccess(true);
+            } else {
+                setError("Error while submitting the request!");
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setLoading(false);
+                setError("Error while submitting the request!");
+            }
+        }
+    }
+
+    const hendlerSuccessToast = () => {
+        setSuccess(false);
+        return toast.success(t("toastTexts.sendOrder.success"))
+    }
+
+    const hendlerErrorToast = () => {
+        setError("")
+        return toast.error(t("toastTexts.sendOrder.error"))
     }
 
     return (
         <section className="bg-[#F4F4F4] px-6 flex justify-center">
+            {loading && <FullPageLoader />}
             <div className="grid lg:grid-cols-[570px_auto] max-md:grid-cols-1 lg:gap-x-[20px] lg:w-[600px] max-md:w-full">
                 <div className="my-0 mx-auto pt-[46px] lg:pb-[350px] max-md:pb-[100px] md:pb-[150px]">
                     <div className="lg:w-[570px] max-md:w-full mb-[20px] bg-[#fff] shadow-[0_4px_8px_0_rgba(0,_0,_0,_0.1)] rounded-[10px]">
@@ -66,8 +126,8 @@ export default function Booking() {
                             <h3 className="text-base font-bold text-[#373f47] text-[rubik]">{t("infoBlock.title")}</h3>
                         </div>
                         <div className="flex flex-col p-5">
-                            <div className="flex gap-[22px] mb-[30px]">
-                                <div className="flex flex-col w-1/2">
+                            <div className="flex lg:flex-row max-md:flex-col gap-[22px] mb-[30px]">
+                                <div className="flex flex-col lg:w-1/2 max-md:w-full">
                                     <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                         <span className="flex gap-3 items-center">
                                             <Image src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt={ticons("BookingPage.calendar")} />
@@ -76,7 +136,7 @@ export default function Booking() {
                                     </label>
                                     <CustomDatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                                 </div>
-                                <div className="flex flex-col w-1/2">
+                                <div className="flex flex-col lg:w-1/2 max-md:w-full">
                                     <label htmlFor="" className="text-sm text-[#6c7c8c] mb-[18px]">
                                         <span className="flex gap-3 items-center">
                                             <Image src={"/icons/booking/time-icon.svg"} width={20} height={20} alt={ticons("BookingPage.time")} />
@@ -92,8 +152,8 @@ export default function Booking() {
                             <p className="text-sm text-[#6c7c8c] mb-4">{t("infoBlock.backTransfer")}</p>
                             <CustomToggle isOn={isOnOutTransfer} setIsOn={setIsOnOutTransfer} />
                             {isOnOutTransfer && (
-                                <div className="flex gap-[22px] mb-[30px] mt-[28px]">
-                                    <div className="flex flex-col w-1/2">
+                                <div className="flex lg:flex-row max-md:flex-col gap-[22px] mb-[30px] mt-[28px]">
+                                    <div className="flex flex-col lg:w-1/2 max-md:w-full">
                                         <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                             <span className="flex gap-3 items-center">
                                                 <Image src={"/icons/booking/calendar-icon.svg"} width={20} height={20} alt={ticons("BookingPage.calendar")} />
@@ -102,7 +162,7 @@ export default function Booking() {
                                         </label>
                                         <CustomDatePicker selectedDate={selectedBackDate} setSelectedDate={setSelectedBackDate} />
                                     </div>
-                                    <div className="flex flex-col w-1/2">
+                                    <div className="flex flex-col v">
                                         <label htmlFor="" className="text-sm text-[#6c7c8c] mb-[18px]">
                                             <span className="flex gap-3 items-center">
                                                 <Image src={"/icons/booking/time-icon.svg"} width={20} height={20} alt={ticons("BookingPage.time")} />
@@ -144,14 +204,14 @@ export default function Booking() {
                                     {t("passengersBlock.phone")}
                                 </span>
                             </label>
-                            <input type="phone" className="w-2/4 p-2 border border-gray-300 rounded-lg focus:outline-none mb-[30px] text-[#373F47] text-base" placeholder="+" onChange={(e) => setPersonPhone(e.target.value)} />
+                            <input type="phone" className="lg:w-2/4 max-md:w-full p-2 border border-gray-300 rounded-lg focus:outline-none mb-[30px] text-[#373F47] text-base" placeholder="+" onChange={(e) => setPersonPhone(e.target.value)} />
                             <label htmlFor="" className="text-sm text-[#6c7c8c] mb-4">
                                 <span className="flex gap-3 items-center">
                                     <Image src={"/icons/booking/mail-order-icon.svg"} width={20} height={20} alt={ticons("BookingPage.mail")} />
                                     {t("passengersBlock.email")}
                                 </span>
                             </label>
-                            <input type="mail" className="w-2/4 p-2 border border-gray-300 rounded-lg focus:outline-none mb-[30px] text-[#373F47] text-base" placeholder="@" onChange={(e) => setPersonEmail(e.target.value)} />
+                            <input type="mail" className="lg:w-2/4 max-md:w-full p-2 border border-gray-300 rounded-lg focus:outline-none mb-[30px] text-[#373F47] text-base" placeholder="@" onChange={(e) => setPersonEmail(e.target.value)} />
                             <div className="text-sm text-[#6c7c8c] flex justify-between mb-[30px]">
                                 <span className="flex gap-3 items-center">
                                     <Image src={"/icons/booking/person-qty-order-icon.svg"} width={20} height={20} alt={ticons("BookingPage.qtyOrder")} />
@@ -170,8 +230,8 @@ export default function Booking() {
                             <h3 className="text-base font-bold text-[#373f47] text-[rubik]">{t("commentaryBlock.title")}</h3>
                         </div>
                         <div className="flex flex-col p-5">
-                            <div className="flex justify-between items-center">
-                                <div className="flex flex-col max-w-[326px]">
+                            <div className="flex lg:flex-row md:flex-col max-md:flex-col justify-between lg:items-center md:items-start max-md:items-start">
+                                <div className="flex flex-col max-w-[326px] md:mb-4 max-md:mb-4">
                                     <h4 className="text-sm text-[#373F47] font-semibold mb-[10px]">{t("commentaryBlock.subtitle")}</h4>
                                     <p className="text-sm text-[#6C7C8C]">{t("commentaryBlock.text")}</p>
                                 </div>
@@ -227,10 +287,10 @@ export default function Booking() {
                 </div>
             </div>
             <Drawer>
-                <DrawerTrigger className="flex-col shadow-[0_4px_8px_0_rgba(0,_0,_0,_0.1)] bg-background inset-x-0 z-50 lg:hidden max-md:flex md:flex w-full h-[70px] fixed bottom-0 text-[#fff] rounded-t-[10px]">
-                    <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted"></div>
+                <DrawerTrigger className="flex-col shadow-[0_4px_8px_0_rgba(0,_0,_0,_0.1)] bg-background inset-x-0 z-50 lg:hidden max-md:flex md:flex w-full h-[90px] fixed bottom-0 text-[#fff] rounded-t-[10px]">
+                    <div className="mx-auto mt-2 h-3 w-[100px] rounded-full bg-muted"></div>
                     <div className="text-[#373F47] text-center font-[rubik] font-bold mt-3">
-                        Посмотреть детали заказа
+                        {t("showDetails")}
                     </div>
                 </DrawerTrigger>
                 <DrawerContent>
@@ -275,6 +335,8 @@ export default function Booking() {
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
+            {success && hendlerSuccessToast()}
+            {error && hendlerErrorToast()}
         </section >
     );
 }

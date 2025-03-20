@@ -53,7 +53,6 @@ const FeaturesComponent = () => {
 
     return (
         <div className="lg:flex md:flex-col lg:flex-row gap-6 max-w-[1090px] mx-auto">
-            {/* Левая часть - меню */}
             <div className="lg:w-1/3 flex flex-col md:mb-4 max-md:mb-4 lg:mb-0 gap-4">
                 {features.map((feature) => (
                     <button
@@ -69,7 +68,6 @@ const FeaturesComponent = () => {
                 ))}
             </div>
 
-            {/* Правая часть - контент */}
             <div className="lg:w-2/3 bg-[#292929] pl-[50px] pt-[20px] pb-[20px] pr-[20px] rounded-lg flex items-center gap-6">
                 <AnimatePresence mode="wait">
                     <motion.div

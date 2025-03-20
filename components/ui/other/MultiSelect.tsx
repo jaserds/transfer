@@ -12,7 +12,6 @@ interface MultiSelectProps {
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({ options, initialSelected = [], onSelectionChange }) => {
-    // Состояние для выбранных элементов
     const [selectedOptions, setSelectedOptions] = useState<string[]>(initialSelected);
 
     const handleCheckboxChange = (id: string) => {
@@ -21,7 +20,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, initialSelected = []
             : [...selectedOptions, id];
 
         setSelectedOptions(updatedSelection);
-        onSelectionChange(updatedSelection); // Обновляем родительский компонент
+        onSelectionChange(updatedSelection);
     };
 
     return (

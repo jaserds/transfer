@@ -23,7 +23,7 @@ const Advantages = async () => {
                 </li>
                 <li className="flex flex-col items-center flex-1">
                     <div className="w-[90px] h-[60px] flex items-center">
-                        <Image src="/icons/main-advantages-icons/car-icon.svg" width={85} height={85} alt={ticons("Advantages.car")} />
+                        <Image src="/icons/main-advantages-icons/car-icon.svg" width={85} height={60} alt={ticons("Advantages.car")} />
                     </div>
                     <p className={`text-center font-[rubik] text-base font-medium text-[#FFFFFF]`}>{t("components.Advantages.Premium")}</p>
                 </li>

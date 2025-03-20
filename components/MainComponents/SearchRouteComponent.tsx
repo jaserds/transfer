@@ -38,7 +38,6 @@ export default function SearchRouteComponent() {
             route.inRoute.toLowerCase().includes(inputInWere.toLowerCase()) || route.city.toLowerCase().includes(inputInWere.toLowerCase())
         )
         .reduce((uniqueRoutes: IRouteResponce[], route) => {
-            // Проверяем, есть ли уже такой маршрут по полю `inRoute` в уникальном списке
             if (!uniqueRoutes.some(r => r.inRoute === route.inRoute)) {
                 uniqueRoutes.push(route);
             }
@@ -93,7 +92,7 @@ export default function SearchRouteComponent() {
 
 
             } catch (error) {
-                console.error("Ошибка загрузки маршрутов:", error);
+                console.error("Error loading routes:", error);
             }
         }
         fetchRoutes();
@@ -220,12 +219,10 @@ export default function SearchRouteComponent() {
             </div>
             <div className="flex">
                 <div className="relative z-9 lg:w-auto md:w-[50%] max-md:w-1/2" ref={dropdownRef}>
-                    {/* Кнопка */}
                     <button
                         className={`flex items-center gap-2 px-2 py-2 h-full lg:border-none lg:rounded-none md:rounded-t-none max-md:rounded-bl-lg md:rounded-bl-lg lg:w-[180px] md:w-full max-md:w-full bg-white`}
                         onClick={() => setIsOpenPassengers(!isOpenPassengers)}
                     >
-                        {/* Иконка пассажира */}
                         <svg
                             className="w-7 h-7 text-[#D2D2D2]"
                             xmlns="http://www.w3.org/2000/svg"
@@ -239,12 +236,10 @@ export default function SearchRouteComponent() {
                             />
                         </svg>
 
-                        {/* Текст с количеством пассажиров */}
                         <span className="text-[#373F47]">
                             {passengers} {passengers === 1 ? t("components.SearchRouteComponent.qtyOnePassengers") : passengers < 5 ? t("components.SearchRouteComponent.qty5Passengers") : t("components.SearchRouteComponent.qtyAllPassengers")}
                         </span>
 
-                        {/* Иконка стрелки */}
                         <svg
                             className={`w-4 h-4 transition-transform ${isOpenPassengers ? "rotate-180 text-[#F9AC1A]" : "text-gray-600"
                                 }`}
@@ -260,7 +255,6 @@ export default function SearchRouteComponent() {
                         </svg>
                     </button>
 
-                    {/* Выпадающий список */}
                     {isOpenPassengers && (
                         <ul className="absolute left-0 mt-2 w-48 bg-white border shadow-md z-10">
                             {[1, 2, 3, 4, 5, 6].map((num) => (

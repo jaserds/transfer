@@ -3,10 +3,9 @@ import { routing } from './i18n/routing';
 
 export default createMiddleware({
     ...routing,
-    localeDetection: true, // Автоматическое определение локали
+    localeDetection: true,
 });
 
 export const config = {
-    // Match only internationalized pathnames
     matcher: ['/', '/(ru|en|fr)/:path*']
 };

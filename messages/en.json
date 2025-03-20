@@ -82,7 +82,13 @@
                 "name": "Name",
                 "phone": "Phone",
                 "q": "Question",
-                "button": "Submit"
+                "button": "Submit",
+                "toastTexts": {
+                    "Submit": {
+                        "success": "Your question has been successfully submitted!",
+                        "error": "Error submitting the question, please try again later!"
+                    }
+                }
             },
             "footer": {
                 "homeLink": "Home",
@@ -110,6 +116,11 @@
                 "title": "Sign in with"
             }
         }
+    },
+    "authAdminError": {
+        "title": "Admin access only",
+        "subtitle": "Log in with an administrator account",
+        "button": "Go to home"
     },
     "LocaleSwitcher": {
         "label": "Change language",
@@ -150,6 +161,42 @@
             "email": "Email",
             "total": "Total:",
             "button": "Submit Request"
+        },
+        "showDetails": "View order details",
+        "toastTexts": {
+            "SubmitOrder": {
+                "errorDateTime": "You have not filled in the date and time of the transfer",
+                "errorNamePhoneMail": "You have not filled in the name, phone, or email"
+            },
+            "sendOrder": {
+                "success": "You have booked a transfer, we will contact you soon!",
+                "error": "Error while booking the transfer, please try again later!"
+            }
+        }
+    },
+    "CustomDatePicker": {
+        "months": {
+            "jan": "January",
+            "feb": "February",
+            "mar": "March",
+            "apr": "April",
+            "may": "May",
+            "jun": "June",
+            "jul": "July",
+            "aug": "August",
+            "sep": "September",
+            "oct": "October",
+            "nov": "November",
+            "dec": "December"
+        },
+        "days": {
+            "sun": "Sun",
+            "mon": "Mon",
+            "tue": "Tue",
+            "wed": "Wed",
+            "thu": "Thu",
+            "fri": "Fri",
+            "sat": "Sat"
         }
     },
     "imagesAlt": {

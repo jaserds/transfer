@@ -18,6 +18,7 @@ interface CustomCheckBoxProps {
 
 const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSelectedDate }) => {
     const t = useTranslations('bookingPage');
+    const tcalendar = useTranslations('CustomDatePicker');
     const [isCalendarVisible, setIsCalendarVisible] = useState(false);
 
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -26,11 +27,11 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ selectedDate, setSe
 
     // Месяцы и дни недели
     const months = [
-        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь",
+        tcalendar("months.jan"), tcalendar("months.feb"), tcalendar("months.mar"), tcalendar("months.apr"), tcalendar("months.may"), tcalendar("months.jun"),
+        tcalendar("months.jul"), tcalendar("months.aug"), tcalendar("months.sep"), tcalendar("months.oct"), tcalendar("months.nov"), tcalendar("months.dec"),
     ];
 
-    const weekdays = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+    const weekdays = [tcalendar("days.sun"), tcalendar("days.mon"), tcalendar("days.tue"), tcalendar("days.wed"), tcalendar("days.thu"), tcalendar("days.fri"), tcalendar("days.sat")];
 
     // Получение первого дня месяца
     const getFirstDayOfMonth = (date: Date) => {

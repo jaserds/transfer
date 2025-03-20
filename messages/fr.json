@@ -82,7 +82,13 @@
                 "name": "Nom",
                 "phone": "Téléphone",
                 "q": "Question",
-                "button": "Envoyer"
+                "button": "Envoyer",
+                "toastTexts": {
+                    "Submit": {
+                        "success": "Votre question a été envoyée avec succès!",
+                        "error": "Erreur lors de l'envoi de la question, veuillez réessayer plus tard!"
+                    }
+                }
             },
             "footer": {
                 "homeLink": "Accueil",
@@ -110,6 +116,11 @@
                 "title": "Connectez-vous avec"
             }
         }
+    },
+    "authAdminError": {
+        "title": "Accès réservé à l'administrateur",
+        "subtitle": "Connectez-vous avec un compte administrateur",
+        "button": "Aller à l'accueil"
     },
     "LocaleSwitcher": {
         "label": "Choisissez la langue",
@@ -150,6 +161,42 @@
             "email": "Email",
             "total": "Total :",
             "button": "Envoyer la demande"
+        },
+        "showDetails": "Voir les détails de la commande",
+        "toastTexts": {
+            "SubmitOrder": {
+                "errorDateTime": "Vous n'avez pas rempli la date et l'heure du transfert",
+                "errorNamePhoneMail": "Vous n'avez pas rempli le nom, le téléphone ou l'e-mail"
+            },
+            "sendOrder": {
+                "success": "Vous avez réservé un transfert, nous vous contacterons bientôt !",
+                "error": "Erreur lors de la réservation du transfert, veuillez réessayer plus tard !"
+            }
+        }
+    },
+    "CustomDatePicker": {
+        "months": {
+            "jan": "Janvier",
+            "feb": "Février",
+            "mar": "Mars",
+            "apr": "Avril",
+            "may": "Mai",
+            "jun": "Juin",
+            "jul": "Juillet",
+            "aug": "Août",
+            "sep": "Septembre",
+            "oct": "Octobre",
+            "nov": "Novembre",
+            "dec": "Décembre"
+        },
+        "days": {
+            "sun": "Dim",
+            "mon": "Lun",
+            "tue": "Mar",
+            "wed": "Mer",
+            "thu": "Jeu",
+            "fri": "Ven",
+            "sat": "Sam"
         }
     },
     "imagesAlt": {
