@@ -25,24 +25,6 @@ export async function POST(req: NextRequest) {
             price
         } = await req.json();
 
-        console.log(name,
-            inRoute,
-            toRoute,
-            selectedDate,
-            selectedTime,
-            selectedBackDate,
-            selectedBackTime,
-            personName,
-            personPhone,
-            personEmail,
-            count,
-            qtyBags,
-            isChecked,
-            isOnOutTransfer,
-            comment,
-            price);
-
-
         const text = `📩 *Новая заявка! ${name}* 
         🚗 Пункт отправления: *${inRoute}*
         🚗 Пункт назначения: *${toRoute}*
@@ -59,9 +41,10 @@ export async function POST(req: NextRequest) {
         📧 Email: *${personEmail}*  
         👥 Количество пассажиров: *${count}*
         👜 Количество багажа: *${qtyBags}*
-        💬 Комментарий: *${comment || "нет"}*
         📡 Нужно что бы связались с клиентом?: *${isChecked ? "Да" : "Нет"}*
-        📌 Цена: *${price}*`;
+        💬 Комментарий: *${comment || "нет"}*
+        
+        📌 Цена: *${price} EUR*`;
 
         const response = await fetch(TELEGRAM_API_URL, {
             method: "POST",
