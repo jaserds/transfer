@@ -8,6 +8,53 @@ import { getLocale } from "next-intl/server";
 import { NextResponse } from "next/server";
 
 
+export async function generateMetadata({ params }: { params: { cityId: string } }) {
+    const locale = await getLocale();
+    const city = await prisma.city.findUnique({
+        where: { id: params.cityId },
+        include: {
+            CityTranslation: {
+                where: { locale },
+                select: { name: true },
+            }
+        }
+    });
+
+    const cityName = city?.CityTranslation[0]?.name || "Город";
+    const title = `Популярные маршруты в ${cityName}`;
+    const description = `Выберите из списка популярных маршрутов в ${cityName} и закажите удобный трансфер с водителем.`;
+    const imageUrl = "https://your-site.com/popular-routes-city-thumbnail.jpg";
+    const pageUrl = `https://your-site.com/popular-routes/${params.cityId}`;
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: pageUrl,
+            siteName: "Ваш сайт",
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
+            type: "website",
+        },
+
+        // 🔹 Twitter Cards
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [imageUrl],
+        },
+    };
+}
+
 export default async function PopularRouteCity({ params }: { params: Promise<{ cityId: string }> }) {
     const locale = await getLocale();
     const { cityId } = await params;

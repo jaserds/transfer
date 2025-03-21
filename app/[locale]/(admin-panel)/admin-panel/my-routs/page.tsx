@@ -68,7 +68,7 @@ export default function MyRouts() {
     const [city, setCity] = useState<City[]>([]);
     const [showFormAddRoute, setShowFormAddRoute] = useState(false);
     const [dataTransferCars, setDataTransferCars] = useState<ITransferCars[]>([]);
-    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    // const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [file, setFile] = useState<File | null>(null);
     const [multiSelectserverData, setMultiSelectserverData] = useState<ITransferCarsByRoute[]>([]);
     const [dataNewRoute, setDataNewRoute] = useState<INewMyRoute>({
@@ -127,10 +127,10 @@ export default function MyRouts() {
 
     }, []);
 
-    const handleSelectionChange = (selected: string[]) => {
-        setSelectedIds(selected);
-        setDataNewRoute({ ...dataNewRoute, transferCarIds: selected });
-    };
+    // const handleSelectionChange = (selected: string[]) => {
+    //     setSelectedIds(selected);
+    //     setDataNewRoute({ ...dataNewRoute, transferCarIds: selected });
+    // };
 
 
     const handleSelectionServerChange = (selected: string[], routeId: string) => {
@@ -219,7 +219,7 @@ export default function MyRouts() {
     }
 
     const addRoute = async () => {
-        if (!city || !file || !dataNewRoute.cityId || !dataNewRoute.inRoute || !dataNewRoute.toRoute || !selectedIds) return;
+        if (!city || !file || !dataNewRoute.cityId || !dataNewRoute.inRoute || !dataNewRoute.toRoute) return;
         const imageUrl = await uploadImage();
         if (!imageUrl) return;
 
@@ -281,8 +281,6 @@ export default function MyRouts() {
             console.error(error);
         }
     };
-
-
 
     return (
         <div className="p-4">
@@ -378,8 +376,8 @@ export default function MyRouts() {
                         <Textarea onChange={(e) => setDataNewRoute(prev => ({ ...prev, descriptionFr: e.target.value }))} placeholder="Описание маршрута Fr" />
                         <p className="text-[#373F47] font-bold text-center mt-3">Фото для стрицы</p>
                         <Input className="cursor-pointer" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
-                        <p className="text-[#373F47] font-bold text-center mt-3">Авто</p>
-                        <MultiSelect options={options} onSelectionChange={handleSelectionChange} />
+                        {/* <p className="text-[#373F47] font-bold text-center mt-3">Авто</p> */}
+                        {/* <MultiSelect options={options} routeId="" onSelectionChange={handleSelectionChange} /> */}
                         <Button className="mt-3" onClick={() => { addRoute() }}>Сохранить маршрут</Button>
                     </div>
 
@@ -420,8 +418,10 @@ export default function MyRouts() {
                             <TableCell className="px-6">
                                 <MultiSelect
                                     options={options}
+                                    routeId={myRoute.id}
                                     initialSelected={
-                                        multiSelectserverData.filter((route) => route.routeId === myRoute.id).map((classCar) => classCar.transferCarsIds).flat()}
+                                        multiSelectserverData.filter((route) => route.routeId === myRoute.id).map((classCar) => classCar.transferCarsIds).flat()
+                                    }
                                     onSelectionChange={(selectedIds) => handleSelectionServerChange(selectedIds, myRoute.id)} />
                             </TableCell>
                             <TableCell className="px-6">

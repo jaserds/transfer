@@ -8,6 +8,31 @@ import WhyChooseUsContainer from "@/components/SectionWhyChooseUs/WhyChooseUsCon
 import { ICountryResponse } from "@/lib/types";
 
 
+
+export async function generateMetadata() {
+  return {
+    title: `Трансферы – Комфортные поездки`,
+    description: `Забронируйте удобный трансфер с профессиональными водителями.`,
+    openGraph: {
+      title: `Трансферы – Комфортные поездки`,
+      description: `Забронируйте удобный трансфер с профессиональными водителями.`,
+      url: ``,
+      siteName: "Ваш сайт",
+      images: [
+        {
+          url: "https://your-site.com/thumbnail.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Трансферы",
+        },
+      ],
+      type: "website",
+    },
+  };
+}
+
+
+
 export default async function Countries() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/country`);
   if (!res.ok) {

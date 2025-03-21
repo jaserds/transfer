@@ -7,6 +7,48 @@ import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 
 
+
+export async function generateMetadata({ params }: { params: { countryId: string } }) {
+    const locale = await getLocale();
+
+    const country = await prisma.country.findUnique({
+        where: { id: params.countryId },
+        include: {
+            CountryTranslation: { where: { locale }, select: { name: true } }
+        }
+    });
+
+    const countryName = country?.CountryTranslation[0]?.name || "Страна";
+    const title = `Города ${countryName} – Трансферы и маршруты`;
+    const description = `Выберите город ${countryName} и забронируйте удобный трансфер с водителем.`;
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: `https://your-site.com/countries/${params.countryId}`,
+            siteName: "Ваш сайт",
+            images: [
+                {
+                    url: "https://your-site.com/thumbnail.jpg",
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
+            type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: ["https://your-site.com/thumbnail.jpg"],
+        },
+    };
+}
+
 export default async function Cities({ params }: { params: Promise<{ countryId: string }> }) {
 
     const { countryId } = await params;

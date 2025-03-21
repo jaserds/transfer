@@ -6,6 +6,41 @@ import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 
 
+export async function generateMetadata() {
+    const title = "Все города – Трансферы и маршруты";
+    const description = "Выберите город и забронируйте удобный трансфер с водителем по лучшей цене.";
+    const imageUrl = "https://your-site.com/all-cities-thumbnail.jpg";
+    const pageUrl = "https://your-site.com/cities";
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: pageUrl,
+            siteName: "Ваш сайт",
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
+            type: "website",
+        },
+
+        // 🔹 Twitter Cards
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [imageUrl],
+        },
+    };
+}
+
 export default async function Cities() {
 
     const locale = await getLocale();

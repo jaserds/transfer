@@ -101,6 +101,7 @@ model TransferCarsTranslation {
 model TransferCarsOnRoutes {
   routeId       String
   transferCarId String
+  price         Float?
   route         Route        @relation(fields: [routeId], references: [id], onDelete: Cascade)
   transferCar   TransferCars @relation(fields: [transferCarId], references: [id], onDelete: Cascade)
 
