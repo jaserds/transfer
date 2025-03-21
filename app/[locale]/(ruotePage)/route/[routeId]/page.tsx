@@ -12,14 +12,18 @@ import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 
 interface TransferCar {
-    id: string;
-    name: string;
-    imageUrl: string;
-    cars: string;
-    qtyPerson: number;
-    qtyBags: number;
-    price: number;
-    TransferCarsTranslation: { name: string }[]
+    price: number | null;
+    transferCar: {
+        id: string;
+        name: string;
+        imageUrl: string;
+        cars: string;
+        qtyPerson: number;
+        qtyBags: number;
+        price: number;
+        TransferCarsTranslation: { name: string }[]
+    }
+
 }
 
 export default async function TransferCars({ params }: { params: Promise<{ routeId: string }> }) {
@@ -51,10 +55,11 @@ export default async function TransferCars({ params }: { params: Promise<{ route
                     }
                 }
             },
+            price: true
         },
     });
 
-    const onlyTransferCars: TransferCar[] = classCar.map((item) => item.transferCar);
+    const onlyTransferCars: TransferCar[] = classCar;
 
     const routeData = await prisma.route.findUnique({
         where: {

@@ -6,13 +6,15 @@ import TransfersContainerComponentCity from "@/components/SectionTransfersCompon
 import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 
+type Params = { countryId: string }
 
-
-export async function generateMetadata({ params }: { params: { countryId: string } }) {
+export async function generateMetadata({ params }: { params: Params }) {
     const locale = await getLocale();
 
+    const { countryId } = await params
+
     const country = await prisma.country.findUnique({
-        where: { id: params.countryId },
+        where: { id: countryId },
         include: {
             CountryTranslation: { where: { locale }, select: { name: true } }
         }
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: { params: { countryId: string
         openGraph: {
             title,
             description,
-            url: `https://your-site.com/countries/${params.countryId}`,
+            url: `https://your-site.com/countries/${countryId}`,
             siteName: "Ваш сайт",
             images: [
                 {
@@ -102,16 +104,26 @@ export default async function Cities({ params }: { params: Promise<{ countryId: 
                 where: {
                     locale: locale,
                 },
+            },
+            transferCars: {
+                select: {
+                    price: true
+                }
             }
         },
         take: 12,
     });
 
+
     const responseData = popularRoutes.map((route) => ({
         id: route.id,
         inRoute: route.inRoute,
         toRoute: route.toRoute,
-        price: route.price,
+        price: route.transferCars.length > 0
+            ? Math.min(...route.transferCars
+                .map((item) => item.price)
+                .filter((price): price is number => price !== undefined)) // Удаляем undefined
+            : null,
         routeTranslation: route.RouteTranslation[0],
     }))
 

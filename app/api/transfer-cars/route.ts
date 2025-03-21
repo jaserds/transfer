@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         const { name, nameEn, nameFr, imageUrl, cars, qtyPerson, qtyBags, price } = await req.json();
 
 
-        if (!name || !nameEn || !nameFr || !imageUrl || !cars || !qtyPerson || !qtyBags || !price) {
+        if (!name || !nameEn || !nameFr || !imageUrl || !cars || !qtyPerson || !qtyBags) {
             return NextResponse.json({ error: "Name and image are required" }, { status: 400 });
         }
 

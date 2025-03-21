@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ButtonSpinner from "@/components/ui/loaders/ButtonSpinner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ITransferCars } from "@/lib/types";
 import { CircleX, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -20,7 +20,19 @@ interface IDataTransferCars {
     price: number;
 }
 
+export interface ITransferCars {
+    id: string;
+    name: string;
+    imageUrl: string;
+    cars: string;
+    qtyPerson: number;
+    qtyBags: number;
+    price: number;
+    TransferCarsTranslation: { name: string }[]
+}
+
 export default function TransferCars() {
+    const [isSetLoading, setIsSetLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [newTransferCars, setNewTransferCars] = useState<IDataTransferCars>({
         name: "",
@@ -72,6 +84,7 @@ export default function TransferCars() {
     };
 
     const addNewTransferCar = async () => {
+        setIsSetLoading(true)
         if (!file || !newTransferCars) return;
 
         const imageUrl = await uploadImage();
@@ -96,6 +109,8 @@ export default function TransferCars() {
             setShowModal(false);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsSetLoading(false)
         }
     };
 
@@ -184,7 +199,7 @@ export default function TransferCars() {
                                     }))
                                 } />
                             </div>
-                            <Button className="self-center mt-5" onClick={() => { addNewTransferCar() }}>Добавить</Button>
+                            <Button className="self-center mt-5" onClick={() => { addNewTransferCar() }}>{isSetLoading ? <ButtonSpinner /> : "Добавить"}</Button>
                         </div>
                     </div>
                 </div>}
@@ -245,9 +260,6 @@ export default function TransferCars() {
                                 <TableCell>{transferCars.name}</TableCell>
                                 <TableCell>
                                     {transferCars.imageUrl && <Image src={transferCars.imageUrl} width={100} height={100} alt={transferCars.name} className="max-h-[100px] max-w-[100px] object-contain rounded-md" />}
-                                </TableCell>
-                                <TableCell>
-                                    {transferCars.price}
                                 </TableCell>
                                 <TableCell>
                                     {transferCars.cars}

@@ -3,6 +3,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ButtonSpinner from "@/components/ui/loaders/ButtonSpinner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -36,6 +37,7 @@ export default function City() {
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingAdd, setIsLoadingAdd] = useState(false);
 
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/city`)
@@ -77,10 +79,17 @@ export default function City() {
     };
 
     const addCity = async () => {
-        if (!city || !file || !selectedCountry) return;
+        setIsLoadingAdd(true);
+        if (!city || !file || !selectedCountry) {
+            setIsLoadingAdd(false);
+            return;
+        };
 
         const imageUrl = await uploadImage();
-        if (!imageUrl) return;
+        if (!imageUrl) {
+            setIsLoadingAdd(false);
+            return;
+        }
 
         try {
 
@@ -100,6 +109,8 @@ export default function City() {
             setFile(null);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoadingAdd(false);
         }
     };
 
@@ -147,7 +158,7 @@ export default function City() {
                         }
                     </SelectContent>
                 </Select>
-                <Button onClick={addCity}>Добавить</Button>
+                <Button className="w-[300px] h-[36px]" onClick={addCity}>{isLoadingAdd ? <ButtonSpinner /> : "Добавить"}</Button>
             </div>
             <div className="mt-10 mb-3 text-[#373F47] font-bold">Поиск</div>
             <Input className="mb-5" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Название города или страны" />

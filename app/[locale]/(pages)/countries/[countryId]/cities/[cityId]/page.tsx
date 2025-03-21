@@ -7,11 +7,14 @@ import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 import { NextResponse } from "next/server";
 
+type Params = { cityId: string }
 
-export async function generateMetadata({ params }: { params: { cityId: string } }) {
+export async function generateMetadata({ params }: { params: Params }) {
+
+    const { cityId } = await params
     const locale = await getLocale();
     const city = await prisma.city.findUnique({
-        where: { id: params.cityId },
+        where: { id: cityId },
         include: {
             CityTranslation: {
                 where: { locale },
@@ -24,7 +27,7 @@ export async function generateMetadata({ params }: { params: { cityId: string } 
     const title = `Популярные маршруты в ${cityName}`;
     const description = `Выберите из списка популярных маршрутов в ${cityName} и закажите удобный трансфер с водителем.`;
     const imageUrl = "https://your-site.com/popular-routes-city-thumbnail.jpg";
-    const pageUrl = `https://your-site.com/popular-routes/${params.cityId}`;
+    const pageUrl = `https://your-site.com/popular-routes/${cityId}`;
 
     return {
         title,

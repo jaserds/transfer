@@ -18,6 +18,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Missing routeId or addedId' }, { status: 400 });
         }
 
+
+
         // Создание новой записи в связи
         await prisma.transferCarsOnRoutes.create({
             data: {

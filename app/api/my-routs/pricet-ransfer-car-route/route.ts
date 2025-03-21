@@ -17,8 +17,6 @@ export async function GET(req: Request) {
             select: { price: true },
         });
 
-        console.log(result);
-
 
         if (!result) {
             return NextResponse.json({ message: "Price not found" }, { status: 404 });
@@ -53,7 +51,7 @@ export async function POST(req: Request) {
             },
         });
 
-        return NextResponse.json(result, { status: 200 });
+        return NextResponse.json(result.price, { status: 200 });
     } catch (error: unknown) {
         if (error instanceof Error) {
             return NextResponse.json({ message: error.message }, { status: 500 });

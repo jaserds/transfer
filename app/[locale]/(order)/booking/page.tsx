@@ -9,56 +9,56 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import FullPageLoader from "@/components/ui/loaders/FullPageLoader";
-import { Metadata } from "next";
-import { prisma } from "@/lib/prisma";
-import { getLocale } from "next-intl/server";
+// import { Metadata } from "next";
+// import { prisma } from "@/lib/prisma";
+// import { getLocale } from "next-intl/server";
 
 
-export async function generateMetadata({ searchParams }: { searchParams: URLSearchParams }): Promise<Metadata> {
+// export async function generateMetadata({ searchParams }: { searchParams: URLSearchParams }): Promise<Metadata> {
 
-    const locale = await getLocale();
-    const rid = searchParams.get('routeId') || '1';
-    const carType = searchParams.get('name') || 'стандартный автомобиль';
+//     const locale = await getLocale();
+//     const rid = searchParams.get('routeId') || '1';
+//     const carType = searchParams.get('name') || 'стандартный автомобиль';
 
-    const routeWithCityAndTranslation = await prisma.route.findUnique({
-        where: {
-            id: rid,
-        },
-        include: {
-            city: {
-                include: {
-                    CityTranslation: {
-                        where: {
-                            locale: locale,
-                        },
-                    },
-                },
-            },
-        },
-    });
+//     const routeWithCityAndTranslation = await prisma.route.findUnique({
+//         where: {
+//             id: rid,
+//         },
+//         include: {
+//             city: {
+//                 include: {
+//                     CityTranslation: {
+//                         where: {
+//                             locale: locale,
+//                         },
+//                     },
+//                 },
+//             },
+//         },
+//     });
 
-    const cityName = routeWithCityAndTranslation?.city?.CityTranslation?.[0]?.name;
+//     const cityName = routeWithCityAndTranslation?.city?.CityTranslation?.[0]?.name;
 
-    return {
-        title: `${cityName} — Бронирование трансфера с выбором ${carType}`,
-        description: `Забронируйте трансфер в ${cityName} с комфортом. Выберите ${carType} для вашего путешествия.`,
-        keywords: `трансфер, ${cityName}, аренда авто, бронирование трансфера, ${carType}, ${cityName} трансфер`,
-        openGraph: {
-            title: `${cityName} — Бронирование трансфера с выбором ${carType}`,
-            description: `Забронируйте трансфер в ${cityName} с комфортом. Выберите ${carType} для вашего путешествия.`,
-            url: `https://example.com/booking?city=${cityName}&carType=${carType}`,
-            images: [
-                {
-                    url: `https://example.com/images/${routeWithCityAndTranslation?.city.imageUrl}`,
-                    width: 1200,
-                    height: 630,
-                    alt: `${carType} для трансфера в ${cityName}`,
-                },
-            ],
-        },
-        robots: 'index, follow',
-    };
-}
+//     return {
+//         title: `${cityName} — Бронирование трансфера с выбором ${carType}`,
+//         description: `Забронируйте трансфер в ${cityName} с комфортом. Выберите ${carType} для вашего путешествия.`,
+//         keywords: `трансфер, ${cityName}, аренда авто, бронирование трансфера, ${carType}, ${cityName} трансфер`,
+//         openGraph: {
+//             title: `${cityName} — Бронирование трансфера с выбором ${carType}`,
+//             description: `Забронируйте трансфер в ${cityName} с комфортом. Выберите ${carType} для вашего путешествия.`,
+//             url: `https://example.com/booking?city=${cityName}&carType=${carType}`,
+//             images: [
+//                 {
+//                     url: `https://example.com/images/${routeWithCityAndTranslation?.city.imageUrl}`,
+//                     width: 1200,
+//                     height: 630,
+//                     alt: `${carType} для трансфера в ${cityName}`,
+//                 },
+//             ],
+//         },
+//         robots: 'index, follow',
+//     };
+// }
 export default function Booking() {
     const searchParams = useSearchParams();
     const t = useTranslations('bookingPage');

@@ -29,23 +29,23 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
         <div className="shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] pb-24 max-md:pb-36 bg-[#fff] w-[500px] max-md:w-auto rounded-[10px] mx-auto relative">
             <div className="flex max-md:flex-col max-md:items-center px-5 pt-[20px] pb-[37px] gap-[30px]">
                 <div className="max-w-[215px]">
-                    <Image className="mb-[10px]" src={carData.imageUrl} width={215} height={95} alt={ticons("CarComponent.carIcon")} />
+                    <Image className="mb-[10px]" src={carData.transferCar.imageUrl} width={215} height={95} alt={ticons("CarComponent.carIcon")} />
                     <div className="bg-[#F6F7F8] rounded-[5px] text-[#6C7C8C]">
                         <p className="py-1 px-3 text-[13px] text-center">
-                            {carData.cars}
+                            {carData.transferCar.cars}
                         </p>
                     </div>
                 </div>
                 <div className="max-w-[199px]">
-                    <h3 className="font-[rubik] text-[#373F47] text-[28px] mb-[15px] font-bold">{carData.TransferCarsTranslation[0].name}</h3>
+                    <h3 className="font-[rubik] text-[#373F47] text-[28px] mb-[15px] font-bold">{carData.transferCar.TransferCarsTranslation[0].name}</h3>
                     <div className="flex gap-[20px] text-[18px] text-[#373F47] font-[rubik] font-bold mb-[20px]">
                         <div className="flex gap-[7px]">
                             <Image src={"/icons/car-icons/car-qty-person.svg"} width={24} height={24} alt={ticons("CarComponent.qtyPerson")} />
-                            <span>{carData.qtyPerson}</span>
+                            <span>{carData.transferCar.qtyPerson}</span>
                         </div>
                         <div className="flex gap-[7px]">
                             <Image src={"/icons/car-icons/car-bag.svg"} width={24} height={24} alt={ticons("CarComponent.qtyBags")} />
-                            <span>{carData.qtyBags}</span>
+                            <span>{carData.transferCar.qtyBags}</span>
                         </div>
                     </div>
                     <div className="flex gap-[5px] mb-[10px]">
@@ -59,9 +59,9 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
                 </div>
             </div>
             <div className="bg-[#292929] py-[29px] px-[27px] flex max-md:flex-col justify-between rounded-b-[10px] absolute bottom-0 w-full">
-                <p className="text-[28px] text-white font-[rubik] font-bold max-md:mb-4">{carData.price.toLocaleString("ru-RU")} RUB</p>
+                <p className="text-[28px] text-white font-[rubik] font-bold max-md:mb-4">{carData.price?.toLocaleString("ru-RU")} EUR</p>
                 <Link href={
-                    `/booking?rid=${routeData.id}&inRoute=${routeData.RouteTranslation[0].inRoute}&toRoute=${routeData.RouteTranslation[0].toRoute}&price=${routeData.price}&name=${carData.TransferCarsTranslation[0].name}&qtyPerson=${carData.qtyPerson}&qtyBags=${carData.qtyBags}`
+                    `/booking?rid=${routeData.id}&inRoute=${routeData.RouteTranslation[0].inRoute}&toRoute=${routeData.RouteTranslation[0].toRoute}&price=${routeData.price}&name=${carData.transferCar.TransferCarsTranslation[0].name}&qtyPerson=${carData.transferCar.qtyPerson}&qtyBags=${carData.transferCar.qtyBags}`
                 }
                     className="bg-[#F9AC1A] text-white max-md:text-center py-[13px] px-[15px] rounded-[5px]">{t("components.CarComponent.button")}</Link>
             </div>

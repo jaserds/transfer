@@ -61,7 +61,7 @@ model Route {
   city             City                   @relation(fields: [cityId], references: [id], onDelete: Cascade)
   pointsGoogleMap  Json
   description      String
-  price            Float
+  price            Float?
   transferCars     TransferCarsOnRoutes[]
   RouteTranslation RouteTranslation[]
 }

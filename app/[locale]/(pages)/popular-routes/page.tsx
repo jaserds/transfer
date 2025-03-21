@@ -55,16 +55,24 @@ export default async function PopularRoute() {
                     locale: locale,
                 }
             },
+            transferCars: {
+                select: {
+                    price: true
+                }
+            }
         },
         take: 30,
     });
-
 
     const responseData = popularRoutes.map((route) => ({
         id: route.id,
         inRoute: route.inRoute,
         toRoute: route.toRoute,
-        price: route.price,
+        price: route.transferCars.length > 0
+            ? Math.min(...route.transferCars
+                .map((item) => item.price)
+                .filter((price): price is number => price !== undefined)) // Удаляем undefined
+            : null,
         routeTranslation: route.RouteTranslation[0]
     }))
 

@@ -53,18 +53,21 @@ export interface IPopularRouteResponse {
     id: string;
     inRoute: string;
     toRoute: string;
-    price: number;
+    price: number | null;
     routeTranslation: IRouteTranslation;
 }
 
 export interface ITransferCars {
-    id: string;
-    name: string;
-    imageUrl: string;
-    cars: string;
-    qtyPerson: number;
-    qtyBags: number;
-    price: number;
-    TransferCarsTranslation: { name: string }[]
+    price: number | null;
+    transferCar: {
+        id: string;
+        name: string;
+        imageUrl: string;
+        cars: string;
+        qtyPerson: number;
+        qtyBags: number;
+        price: number;
+        TransferCarsTranslation: { name: string }[]
+    }
 }
 

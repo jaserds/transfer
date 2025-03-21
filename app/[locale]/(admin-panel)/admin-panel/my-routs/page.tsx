@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ButtonSpinner from "@/components/ui/loaders/ButtonSpinner";
 import MultiSelect from "@/components/ui/other/MultiSelect";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -62,12 +63,24 @@ interface City {
     countryId: string[];
 }
 
+interface ITransferCarsResp {
+    id: string;
+    name: string;
+    imageUrl: string;
+    cars: string;
+    qtyPerson: number;
+    qtyBags: number;
+    price: number;
+    TransferCarsTranslation: { name: string }[]
+}
+
 
 export default function MyRouts() {
+    const [isLoading, setIsLoading] = useState(false);
     const [myRouts, setMyRouts] = useState<IMyRoute[]>([]);
     const [city, setCity] = useState<City[]>([]);
     const [showFormAddRoute, setShowFormAddRoute] = useState(false);
-    const [dataTransferCars, setDataTransferCars] = useState<ITransferCars[]>([]);
+    const [dataTransferCars, setDataTransferCars] = useState<ITransferCarsResp[]>([]);
     // const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [file, setFile] = useState<File | null>(null);
     const [multiSelectserverData, setMultiSelectserverData] = useState<ITransferCarsByRoute[]>([]);
@@ -114,6 +127,8 @@ export default function MyRouts() {
             .then((res) => res.json())
             .then((data) => {
                 setMyRouts(data);
+                console.log(data);
+
                 setMultiSelectserverData(data.map((myRoute: IMyRoute) => ({ routeId: myRoute.id, transferCarsIds: myRoute.transferCars.map((transferCar) => transferCar.transferCarId) })));
             })
             .catch(() => console.error("Failed to fetch countries"));
@@ -142,6 +157,8 @@ export default function MyRouts() {
         setMultiSelectserverData(multiSelectserverData.map((route) => route.routeId === routeId ? { ...route, transferCarsIds: selected } : route));
 
         if (addedIds.length > 0) {
+            console.log(addedIds, routeId);
+
             fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs/add-transfer-car`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -217,20 +234,25 @@ export default function MyRouts() {
 
         )
     }
-
     const addRoute = async () => {
         if (!city || !file || !dataNewRoute.cityId || !dataNewRoute.inRoute || !dataNewRoute.toRoute) return;
-        const imageUrl = await uploadImage();
-        if (!imageUrl) return;
+
+        setIsLoading(true); // Включаем лоадер перед началом загрузки
 
         try {
+            const imageUrl = await uploadImage();
+            if (!imageUrl) {
+                setIsLoading(false); // Выключаем лоадер, если загрузка изображения не удалась
+                return;
+            }
+
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs`, {
                 method: "POST",
                 body: JSON.stringify({
                     ...dataNewRoute,
                     pointsGoogleMap: JSON.stringify(dataNewRoute.pointsGoogleMap),
                     imageUrl,
-                    transferCarIds: dataNewRoute.transferCarIds
+                    transferCarIds: dataNewRoute.transferCarIds,
                 }),
                 headers: { "Content-Type": "application/json" },
             });
@@ -239,11 +261,21 @@ export default function MyRouts() {
 
             const newRoute: IMyRoute = await res.json();
             setMyRouts([...myRouts, newRoute]);
-            handleResetDataNewRoute()
+
+            handleResetDataNewRoute();
             setFile(null);
-            setShowFormAddRoute(false)
+            setShowFormAddRoute(false);
         } catch (error) {
             console.error(error);
+        } finally {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-routs`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setMyRouts(data);
+                    setMultiSelectserverData(data.map((myRoute: IMyRoute) => ({ routeId: myRoute.id, transferCarsIds: myRoute.transferCars.map((transferCar) => transferCar.transferCarId) })));
+                })
+                .catch(() => console.error("Failed to fetch countries"));
+            setIsLoading(false); // Гарантированное выключение лоадера в любом случае
         }
     };
 
@@ -314,7 +346,7 @@ export default function MyRouts() {
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRouteEn: e.target.value }))} id="toRouteEn" type='text' className="" placeholder="Куда En" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRouteFr: e.target.value }))} id="inRouteFr" type='text' className="" placeholder="От куда Fr" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRouteFr: e.target.value }))} id="toRouteFr" type='text' className="" placeholder="Куда Fr" />
-                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" />
+                        {/* <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" /> */}
                         <div className=" flex flex-col gap-4 mt-3">
                             <p className="text-[#373F47] font-bold text-center">Точки маршрута для Googl карты</p>
                             <div className="flex gap-4">
@@ -378,7 +410,7 @@ export default function MyRouts() {
                         <Input className="cursor-pointer" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
                         {/* <p className="text-[#373F47] font-bold text-center mt-3">Авто</p> */}
                         {/* <MultiSelect options={options} routeId="" onSelectionChange={handleSelectionChange} /> */}
-                        <Button className="mt-3" onClick={() => { addRoute() }}>Сохранить маршрут</Button>
+                        <Button className="mt-3" onClick={() => { addRoute() }}>{isLoading ? <ButtonSpinner /> : "Сохранить маршрут"}</Button>
                     </div>
 
                 </div>

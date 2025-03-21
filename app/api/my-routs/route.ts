@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     try {
         const { imageUrl, inRoute, toRoute, cityId, popularRoute, pointsGoogleMap, description, price, transferCarIds, inRouteEn, toRouteEn, descriptionEn, inRouteFr, toRouteFr, descriptionFr }: IRequestMyRoute = await req.json();
 
-        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !price || !transferCarIds || !inRouteEn || !toRouteEn || !descriptionEn || !inRouteFr || !toRouteFr || !descriptionFr) {
+        if (!imageUrl || !inRoute || !toRoute || !cityId || !pointsGoogleMap || !description || !transferCarIds || !inRouteEn || !toRouteEn || !descriptionEn || !inRouteFr || !toRouteFr || !descriptionFr) {
             return NextResponse.json(
                 { error: "Not all fields were filled (imageUrl, inRoute, toRoute, cityId, pointsGoogleMap, description)" },
                 { status: 400 }
