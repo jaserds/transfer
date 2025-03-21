@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     };
 }
 
-export default async function PopularRouteCity({ params }: { params: Promise<{ cityId: string }> }) {
+export default async function PopularRouteCity({ params }: { params: { cityId: string } }) {
     const locale = await getLocale();
     const { cityId } = await params;
     try {
