@@ -22,7 +22,7 @@ interface RouteData {
     description: string;
     imageUrl: string;
     inRoute: string;
-    price: number;
+    price: number | null;
     RouteTranslation: {
         inRoute: string;
         toRoute: string;

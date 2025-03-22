@@ -4,12 +4,17 @@ import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import PopularRoutesSection from "@/components/PopularRoutesComponents/PopularRoutesSection";
 import { prisma } from "@/lib/prisma";
+import { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { NextResponse } from "next/server";
 
-type Params = { cityId: string }
+type Props = {
+    params: Promise<{ cityId: string }>
+}
 
-export async function generateMetadata({ params }: { params: Params }) {
+export async function generateMetadata(
+    { params }: Props,
+): Promise<Metadata> {
 
     const { cityId } = await params
     const locale = await getLocale();
@@ -27,7 +32,6 @@ export async function generateMetadata({ params }: { params: Params }) {
     const title = `Популярные маршруты в ${cityName}`;
     const description = `Выберите из списка популярных маршрутов в ${cityName} и закажите удобный трансфер с водителем.`;
     const imageUrl = "https://your-site.com/popular-routes-city-thumbnail.jpg";
-    const pageUrl = `https://your-site.com/popular-routes/${cityId}`;
 
     return {
         title,
@@ -35,7 +39,7 @@ export async function generateMetadata({ params }: { params: Params }) {
         openGraph: {
             title,
             description,
-            url: pageUrl,
+            url: `https://your-site.com/popular-routes/${cityId}`,
             siteName: "Ваш сайт",
             images: [
                 {
@@ -58,7 +62,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     };
 }
 
-export default async function PopularRouteCity({ params }: { params: { cityId: string } }) {
+export default async function PopularRouteCity({ params }: { params: Promise<{ cityId: string }> }) {
     const locale = await getLocale();
     const { cityId } = await params;
     try {

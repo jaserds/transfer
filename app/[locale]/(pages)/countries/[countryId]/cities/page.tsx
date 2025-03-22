@@ -4,11 +4,17 @@ import SearchRouteComponent from "@/components/MainComponents/SearchRouteCompone
 import PopularRoutesSection from "@/components/PopularRoutesComponents/PopularRoutesSection";
 import TransfersContainerComponentCity from "@/components/SectionTransfersComponent/TransfersContainerComponentCity";
 import { prisma } from "@/lib/prisma";
+import { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 
-type Params = { countryId: string }
 
-export async function generateMetadata({ params }: { params: Params }) {
+type Props = {
+    params: Promise<{ countryId: string }>
+}
+
+export async function generateMetadata(
+    { params }: Props,
+): Promise<Metadata> {
     const locale = await getLocale();
 
     const { countryId } = await params
