@@ -69,7 +69,7 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
         const popularRoutes = await prisma.route.findMany({
             where: {
                 cityId: cityId,
-                popularRoute: true, // Фильтруем по популярным маршрутам
+                popularRoute: true,
             },
             include: {
                 city: {
@@ -85,6 +85,11 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
                     where: {
                         locale: locale,
                     }
+                },
+                transferCars: {
+                    select: {
+                        price: true
+                    }
                 }
             },
             take: 12,
@@ -95,9 +100,15 @@ export default async function PopularRouteCity({ params }: { params: Promise<{ c
             inRoute: route.inRoute,
             toRoute: route.toRoute,
             cityName: route.city.CityTranslation[0]?.name,
-            price: route.price,
+            price: route.transferCars.length > 0
+                ? Math.min(...route.transferCars
+                    .map((item) => item.price)
+                    .filter((price): price is number => price !== undefined))
+                : null,
             routeTranslation: route.RouteTranslation[0],
         }))
+
+
 
         return (
             <>

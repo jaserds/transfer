@@ -51,7 +51,7 @@ export default function SearchRouteComponent() {
         const findRouteId = routes.find(route => route.inRoute === inputInWere && route.toRoute === inputToWere)?.id;
         if (inputInWere && inputToWere) {
             if (findRouteId) {
-                router.push(`${locale}/route/${findRouteId}`);
+                router.push(`/${locale.replace(/^\//, "")}/route/${findRouteId}`);
             } else {
                 toast(t("components.SearchRouteComponent.noFindRoute"))
             }
