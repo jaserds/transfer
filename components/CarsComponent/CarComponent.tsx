@@ -61,7 +61,7 @@ export default async function CarComponent({ carData, routeData }: ICarComponent
             <div className="bg-[#292929] py-[29px] px-[27px] flex max-md:flex-col justify-between rounded-b-[10px] absolute bottom-0 w-full">
                 <p className="text-[28px] text-white font-[rubik] font-bold max-md:mb-4">{carData.price?.toLocaleString("ru-RU")} EUR</p>
                 <Link href={
-                    `/booking?rid=${routeData.id}&inRoute=${routeData.RouteTranslation[0].inRoute}&toRoute=${routeData.RouteTranslation[0].toRoute}&price=${routeData.price}&name=${carData.transferCar.TransferCarsTranslation[0].name}&qtyPerson=${carData.transferCar.qtyPerson}&qtyBags=${carData.transferCar.qtyBags}`
+                    `/booking?rid=${routeData.id}&inRoute=${routeData.RouteTranslation[0].inRoute}&toRoute=${routeData.RouteTranslation[0].toRoute}&price=${carData.price}&name=${carData.transferCar.TransferCarsTranslation[0].name}&qtyPerson=${carData.transferCar.qtyPerson}&qtyBags=${carData.transferCar.qtyBags}`
                 }
                     className="bg-[#F9AC1A] text-white max-md:text-center py-[13px] px-[15px] rounded-[5px]">{t("components.CarComponent.button")}</Link>
             </div>

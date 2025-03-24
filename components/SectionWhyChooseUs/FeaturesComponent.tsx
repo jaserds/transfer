@@ -68,7 +68,7 @@ const FeaturesComponent = () => {
                 ))}
             </div>
 
-            <div className="lg:w-2/3 bg-[#292929] pl-[50px] pt-[20px] pb-[20px] pr-[20px] rounded-lg flex items-center gap-6">
+            <div className="lg:w-2/3 bg-[#292929] pl-[50px] pt-[20px] pb-[20px] pr-[20px] rounded-lg flex lg:flex-row max-md:flex-col md:flex-col items-center gap-6">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={selectedFeature.title}
@@ -76,7 +76,7 @@ const FeaturesComponent = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
                         transition={{ duration: 0.5 }}
-                        className="self-start mt-[23px] w-2/3">
+                        className="lg:self-start mt-[23px] lg:w-2/3">
                         <h3 className="text-lg font-semibold mb-4 text-[#fff]">{selectedFeature.title}</h3>
                         <p className="text-base text-[#E0E0E0]">{selectedFeature.description}</p>
                     </motion.div>

@@ -89,8 +89,6 @@ export default async function TransferCars({ params }: { params: Promise<{ route
         return <div>Маршрут не найден</div>;
     }
 
-
-
     return (
         <>
             <HeaderComponent />
