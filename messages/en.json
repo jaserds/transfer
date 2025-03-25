@@ -67,11 +67,85 @@
                 "title3": "How can I find my driver?",
                 "title4": "What happens if my flight details change or it is significantly delayed?",
                 "title5": "Will the driver carry my luggage?",
-                "text1": "",
-                "text2": "",
-                "text3": "",
-                "text4": "",
-                "text5": ""
+                "text1": {
+                    "p1": "Booking a transfer with us is very easy! Follow these steps:",
+                    "p2": "Our drivers will meet you on time and ensure a comfortable journey!",
+                    "li1": {
+                        "strong": "Select your route",
+                        "text": "Specify the departure point and destination."
+                    },
+                    "li2": {
+                        "strong": "Choose a vehicle",
+                        "text": "Pick a transport that meets your requirements."
+                    },
+                    "li3": {
+                        "strong": "Enter your details",
+                        "text": "Provide passenger information and contact details."
+                    },
+                    "li4": {
+                        "strong": "Confirm your booking",
+                        "text": "Check all details and place your order."
+                    }
+                },
+                "text2": {
+                    "p1": "We have made finding your driver simple and convenient:",
+                    "li1": {
+                        "strong": "After booking",
+                        "text": "You will receive confirmation with trip details via WhatsApp or Telegram."
+                    },
+                    "li2": {
+                        "strong": "The day before your trip",
+                        "text": "We will send a reminder with the driver’s name and vehicle number."
+                    },
+                    "li3": {
+                        "strong": "On the transfer day",
+                        "text": "The driver will arrive on time at the designated location."
+                    },
+                    "li4": {
+                        "strong": "Name sign",
+                        "text": "At airports, the driver will be waiting with a sign displaying your name."
+                    },
+                    "li5": {
+                        "strong": "Contact with the driver",
+                        "text": "You will receive the driver’s phone number for quick communication."
+                    }
+                },
+                "text3": {
+                    "p1": "If your flight changes or gets delayed, don’t worry – we’ve got you covered:",
+                    "p2": "Our goal is to make your journey smooth, even with last-minute changes! 😊✈🚖",
+                    "li1": {
+                        "strong": "Automatic flight tracking",
+                        "text": "We monitor changes and adjust the transfer time accordingly."
+                    },
+                    "li2": {
+                        "strong": "Driver notification",
+                        "text": "Your driver will be informed of the delay and will arrive at the correct time."
+                    },
+                    "li3": {
+                        "strong": "Flexible waiting time",
+                        "text": "We provide free waiting time depending on the transfer class."
+                    },
+                    "li4": {
+                        "strong": "Support assistance",
+                        "text": "If there are any updates, inform us, and we will adjust your transfer."
+                    }
+                },
+                "text4": {
+                    "p1": "Yes, our driver will assist you with your luggage!",
+                    "p2": "If you need special assistance with your luggage, let us know in advance! 😊🎒🚖",
+                    "li1": {
+                        "strong": "At the airport or train station",
+                        "text": "The driver will greet you and help carry your luggage to the car."
+                    },
+                    "li2": {
+                        "strong": "At the hotel or home",
+                        "text": "The driver will assist with loading and unloading your luggage."
+                    },
+                    "li3": {
+                        "strong": "Extra luggage",
+                        "text": "If you have a lot of baggage, choose a vehicle with a spacious trunk."
+                    }
+                }
             },
             "ContactsFomContainer": {
                 "title1": "Contact Us",

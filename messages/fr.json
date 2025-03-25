@@ -65,13 +65,87 @@
                 "title1": "Comment puis-je réserver un transfert ?",
                 "title2": "Comment puis-je vérifier si ma réservation a été traitée avec succès ?",
                 "title3": "Comment puis-je trouver mon chauffeur ?",
-                "title4": "Que se passe-t-il si mon vol est modifié ou sérieusement retardé ?",
+                "title4": "Que se passe-t-il si les détails de mon vol changent ou s'il est fortement retardé ?",
                 "title5": "Le chauffeur portera-t-il mes bagages ?",
-                "text1": "",
-                "text2": "",
-                "text3": "",
-                "text4": "",
-                "text5": ""
+                "text1": {
+                    "p1": "Réserver un transfert avec nous est très simple ! Suivez ces étapes :",
+                    "p2": "Nos chauffeurs vous attendront à l’heure convenue pour un voyage en toute sérénité !",
+                    "li1": {
+                        "strong": "Choisissez votre itinéraire",
+                        "text": "Indiquez le point de départ et la destination."
+                    },
+                    "li2": {
+                        "strong": "Sélectionnez un véhicule",
+                        "text": "Choisissez le type de transport qui correspond à vos besoins."
+                    },
+                    "li3": {
+                        "strong": "Remplissez les informations",
+                        "text": "Entrez les détails des passagers et vos coordonnées."
+                    },
+                    "li4": {
+                        "strong": "Confirmez la réservation",
+                        "text": "Vérifiez les informations et validez votre commande."
+                    }
+                },
+                "text2": {
+                    "p1": "Nous avons simplifié le processus pour trouver votre chauffeur :",
+                    "li1": {
+                        "strong": "Après la réservation",
+                        "text": "Vous recevrez une confirmation avec les détails du trajet sur WhatsApp ou Telegram."
+                    },
+                    "li2": {
+                        "strong": "La veille du trajet",
+                        "text": "Nous vous enverrons un rappel avec le nom du chauffeur et le numéro du véhicule."
+                    },
+                    "li3": {
+                        "strong": "Le jour du transfert",
+                        "text": "Votre chauffeur arrivera à l’heure à l’endroit prévu."
+                    },
+                    "li4": {
+                        "strong": "Panneau nominatif",
+                        "text": "Dans les aéroports, le chauffeur vous attendra avec un panneau portant votre nom."
+                    },
+                    "li5": {
+                        "strong": "Contact avec le chauffeur",
+                        "text": "Vous recevrez son numéro de téléphone pour toute communication nécessaire."
+                    }
+                },
+                "text3": {
+                    "p1": "Si votre vol est modifié ou retardé, ne vous inquiétez pas, nous nous en occupons :",
+                    "p2": "Notre objectif est de rendre votre voyage agréable, même en cas de changements ! 😊✈🚖",
+                    "li1": {
+                        "strong": "Suivi automatique du vol",
+                        "text": "Nous surveillons les modifications et ajustons l’heure du transfert."
+                    },
+                    "li2": {
+                        "strong": "Notification au chauffeur",
+                        "text": "Votre chauffeur sera informé du retard et viendra à l’heure appropriée."
+                    },
+                    "li3": {
+                        "strong": "Temps d’attente flexible",
+                        "text": "Nous offrons un temps d’attente gratuit selon la classe du transfert."
+                    },
+                    "li4": {
+                        "strong": "Assistance",
+                        "text": "En cas de changement, informez-nous et nous adapterons votre transfert."
+                    }
+                },
+                "text4": {
+                    "p1": "Oui, notre chauffeur vous aidera avec vos bagages !",
+                    "p2": "Si vous avez besoin d’une assistance particulière pour vos bagages, informez-nous à l’avance ! 😊🎒🚖",
+                    "li1": {
+                        "strong": "À l’aéroport ou à la gare",
+                        "text": "Le chauffeur vous accueillera et transportera vos bagages jusqu’au véhicule."
+                    },
+                    "li2": {
+                        "strong": "À l’hôtel ou chez vous",
+                        "text": "Le chauffeur vous aidera à charger et décharger vos bagages."
+                    },
+                    "li3": {
+                        "strong": "Bagages supplémentaires",
+                        "text": "Si vous avez beaucoup de bagages, choisissez un véhicule avec un grand coffre."
+                    }
+                }
             },
             "ContactsFomContainer": {
                 "title1": "Contactez-nous",

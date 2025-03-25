@@ -5,7 +5,7 @@ import { useState } from "react";
 
 interface AccordionProps {
     title: string;
-    content: string;
+    content: React.ReactNode;
 }
 
 const Accordion = ({ title, content }: AccordionProps) => {
@@ -34,7 +34,7 @@ const Accordion = ({ title, content }: AccordionProps) => {
                      ${isOpen ? "max-h-screen p-4 opacity-100" : "max-h-0 overflow-hidden"
                     }`}
             >
-                <p>{content}</p>
+                {content}
             </div>
         </div>
     );
