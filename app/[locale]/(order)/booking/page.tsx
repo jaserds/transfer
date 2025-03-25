@@ -327,7 +327,7 @@ export default function Booking() {
                         <p className="text-[16px] text-[#4f5b67] font-semibold mb-8">{personEmail}</p>
                         <div className="flex justify-between">
                             <p className="">{t("infoOrderBlock.total")}</p>
-                            <p className="text-[#26A659] text-[rubik] font-bold text-[18px] mb-[20px]"> {searchParams.get('price')} <span className="text-[#6C7C8C]">RUB</span></p>
+                            <p className="text-[#26A659] text-[rubik] font-bold text-[18px] mb-[20px]"> {searchParams.get('price')} <span className="text-[#6C7C8C]">EUR</span></p>
                         </div>
                         <button onClick={handleSubmitOrder} className="w-full bg-[#26A659] text-[#fff] rounded-[5px] py-3">{t("infoOrderBlock.button")}</button>
                     </div>
