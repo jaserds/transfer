@@ -1,0 +1,23 @@
+# Разрешаем всем роботам доступ ко всем страницам
+User-agent: *
+Disallow:
+
+# Запрещаем доступ к некоторым директориям
+Disallow: /en/admin-panel/
+Disallow: /ru/admin-panel/
+Disallow: /fr/admin-panel/
+Disallow: /ru/admin-panel/my-routs
+Disallow: /en/admin-panel/my-routs
+Disallow: /fr/admin-panel/my-routs
+Disallow: /ru/admin-panel/country
+Disallow: /en/admin-panel/country
+Disallow: /fr/admin-panel/country
+Disallow: /ru/admin-panel/city
+Disallow: /en/admin-panel/city
+Disallow: /fr/admin-panel/city
+Disallow: /ru/admin-panel/transfer-cars
+Disallow: /en/admin-panel/transfer-cars
+Disallow: /fr/admin-panel/transfer-cars
+
+# Указываем URL для карты сайта
+Sitemap: http://localhost:3000/sitemap.xml
