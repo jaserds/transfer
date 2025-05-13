@@ -57,9 +57,9 @@ export default function HeaderComponent() {
                 </div>
 
             </div>
-            <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
+            {/* <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? "✖" : "☰"}
-            </button>
+            </button> */}
             <nav className={`absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50 ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0 z-[-50]'} overflow-hidden transition-all duration-700
                 `}>
                 <ul className="flex flex-col items-start p-4 space-y-4">
@@ -70,9 +70,9 @@ export default function HeaderComponent() {
                         <li><Link href="/admin-panel" className="text-[#373F47] block py-2" onClick={() => setMenuOpen(false)}>АП</Link></li>
                     )}
                     <li className="flex items-center gap-4">
-                        <Image src='/icons/social-icons/wa.svg' width={30} height={30} alt={ticons("HeaderComponent.wa")} />
-                        <Image src='/icons/social-icons/tg.svg' width={30} height={30} alt={ticons("HeaderComponent.telegram")} />
-                        <Image src='/icons/social-icons/ig.svg' width={30} height={30} alt={ticons("HeaderComponent.ins")} />
+                        {/* <Image src='/icons/social-icons/wa.svg' width={30} height={30} alt={ticons("HeaderComponent.wa")} /> */}
+                        {/* <Image src='/icons/social-icons/tg.svg' width={30} height={30} alt={ticons("HeaderComponent.telegram")} /> */}
+                        {/* <Image src='/icons/social-icons/ig.svg' width={30} height={30} alt={ticons("HeaderComponent.ins")} /> */}
                     </li>
                     <li>
                         <LocaleSwitcher />

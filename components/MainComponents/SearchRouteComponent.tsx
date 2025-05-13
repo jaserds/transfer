@@ -35,7 +35,9 @@ export default function SearchRouteComponent() {
 
     const filteredRoutesInWere = routes
         .filter(route =>
-            route.inRoute.toLowerCase().includes(inputInWere.toLowerCase()) || route.city.toLowerCase().includes(inputInWere.toLowerCase())
+            inputInWere === "" || // Показывать все, если пусто
+            route.inRoute.toLowerCase().includes(inputInWere.toLowerCase()) ||
+            route.city.toLowerCase().includes(inputInWere.toLowerCase())
         )
         .reduce((uniqueRoutes: IRouteResponce[], route) => {
             if (!uniqueRoutes.some(r => r.inRoute === route.inRoute)) {
@@ -44,7 +46,9 @@ export default function SearchRouteComponent() {
             return uniqueRoutes;
         }, []);
 
-    const filteredRoutesToWere = routes.filter(route => route.inRoute === inputInWere);
+    const filteredRoutesToWere = routes.filter(route =>
+        inputInWere && (inputToWere === "" || route.toRoute.toLowerCase().includes(inputToWere.toLowerCase()))
+    );
 
 
     const handleSearchRoute = () => {
@@ -151,7 +155,7 @@ export default function SearchRouteComponent() {
                         onBlur={() => setIsFocusedIsWere(false)}
                         autoComplete="off"
                     />
-                    {isInOpenLocations && inputInWere && filteredRoutesInWere.length > 0 && (
+                    {isInOpenLocations && filteredRoutesInWere && (
                         <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
                             {filteredRoutesInWere.map((location, index) => (
                                 <li
@@ -198,7 +202,7 @@ export default function SearchRouteComponent() {
                         onBlur={() => setIsFocusedInWer(false)}
                         autoComplete="off"
                     />
-                    {isToOpenLocations && filteredRoutesToWere.length > 0 && (
+                    {isToOpenLocations && filteredRoutesToWere && (
                         <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
                             {filteredRoutesToWere.map((location, index) => (
                                 <li

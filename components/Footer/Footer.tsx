@@ -8,7 +8,7 @@ export default async function Footer() {
     const ticons = await getTranslations("imagesAlt")
 
     return (
-        <section className="bg-[#292929] h-[340px] flex flex-col items-center">
+        <section className="bg-[#292929] h-[250px] flex flex-col items-center">
             <div className="mt-[40px] mb-[20px]">
                 <Image src="/icons/header-icons/logo-footer.svg" width={137} height={70} alt={ticons("Footer.logo")} />
             </div>
@@ -19,9 +19,9 @@ export default async function Footer() {
                 {/* <li className="cursor-pointer">Экскурсии</li> */}
             </ul>
             <div className="flex justify-center gap-5">
-                <Image className="cursor-pointer" src="/icons/social-icons/wa.svg" width={40} height={40} alt={ticons("Footer.wa")} />
+                {/* <Image className="cursor-pointer" src="/icons/social-icons/wa.svg" width={40} height={40} alt={ticons("Footer.wa")} />
                 <Image className="cursor-pointer" src="/icons/social-icons/tg.svg" width={40} height={40} alt={ticons("Footer.telegram")} />
-                <Image className="cursor-pointer" src="/icons/social-icons/ig.svg" width={40} height={40} alt={ticons("Footer.ins")} />
+                <Image className="cursor-pointer" src="/icons/social-icons/ig.svg" width={40} height={40} alt={ticons("Footer.ins")} /> */}
             </div>
         </section>
     )
