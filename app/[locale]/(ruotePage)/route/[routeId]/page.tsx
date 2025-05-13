@@ -104,7 +104,7 @@ export default async function TransferCars({ params }: { params: Promise<{ route
                 </h1>
             </div>
             <section className="mb-[120px]">
-                <div className="max-w-[1070px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="max-w-[1070px] mx-auto">
                     <p className="text-lg text-[#373F47]">
                         {routeData.RouteTranslation[0].description}
                     </p>
