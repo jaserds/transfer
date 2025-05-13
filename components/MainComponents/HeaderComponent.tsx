@@ -38,9 +38,9 @@ export default function HeaderComponent() {
                 </nav>
                 <div className="flex items-center gap-10">
                     <div className="flex justify-start items-center gap-5">
-                        <Image src='/icons/social-icons/wa.svg' width={40} height={40} alt={ticons("HeaderComponent.wa")} />
+                        {/* <Image src='/icons/social-icons/wa.svg' width={40} height={40} alt={ticons("HeaderComponent.wa")} />
                         <Image src='/icons/social-icons/tg.svg' width={40} height={40} alt={ticons("HeaderComponent.telegram")} />
-                        <Image src='/icons/social-icons/ig.svg' width={40} height={40} alt={ticons("HeaderComponent.ins")} />
+                        <Image src='/icons/social-icons/ig.svg' width={40} height={40} alt={ticons("HeaderComponent.ins")} /> */}
                         <LocaleSwitcher />
                     </div>
                     {session.status === 'loading' && <div className="bg-gray-200 animate-pulse px-9 py-3 rounded-[5px] w-[100px] h-[40px]"></div>}

@@ -197,16 +197,16 @@
         "button": "На главную"
     },
     "LocaleSwitcher": {
-        "label": "Выбирите язык",
+        "label": "Выберите язык",
         "locale": "{locale, select, ru {ru Русский} en {🇺🇸 Ангийский} fr {🇫🇷 Французкий} other {Unknown}}"
     },
     "bookingPage": {
         "infoBlock": {
             "title": "Информация о трансфере",
             "date": "Дата трансфера",
-            "changeData": "Выбирите дату",
+            "changeData": "Выберите дату",
             "time": "Время",
-            "changeTime": "Выбирите время",
+            "changeTime": "Выберите время",
             "place": "Место назначения: адрес или название отеля",
             "backTransfer": "Обратный трансфер"
         },

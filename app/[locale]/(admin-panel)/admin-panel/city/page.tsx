@@ -148,7 +148,7 @@ export default function City() {
                 <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
                 <Select onValueChange={setSelectedCountry}>
                     <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Выбирите страну" />
+                        <SelectValue placeholder="Выберите страну" />
                     </SelectTrigger>
                     <SelectContent>
                         {
