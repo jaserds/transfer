@@ -44,7 +44,7 @@ export default function HeaderComponent() {
                         <LocaleSwitcher />
                     </div>
                     {session.status === 'loading' && <div className="bg-gray-200 animate-pulse px-9 py-3 rounded-[5px] w-[100px] h-[40px]"></div>}
-                    {session.status === "unauthenticated" ?
+                    {/* {session.status === "unauthenticated" ?
                         <div className="bg-[#fff] text-[#373F47] border-[1px] border-[#DFE2E6] shadow-[0px_0px_2px_1px_rgba(55,63,71,0.05)] px-9 py-3 rounded-[5px] cursor-pointer"
                             onClick={() => signIn()}
                         >{t("components.HeaderComponent.signIn")}</div>
@@ -53,13 +53,13 @@ export default function HeaderComponent() {
                         <div className="bg-[#fff] text-[#373F47] border-[1px] border-[#DFE2E6] shadow-[0px_0px_2px_1px_rgba(55,63,71,0.05)] px-9 py-3 rounded-[5px] cursor-pointer"
                             onClick={() => signOut.signOut()}
                         >{t("components.HeaderComponent.signOut")}</div>
-                    }
+                    } */}
                 </div>
 
             </div>
-            {/* <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="lg:hidden text-gray-700 text-2xl px-4" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? "✖" : "☰"}
-            </button> */}
+            </button>
             <nav className={`absolute left-0 top-[70px] w-full bg-white shadow-md border-t border-gray-200 z-50 ${menuOpen ? 'animate-expandHeight opacity-1' : 'animate-expandHeightOut opacity-0 z-[-50]'} overflow-hidden transition-all duration-700
                 `}>
                 <ul className="flex flex-col items-start p-4 space-y-4">
