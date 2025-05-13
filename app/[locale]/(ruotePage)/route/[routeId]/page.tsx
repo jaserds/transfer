@@ -9,7 +9,6 @@ import HeaderComponent from "@/components/MainComponents/HeaderComponent";
 import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import { prisma } from "@/lib/prisma";
-import { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 
 interface TransferCar {
@@ -27,9 +26,9 @@ interface TransferCar {
 
 }
 
-export async function generateMetadata({ params }: { params: { routeId: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ routeId: string }> }) {
     const locale = await getLocale();
-    const routeId = params.routeId;
+    const { routeId } = await params
 
     const routeData = await prisma.route.findUnique({
         where: {
