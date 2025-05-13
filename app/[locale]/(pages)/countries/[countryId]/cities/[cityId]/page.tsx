@@ -31,7 +31,7 @@ export async function generateMetadata(
     const cityName = city?.CityTranslation[0]?.name || "Город";
     const title = `Популярные маршруты в ${cityName}`;
     const description = `Выберите из списка популярных маршрутов в ${cityName} и закажите удобный трансфер с водителем.`;
-    const imageUrl = "https://your-site.com/popular-routes-city-thumbnail.jpg";
+    const imageUrl = "https://azuralptransfer.com/popular-routes-city-thumbnail.jpg";
 
     return {
         title,
@@ -39,8 +39,8 @@ export async function generateMetadata(
         openGraph: {
             title,
             description,
-            url: `https://your-site.com/popular-routes/${cityId}`,
-            siteName: "Ваш сайт",
+            url: `https://azuralptransfer.com/${locale}/popular-routes/${cityId}`,
+            siteName: "AzuralpTransfer - Популярные маршруты в городе " + cityName,
             images: [
                 {
                     url: imageUrl,

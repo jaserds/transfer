@@ -9,6 +9,7 @@ import HeaderComponent from "@/components/MainComponents/HeaderComponent";
 import MainComponent from "@/components/MainComponents/MainComponent";
 import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import { prisma } from "@/lib/prisma";
+import { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 
 interface TransferCar {
@@ -24,6 +25,70 @@ interface TransferCar {
         TransferCarsTranslation: { name: string }[]
     }
 
+}
+
+export async function generateMetadata({ params }: { params: { routeId: string } }): Promise<Metadata> {
+    const locale = await getLocale();
+    const routeId = params.routeId;
+
+    const routeData = await prisma.route.findUnique({
+        where: {
+            id: routeId,
+        },
+        select: {
+            imageUrl: true,
+            RouteTranslation: {
+                where: {
+                    locale: locale,
+                },
+                select: {
+                    inRoute: true,
+                    toRoute: true,
+                    description: true,
+                }
+            }
+        }
+    });
+
+    if (!routeData || !routeData.RouteTranslation[0]) {
+        return {
+            title: "Маршрут не найден",
+            description: "Информация о маршруте недоступна.",
+        };
+    }
+
+    const { inRoute, toRoute, description } = routeData.RouteTranslation[0];
+
+    const pageTitle = `${inRoute} – ${toRoute} | Трансфер`;
+    const pageDescription = description || "Забронируйте трансфер с водителем по лучшей цене.";
+    const imageUrl = routeData.imageUrl || "https://azuralptransfer.com/default-thumbnail.jpg";
+    const pageUrl = `https://azuralptransfer.com/${locale}/routes/${routeId}`;
+
+    return {
+        title: pageTitle,
+        description: pageDescription,
+        openGraph: {
+            title: pageTitle,
+            description: pageDescription,
+            url: pageUrl,
+            siteName: "AzuralpTransfer",
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: pageTitle,
+                },
+            ],
+            type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: pageTitle,
+            description: pageDescription,
+            images: [imageUrl],
+        },
+    };
 }
 
 export default async function TransferCars({ params }: { params: Promise<{ routeId: string }> }) {

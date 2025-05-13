@@ -36,11 +36,11 @@ export async function generateMetadata(
         openGraph: {
             title,
             description,
-            url: `https://your-site.com/countries/${countryId}`,
-            siteName: "Ваш сайт",
+            url: `https://azuralptransfer.com/${locale}/countries/${countryId}`,
+            siteName: "AzuralpTransfer - Города " + countryName,
             images: [
                 {
-                    url: "https://your-site.com/thumbnail.jpg",
+                    url: "https://azuralptransfer.com/thumbnail.jpg",
                     width: 1200,
                     height: 630,
                     alt: title,
@@ -52,7 +52,7 @@ export async function generateMetadata(
             card: "summary_large_image",
             title,
             description,
-            images: ["https://your-site.com/thumbnail.jpg"],
+            images: ["https://azuralptransfer.com/thumbnail.jpg"],
         },
     };
 }

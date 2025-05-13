@@ -20,4 +20,4 @@ Disallow: /en/admin-panel/transfer-cars
 Disallow: /fr/admin-panel/transfer-cars
 
 # Указываем URL для карты сайта
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: http://azuralptransfer.com/sitemap.xml

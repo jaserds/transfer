@@ -34,7 +34,7 @@ export async function GET() {
     const urls = allUrls
         .map(({ path, priority = 0.7 }) => `
             <url>
-                <loc>https://mysite.com${path}</loc>
+                <loc>https://azuralptransfer.com${path}</loc>
                 <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
                 <priority>${priority}</priority>
             </url>

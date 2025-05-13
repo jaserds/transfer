@@ -6,21 +6,23 @@ import SearchRouteComponent from "@/components/MainComponents/SearchRouteCompone
 import TransfersContainerComponentCountry from "@/components/SectionTransfersComponent/TransfersContainerComponentCountry";
 import WhyChooseUsContainer from "@/components/SectionWhyChooseUs/WhyChooseUsContainer";
 import { ICountryResponse } from "@/lib/types";
+import { getLocale } from "next-intl/server";
 
 
 
 export async function generateMetadata() {
+  const locale = await getLocale();
   return {
     title: `Трансферы – Комфортные поездки`,
     description: `Забронируйте удобный трансфер с профессиональными водителями.`,
     openGraph: {
       title: `Трансферы – Комфортные поездки`,
       description: `Забронируйте удобный трансфер с профессиональными водителями.`,
-      url: ``,
-      siteName: "Ваш сайт",
+      url: `https://azuralptransfer.com/${locale}/cities`,
+      siteName: "AzuralpTransfer",
       images: [
         {
-          url: "https://your-site.com/thumbnail.jpg",
+          url: "https://azuralptransfer.com/thumbnail.jpg",
           width: 1200,
           height: 630,
           alt: "Трансферы",

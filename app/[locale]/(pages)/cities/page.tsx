@@ -7,10 +7,11 @@ import { getLocale } from "next-intl/server";
 
 
 export async function generateMetadata() {
+    const locale = await getLocale();
     const title = "Все города – Трансферы и маршруты";
     const description = "Выберите город и забронируйте удобный трансфер с водителем по лучшей цене.";
-    const imageUrl = "https://your-site.com/all-cities-thumbnail.jpg";
-    const pageUrl = "https://your-site.com/cities";
+    const imageUrl = "https://azuralptransfer.com/all-cities-thumbnail.jpg";
+    const pageUrl = `https://azuralptransfer.com/${locale}/cities`;
 
     return {
         title,
@@ -19,7 +20,7 @@ export async function generateMetadata() {
             title,
             description,
             url: pageUrl,
-            siteName: "Ваш сайт",
+            siteName: `AzuralpTransfer - Все города`,
             images: [
                 {
                     url: imageUrl,
