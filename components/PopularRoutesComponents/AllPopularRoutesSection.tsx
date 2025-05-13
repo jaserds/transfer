@@ -18,7 +18,7 @@ const AllPopularRoutesSection = ({ popularRoute }: PopularRouteProps) => {
     const ticons = useTranslations("imagesAlt")
 
     return (
-        <section className="mb-[120px] px-5 bg-[url('/bg-popular-routes.png')] bg-no-repeat bg-cover bg-top max-h-[732px] mt-[120px]">
+        <section className="mb-[120px] px-5 bg-[url('/bg-popular-routes.png')] bg-no-repeat bg-cover bg-top mt-[120px]">
             {isLoading && (
                 <FullPageLoader />
             )}
