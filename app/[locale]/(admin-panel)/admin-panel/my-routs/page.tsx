@@ -340,11 +340,11 @@ export default function MyRouts() {
                                 }
                             </SelectContent>
                         </Select>
-                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRoute: e.target.value }))} id="inRoute" type='text' className="" placeholder="От куда" />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRoute: e.target.value }))} id="inRoute" type='text' className="" placeholder="Откуда" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRoute: e.target.value }))} id="toRoute" type='text' className="" placeholder="Куда" />
-                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRouteEn: e.target.value }))} id="inRouteEn" type='text' className="" placeholder="От куда En" />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRouteEn: e.target.value }))} id="inRouteEn" type='text' className="" placeholder="Откуда En" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRouteEn: e.target.value }))} id="toRouteEn" type='text' className="" placeholder="Куда En" />
-                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRouteFr: e.target.value }))} id="inRouteFr" type='text' className="" placeholder="От куда Fr" />
+                        <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, inRouteFr: e.target.value }))} id="inRouteFr" type='text' className="" placeholder="Откуда Fr" />
                         <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, toRouteFr: e.target.value }))} id="toRouteFr" type='text' className="" placeholder="Куда Fr" />
                         {/* <Input onChange={(e) => setDataNewRoute(prev => ({ ...prev, price: Number(e.target.value) }))} id="price" type='text' className="" placeholder="Цена" /> */}
                         <div className=" flex flex-col gap-4 mt-3">
@@ -419,7 +419,7 @@ export default function MyRouts() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="px-6">От куда</TableHead>
+                            <TableHead className="px-6">Откуда</TableHead>
                             <TableHead className="px-6"></TableHead>
                             <TableHead className="px-6">Куда</TableHead>
                             <TableHead className="px-6">Город</TableHead>

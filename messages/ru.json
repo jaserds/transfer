@@ -5,7 +5,7 @@
                 "title": "Премиальный трансфер из аэропорта с личным водителем"
             },
             "SearchRouteComponent": {
-                "labelFrom": "От куда",
+                "labelFrom": "Откуда",
                 "labelTo": "Куда",
                 "qtyOnePassengers": "Пассажир",
                 "qty5Passengers": "Пассажира",
@@ -174,7 +174,7 @@
             },
             "PopularRoutes": {
                 "title": "Популярные маршруты",
-                "from": "От куда",
+                "from": "Откуда",
                 "to": "Куда",
                 "price": "От"
             },
