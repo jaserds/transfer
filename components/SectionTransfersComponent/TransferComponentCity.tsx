@@ -38,7 +38,7 @@ const TransferComponentCity = ({ dataSet, link }: ITransferComponentCityProps) =
                 <FullPageLoader />
             )}
             <Link onClick={() => setIsLoading(true)} className="relative block" href={link}>
-                <div className="relative cursor-pointer min-w-[290px] 
+                <div className="relative cursor-pointer mx-auto min-w-[290px] 
                         max-w-[330px] min-h-[311px] max-h-[351px] pt-[10px] 
                         px-[10px] shadow-[0px_0px_10px_2px_rgba(73,73,73,0.10)] bg-white rounded-[10px]
                         transition-all duration-300 ease-in-out hover:scale-105">
