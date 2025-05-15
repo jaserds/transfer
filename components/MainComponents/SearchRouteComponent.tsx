@@ -47,7 +47,7 @@ export default function SearchRouteComponent() {
         }, []);
 
     const filteredRoutesToWere = routes.filter(route =>
-        inputInWere && (inputToWere === "" || route.toRoute.toLowerCase().includes(inputToWere.toLowerCase()))
+        route.inRoute === inputInWere && (inputToWere === "" || route.toRoute.toLowerCase().includes(inputToWere.toLowerCase()))
     );
 
 
@@ -224,7 +224,7 @@ export default function SearchRouteComponent() {
             <div className="flex">
                 <div className="relative z-9 lg:w-auto md:w-[50%] max-md:w-1/2" ref={dropdownRef}>
                     <button
-                        className={`flex items-center gap-2 px-2 py-2 h-full lg:border-none lg:rounded-none md:rounded-t-none max-md:rounded-bl-lg md:rounded-bl-lg lg:w-[180px] md:w-full max-md:w-full bg-white`}
+                        className={`flex items-center max-h-[60px] gap-2 px-2 py-2 h-full lg:border-none lg:rounded-none md:rounded-t-none max-md:rounded-bl-lg md:rounded-bl-lg lg:w-[180px] md:w-full max-md:w-full bg-white`}
                         onClick={() => setIsOpenPassengers(!isOpenPassengers)}
                     >
                         <svg
