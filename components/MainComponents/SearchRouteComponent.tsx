@@ -173,7 +173,7 @@ export default function SearchRouteComponent() {
                         </ul>
                     )}
                 </div>
-                <div className="relative flex flex-col w-[8%] h-[60px] bg-[#fff] z-0 cursor-pointer max-md:w-full max-md:border-[1px] border-[#d2d2d264]" onClick={handleReverseInputWhere}>
+                <div className="relative flex flex-col w-[8%] h-[60px] bg-[#fff] z-[1] cursor-pointer max-md:w-full max-md:border-[1px] border-[#d2d2d264]" onClick={handleReverseInputWhere}>
                     <Image src={"/icons/main-search-icons/arrow-reverse.svg"} width={30} height={30} alt={ticons("SearchRouteComponent.reverse")} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                 </div>
                 <div className="relative flex flex-col w-[47%] max-md:w-full h-[60px] z-0" ref={dropdownToLocationsRef}>
@@ -203,7 +203,7 @@ export default function SearchRouteComponent() {
                         autoComplete="off"
                     />
                     {isToOpenLocations && filteredRoutesToWere && (
-                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
+                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-[9999]">
                             {filteredRoutesToWere.map((location, index) => (
                                 <li
                                     key={index}
