@@ -173,10 +173,10 @@ export default function SearchRouteComponent() {
                         </ul>
                     )}
                 </div>
-                <div className="relative flex flex-col w-[8%] h-[60px] bg-[#fff] z-[1] cursor-pointer max-md:w-full max-md:border-[1px] border-[#d2d2d264]" onClick={handleReverseInputWhere}>
+                <div className="relative flex flex-col w-[8%] h-[60px] bg-[#fff] z-0 cursor-pointer max-md:w-full max-md:border-[1px] border-[#d2d2d264]" onClick={handleReverseInputWhere}>
                     <Image src={"/icons/main-search-icons/arrow-reverse.svg"} width={30} height={30} alt={ticons("SearchRouteComponent.reverse")} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                 </div>
-                <div className="relative flex flex-col w-[47%] max-md:w-full h-[60px] z-0" ref={dropdownToLocationsRef}>
+                <div className="relative flex flex-col w-[47%] max-md:w-full h-[60px]" ref={dropdownToLocationsRef}>
                     <span className="max-md:hidden block absolute left-0 w-[2px] 
                                  h-[80%] top-[10%] border-l-[2px] border-dashed border-[#D2D2D2] overflow-hidden"></span>
                     <span className="max-md:hidden block absolute right-0 w-[2px] 
@@ -202,10 +202,27 @@ export default function SearchRouteComponent() {
                         onBlur={() => setIsFocusedInWer(false)}
                         autoComplete="off"
                     />
+                    {isToOpenLocations && filteredRoutesToWere && (
+                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
+                            {filteredRoutesToWere.map((location, index) => (
+                                <li
+                                    key={index}
+                                    className="relative px-4 py-2 cursor-pointer hover:bg-[#f9ab1a52] text-[#373F47] last:border-none"
+                                    onClick={() => {
+                                        handleToLocationSelect(location.toRoute);
+                                    }}
+                                >
+                                    {location.toRoute}
+                                    <p className="text-[14px]">{location.toRoute}, {location.city}</p>
+                                    <span className="block absolute bottom-0 w-[90%] h-[1px] border-b-[1px] border-[#D2D2D2]"></span>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
             <div className="flex">
-                <div className="relative lg:w-auto md:w-[50%] max-md:w-1/2" ref={dropdownRef}>
+                <div className="relative z-9 lg:w-auto md:w-[50%] max-md:w-1/2" ref={dropdownRef}>
                     <button
                         className={`flex items-center max-h-[60px] gap-2 px-2 py-2 h-full lg:border-none lg:rounded-none md:rounded-t-none max-md:rounded-bl-lg md:rounded-bl-lg lg:w-[180px] md:w-full max-md:w-full bg-white`}
                         onClick={() => setIsOpenPassengers(!isOpenPassengers)}
@@ -241,23 +258,6 @@ export default function SearchRouteComponent() {
                             />
                         </svg>
                     </button>
-                    {isToOpenLocations && filteredRoutesToWere && (
-                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-[9999]">
-                            {filteredRoutesToWere.map((location, index) => (
-                                <li
-                                    key={index}
-                                    className="relative px-4 py-2 cursor-pointer hover:bg-[#f9ab1a52] text-[#373F47] last:border-none"
-                                    onClick={() => {
-                                        handleToLocationSelect(location.toRoute);
-                                    }}
-                                >
-                                    {location.toRoute}
-                                    <p className="text-[14px]">{location.toRoute}, {location.city}</p>
-                                    <span className="block absolute bottom-0 w-[90%] h-[1px] border-b-[1px] border-[#D2D2D2]"></span>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
 
                     {isOpenPassengers && (
                         <ul className="absolute left-0 mt-2 w-48 bg-white border shadow-md z-10">
