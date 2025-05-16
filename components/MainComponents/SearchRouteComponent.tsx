@@ -156,7 +156,7 @@ export default function SearchRouteComponent() {
                         autoComplete="off"
                     />
                     {isInOpenLocations && filteredRoutesInWere && (
-                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-40">
+                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
                             {filteredRoutesInWere.map((location, index) => (
                                 <li
                                     key={index}
@@ -192,7 +192,7 @@ export default function SearchRouteComponent() {
                     </label>
                     <input
                         className="focus:outline-none rounded-none
-                      h-full w-full px-4 pt-5 pb-1 border-l-0 focus:border-l-0 lg:rounded-tr-none md:rounded-tr-[10px] z-0 text-[#373F47]"
+                      h-full w-full px-4 pt-5 pb-1 border-l-0 focus:border-l-0 lg:rounded-tr-none md:rounded-tr-[10px] text-[#373F47]"
                         type="text"
                         id="inWhereInput"
                         value={inputToWere}
@@ -203,7 +203,7 @@ export default function SearchRouteComponent() {
                         autoComplete="off"
                     />
                     {isToOpenLocations && filteredRoutesToWere && (
-                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-40">
+                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
                             {filteredRoutesToWere.map((location, index) => (
                                 <li
                                     key={index}
