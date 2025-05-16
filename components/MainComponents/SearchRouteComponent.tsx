@@ -156,7 +156,7 @@ export default function SearchRouteComponent() {
                         autoComplete="off"
                     />
                     {isInOpenLocations && filteredRoutesInWere && (
-                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
+                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-40">
                             {filteredRoutesInWere.map((location, index) => (
                                 <li
                                     key={index}
@@ -203,7 +203,7 @@ export default function SearchRouteComponent() {
                         autoComplete="off"
                     />
                     {isToOpenLocations && filteredRoutesToWere && (
-                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-10">
+                        <ul className="absolute left-0 top-16 w-full max-h-[400px] overflow-y-auto mt-1 bg-white border rounded-l-lg shadow-md z-40">
                             {filteredRoutesToWere.map((location, index) => (
                                 <li
                                     key={index}

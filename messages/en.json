@@ -179,7 +179,7 @@
                 "price": "From"
             },
             "CarsComponentContainer": {
-                "title": "Fleet"
+                "title": "Transfer"
             },
             "CarComponent": {
                 "orderCancellation": "Free order cancellation",

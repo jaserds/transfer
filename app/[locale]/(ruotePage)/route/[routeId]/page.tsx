@@ -4,10 +4,10 @@ import CarsComponentContainer from "@/components/CarsComponent/CarsComponentCont
 import ContactAndFAQContainer from "@/components/ContactAndFAQSection/ContactAndFAQContainer";
 import ContactsFomContainer from "@/components/ContactsFomSection/ContactsFomContainer";
 import Footer from "@/components/Footer/Footer";
-import Advantages from "@/components/MainComponents/AdvantagesComponent";
+// import Advantages from "@/components/MainComponents/AdvantagesComponent";
 import HeaderComponent from "@/components/MainComponents/HeaderComponent";
-import MainComponent from "@/components/MainComponents/MainComponent";
-import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
+// import MainComponent from "@/components/MainComponents/MainComponent";
+// import SearchRouteComponent from "@/components/MainComponents/SearchRouteComponent";
 import { prisma } from "@/lib/prisma";
 import { getLocale } from "next-intl/server";
 
@@ -156,10 +156,10 @@ export default async function TransferCars({ params }: { params: Promise<{ route
     return (
         <>
             <HeaderComponent />
-            <MainComponent>
+            {/* <MainComponent>
                 <SearchRouteComponent />
                 <Advantages />
-            </MainComponent>
+            </MainComponent> */}
             <CarsComponentContainer onlyTransferCars={onlyTransferCars} routeData={routeData} />
             <div className="mb-[72px] relative w-full h-[300px] bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-center" style={{ backgroundImage: `url('${routeData?.imageUrl}')` }}>
                 <div className="absolute inset-0 bg-black opacity-30"></div>
