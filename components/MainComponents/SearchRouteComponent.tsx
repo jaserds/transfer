@@ -192,7 +192,7 @@ export default function SearchRouteComponent() {
                     </label>
                     <input
                         className="focus:outline-none rounded-none
-                      h-full w-full px-4 pt-5 pb-1 border-l-0 focus:border-l-0 lg:rounded-tr-none md:rounded-tr-[10px] text-[#373F47]"
+                      h-full w-full px-4 pt-5 pb-1 border-l-0 focus:border-l-0 lg:rounded-tr-none md:rounded-tr-[10px] z-0 text-[#373F47]"
                         type="text"
                         id="inWhereInput"
                         value={inputToWere}
