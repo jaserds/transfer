@@ -7,6 +7,7 @@ import "./globals.css";
 import { Rubik, Open_Sans } from 'next/font/google';
 import { AppProviders } from './_providers/app-providers';
 import { Toaster } from 'sonner';
+import { NavigationLoader } from '@/components/ui/loaders/NavigationLoader';
 
 export const metadata: Metadata = {
     title: "Трансфер",
@@ -41,10 +42,11 @@ export default async function LocaleLayout({
     return (
 
         <html lang={locale}>
-            <body className={`${rubik.className} ${openSans.className}`}>
+            <body className={`${rubik.className} ${openSans.className} relative`}>
 
                 <NextIntlClientProvider messages={messages}>
                     <AppProviders >
+                        <NavigationLoader />
                         {children}
                         <Toaster />
                     </AppProviders>
